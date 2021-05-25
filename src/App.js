@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Router from "./routes";
 import { useSelector } from "react-redux";
 import ErrorBoundary from './utils/ErrorBoundary'
+import './css/globalcss.css';
 
 
 const App = () => {
