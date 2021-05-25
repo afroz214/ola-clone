@@ -35,7 +35,7 @@ export const Button = styled.button`
   white-space: nowrap;
   box-shadow: ${({ theme }) => theme.dark ? '0 10px 15px 6px rgb(0 0 0 / 10%), 0 4px 6px -2px rgb(0 0 0 / 5%)' : '0px 7px 15px -3px #b6b6b6, 0 4px 6px -2px #F9FBE7'};
 
-  ${({ buttonStyle, hex1, hex2, theme, borderRadius, shadow }) => {
+  ${({ buttonStyle, hex1, hex2, theme, borderRadius, shadow, height }) => {
     switch (buttonStyle) {
       case "danger":
         return `
@@ -119,6 +119,7 @@ export const Button = styled.button`
           background-image: none;
           color: ${hex1};
         }
+        height: ${ height || 'auto'}
       `;
 
       default:

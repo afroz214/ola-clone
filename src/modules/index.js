@@ -1,1 +1,2 @@
 export * from './dummy/dummy';
+export * from './Home/home'
