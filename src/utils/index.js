@@ -1,6 +1,8 @@
 //eslint-disable-next-line
 import { object } from "prop-types";
 
+export * from './validations';
+
 export const useQuery = search => {
   return new URLSearchParams(search);
 };
