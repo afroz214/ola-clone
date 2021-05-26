@@ -7,27 +7,26 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
 
 const DummyData = {
-	name: "Maruti",
-	logo: "/assets/images/logo/logo12.png",
+	name: "Maruti Swift Dzire",
 	id: "1",
 };
 
 const DummyOthers = [
 	{
-		name: "Audi",
-		label: "Audi",
+		name: "X3",
+		label: "X3",
 		value: "2",
 		id: "2",
 	},
 	{
-		name: "BMW",
-		label: "BMW",
+		name: "Y3",
+		label: "Y3",
 		value: "3",
 		id: "3",
 	},
 	{
-		name: "Ferrari",
-		label: "Ferrari",
+		name: "Z3",
+		label: "Z3",
 		value: "4",
 		id: "4",
 	},
@@ -35,10 +34,10 @@ const DummyOthers = [
 
 // validation schema
 const yupValidate = yup.object({
-	brand: yup.array().required("Brand is required").nullable(),
+	model: yup.array().required("Model is required").nullable(),
 });
 
-export const Brand = ({ stepFn }) => {
+export const Model = ({ stepFn }) => {
 	const { handleSubmit, register, watch, control, errors } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
@@ -46,18 +45,18 @@ export const Brand = ({ stepFn }) => {
 	});
 	const [show, setShow] = useState(false);
 
-	const other = watch("brand_other");
-	const brand = watch("brand");
+	const other = watch("model_other");
+	const model = watch("model");
 
 	useEffect(() => {
 		if (!_.isEmpty(other)) {
-			stepFn(1, other?.value, 2);
+			stepFn(2, other?.value, 3);
 		}
-		if (brand) {
-			stepFn(1, brand, 2);
+		if (model) {
+			stepFn(2, model, 3);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [other, brand]);
+	}, [other, model]);
 
 	return (
 		<>
@@ -74,12 +73,12 @@ export const Brand = ({ stepFn }) => {
 								className="d-flex justify-content-center"
 							>
 								<Tile
-									logo={DummyData?.logo}
 									text={DummyData?.name}
 									id={index}
 									register={register}
-									name={"brand"}
+									name={"model"}
 									value={index}
+                                    height={'50px'}
 								/>
 							</Col>
 						))}
@@ -87,7 +86,7 @@ export const Brand = ({ stepFn }) => {
 					<Row className="mx-auto d-flex no-wrap mt-4">
 						<Col xs="12" sm="12" md="12" lg="12" xl="12" className="linkLine">
 							<Button variant="link" className="" onClick={() => setShow(true)}>
-								Don't See your Car's Brand? Click Here
+								Don't See your Car's Model? Click Here
 							</Button>
 						</Col>
 					</Row>
@@ -98,7 +97,7 @@ export const Brand = ({ stepFn }) => {
 						<Col xs="12" sm="12" md="12" lg="12" xl="12">
 							<Controller
 								control={control}
-								name="brand_other"
+								name="model_other"
 								defaultValue={""}
 								render={({ onChange, onBlur, value, name }) => (
 									<MultiSelect
@@ -109,7 +108,7 @@ export const Brand = ({ stepFn }) => {
 										onBlur={onBlur}
 										isMulti={false}
 										options={DummyOthers}
-										placeholder={"Select Brand"}
+										placeholder={"Select Model"}
 										errors={errors.brand}
 										Styled
 										closeMenuOnSelect

@@ -12,6 +12,7 @@ const Tile = ({
 	height,
 	name,
 	register,
+	imgMargin
 }) => {
 	// on change method
 	const [ val, setVal ] = useState(null);
@@ -29,8 +30,8 @@ const Tile = ({
 						value={val}
 						onClick={() => setVal(value)}
 					/>
-					<Label width={width} height={width}>
-						{logo && <Img src={logo} />}
+					<Label width={width} height={height}>
+						{logo && <Img src={logo} style={imgMargin && {marginBottom: imgMargin}}/>}
 						{text}
 					</Label>
 				</>

@@ -1,18 +1,52 @@
 import React, { useState } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import "./style.css";
-import { Brand } from "./steps";
+import { Brand, Model, FuelType, Variant, City } from "./steps";
 
 export const CarDetails = () => {
-	const [Step, setStep] = useState(1);
-	const [brandData, setBrandData] = useState({});
+	const [Step, setStep] = useState(4);
 
-	const stepFn = (stepNo, data) => {
-		setStep(Number(stepNo));
+	//formData's
+	const [brandData, setBrandData] = useState({});
+	const [ModelData, setModelData] = useState({});
+	const [FuelData, setFuelData] = useState({});
+	const [VariantData, setVariantData] = useState({});
+	const [CitytData, setCityData] = useState({});
+
+	const stepFn = (stepNo, data, newStep) => {
+		setStep(Number(newStep));
 		switch (Number(stepNo)) {
 			case 1:
 				setBrandData(data);
 				break;
+			case 2:
+				setModelData(data);
+				break;
+			case 3:
+				setFuelData(data);
+				break;
+			case 4:
+				setVariantData(data);
+				break;
+			case 5:
+				setCityData(data);
+				break;
+			default:
+				break;
+		}
+	};
+	const TitleFn = (Step) => {
+		switch (Step) {
+			case 1:
+				return "Select the Brand of your Car";
+			case 2:
+				return "Select the Model of your Car";
+			case 3:
+				return "Select Fuel type of your Car";
+			case 4:
+				return "Select the Variant of your Car";
+			case 5:
+				return "Enter City Details";
 			default:
 				break;
 		}
@@ -33,17 +67,25 @@ export const CarDetails = () => {
 					</div>
 				</Col>
 			</Row>
-			<Row className="w-100 mt-5 mx-auto ">
-				{Step > 1 && (
+			<Row className="w-100 mt-4 mx-auto">
+				<Row className="mx-auto d-flex w-100">
 					<Button
+						className="my-2"
 						size="sm"
-						variant="dark"
+						variant="light"
 						onClick={() => setStep((prev) => prev - 1)}
+						disabled={Step > 1 ? false : true}
+						style={Step > 1 ? {} : { visibility: "hidden" }}
 					>
-						Back
+						<img src={"/assets/images/back-button.png"} alt="bck" />
 					</Button>
-				)}
+					<h3 className="text-center w-100">{TitleFn(Step)}</h3>
+				</Row>
 				{Step === 1 && <Brand stepFn={stepFn} />}
+				{Step === 2 && <Model stepFn={stepFn} />}
+				{Step === 3 && <FuelType stepFn={stepFn} />}
+				{Step === 4 && <Variant stepFn={stepFn} />}
+				{Step === 5 && <City stepFn={stepFn} />}
 			</Row>
 		</>
 	);
