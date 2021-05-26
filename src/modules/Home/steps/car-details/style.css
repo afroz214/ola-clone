@@ -54,3 +54,8 @@
 .progressBar li.active + li:after {
     background-color: #bdd400;
 }
+
+/* bootstrap btn */
+.linkLine .btn:focus {
+    box-shadow: none;
+  }
