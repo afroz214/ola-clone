@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Label, TileWrap, Img } from "./style";
 
@@ -14,21 +14,34 @@ const Tile = ({
 	register,
 }) => {
 	// on change method
-
+	const [selected, setSelected] = useState(false);
 	const _renderInput = () => (
 		<>
 			<TileWrap>
 				<>
 					<input
-						type="radio"
+						type="button"
 						name={name}
 						id={id}
 						ref={register}
-						class="keyRadio"
 						value={value}
-						onClick={handleChange ? handleChange : ""}
+						onClick={() => setSelected(id)}
 					/>
-					<Label width={width} height={width}>
+					{selected && (
+						<input
+							type="hidden"
+							name={"brand"}
+							id={selected}
+							ref={register}
+							value={selected}
+						/>
+					)}
+					<Label
+						width={width}
+						height={height}
+						htmlFor={id}
+						onClick={() => handleChange(selected)}
+					>
 						{logo && <Img src={logo} />}
 						{text}
 					</Label>

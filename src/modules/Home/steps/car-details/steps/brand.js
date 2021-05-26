@@ -46,8 +46,8 @@ export const Brand = () => {
 	const [show, setShow] = useState(false);
 
 	const other = watch("brand_other");
-	const brand = watch('brand');
-	console.log(brand)
+	const brand = watch("brand");
+	console.log(brand);
 	return (
 		<>
 			<Row className="w-100 mx-auto">
@@ -69,9 +69,8 @@ export const Brand = () => {
 									logo={DummyData?.logo}
 									text={DummyData?.name}
 									id={index}
-									register={register}
-									name={"brand"}
 									value={index}
+									handleChange={() => console.log(index)}
 								/>
 							</Col>
 						))}

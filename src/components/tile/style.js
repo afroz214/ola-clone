@@ -16,6 +16,8 @@ export const TileWrap = styled.div`
 		left: 119px;
 		position: relative;
 		top: 17px;
+		top: 44px;
+		z-index: -1;
 	}
 `;
 
@@ -28,7 +30,7 @@ export const Label = styled.div`
 	color: #333;
 	font-size: 14px;
 	font-weight: 800;
-	letter-spacing:0.5px;
+	letter-spacing: 0.5px;
 	line-height: 17px;
 	text-align: center;
 	padding: 0 2px;
@@ -43,13 +45,13 @@ export const Label = styled.div`
 		font-family: "Inter-SemiBold";
 		background-color: #fff;
 		color: #000;
-		box-shadow: 0px 0px 7px 0px #33CC33;
+		box-shadow: 0px 0px 7px 0px #33cc33;
 	}
 	&:hover,
 	&:focus {
-		box-shadow: 0px 0px 7px 0px #33CC33;
-		-webkit-box-shadow: 0px 0px 7px 0px #33CC33;
-		-moz-box-shadow: 0px 0px 7px 0px #33CC33;
+		box-shadow: 0px 0px 7px 0px #33cc33;
+		-webkit-box-shadow: 0px 0px 7px 0px #33cc33;
+		-moz-box-shadow: 0px 0px 7px 0px #33cc33;
 	}
 `;
 
