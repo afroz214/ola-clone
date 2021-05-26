@@ -4,7 +4,7 @@ import "./style.css";
 import { Brand, Model, FuelType, Variant, City } from "./steps";
 
 export const CarDetails = () => {
-	const [Step, setStep] = useState(4);
+	const [Step, setStep] = useState(5);
 
 	//formData's
 	const [brandData, setBrandData] = useState({});

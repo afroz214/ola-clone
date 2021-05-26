@@ -111,7 +111,7 @@ export const Variant = ({ stepFn }) => {
 										placeholder={"Select Variant"}
 										errors={errors.variant}
 										Styled
-										closeMenuOnSelect
+										closeOnSelect
 									/>
 								)}
 							/>

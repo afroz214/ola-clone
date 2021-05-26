@@ -111,7 +111,7 @@ export const Model = ({ stepFn }) => {
 										placeholder={"Select Model"}
 										errors={errors.brand}
 										Styled
-										closeMenuOnSelect
+										closeOnSelect
 									/>
 								)}
 							/>

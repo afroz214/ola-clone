@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Tile, MultiSelect, Btn } from "components";
+import { Tile, MultiSelect, Button as Btn } from "components";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -48,12 +48,14 @@ const DummySub = [
 	},
 ];
 
-// validation schema
-const yupValidate = yup.object({
-	city: yup.array().required("City is required").nullable(),
-});
-
 export const City = ({ stepFn }) => {
+	const [Val, setVal] = useState(false);
+	// validation schema
+	const yupValidate = yup.object({
+		city: yup.string().required("City is required").nullable(),
+		...(Val && { sub_no: yup.string().required("Sub No. is required") }),
+	});
+
 	const { handleSubmit, register, watch, control, errors } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
@@ -61,17 +63,19 @@ export const City = ({ stepFn }) => {
 	});
 
 	const sub_no = watch("sub_no");
+	console.log(sub_no);
 	const city = watch("city");
+	// console.log(Val);
 
-	// useEffect(() => {
-	// 	if (!_.isEmpty(city)) {
-	// 		stepFn(5, city?.value, 6);
-	// 	}
-	// 	if (!_.isEmpty(sub_no)) {
-	// 		stepFn(5, sub_no?.value, 6);
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [city, sub_no]);
+	useEffect(() => {
+		if (!_.isEmpty(DummySub) && DummySub) {
+			setVal(true);
+		}
+		else {
+			setVal(false);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [city]);
 
 	const onSubmit = (data) => {
 		console.log(data);
@@ -80,8 +84,8 @@ export const City = ({ stepFn }) => {
 
 	return (
 		<Row className="mx-auto d-flex no-wrap mt-4 w-100">
-			<Form onSubmit={handleSubmit(onSubmit)}>
-				<Col xs="12" sm="12" md="12" lg="12" xl="12">
+			<Form onSubmit={handleSubmit(onSubmit)} className="w-100">
+				<Col xs="12" sm="12" md="12" lg="12" xl="12" className="w-100">
 					<Controller
 						control={control}
 						name="city"
@@ -98,20 +102,19 @@ export const City = ({ stepFn }) => {
 								placeholder={"Select City"}
 								errors={errors.city}
 								Styled
-								closeMenuOnSelect
+								closeOnSelect={true}
 							/>
 						)}
 					/>
 				</Col>
 				{city && (
-					<Col xs="12" sm="12" md="12" lg="12" xl="12" className="mt-4">
+					<Col xs="12" sm="12" md="12" lg="12" xl="12" className="mt-4 w-100">
+						<h2 className="w-100 text-center mb-4">Sub Number</h2>
 						<Controller
 							control={control}
 							name="sub_no"
-							defaultValue={""}
 							render={({ onChange, onBlur, value, name }) => (
 								<MultiSelect
-									required
 									name={name}
 									onChange={onChange}
 									ref={register}
@@ -119,9 +122,10 @@ export const City = ({ stepFn }) => {
 									onBlur={onBlur}
 									isMulti={false}
 									options={DummySub}
+									errors={errors.sub_no}
 									placeholder={"Select"}
 									Styled
-									closeMenuOnSelect
+									closeOnSelect={true}
 								/>
 							)}
 						/>
@@ -132,7 +136,7 @@ export const City = ({ stepFn }) => {
 					md="12"
 					lg="12"
 					xl="12"
-					className="d-flex justify-content-center mt-4"
+					className="d-flex justify-content-center mt-5"
 				>
 					<Btn
 						buttonStyle="outline-solid"
