@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Tile, MultiSelect, Button as Btn } from "components";
+import { Tile, MultiSelect, Button as Btn, Error } from "components";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -106,6 +106,7 @@ export const City = ({ stepFn }) => {
 							/>
 						)}
 					/>
+					{!!errors?.city && <Error className='mt-1'>{errors?.city?.message}</Error>}
 				</Col>
 				{city && (
 					<Col xs="12" sm="12" md="12" lg="12" xl="12" className="mt-4 w-100">
@@ -129,6 +130,7 @@ export const City = ({ stepFn }) => {
 								/>
 							)}
 						/>
+						{!!errors?.sub_no && <Error className='mt-1'>{errors?.sub_no?.message}</Error>}
 					</Col>
 				)}
 				<Col

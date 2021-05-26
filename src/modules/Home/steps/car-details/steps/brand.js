@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Tile, MultiSelect } from "components";
+import { Tile, MultiSelect, Error } from "components";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -116,6 +116,7 @@ export const Brand = ({ stepFn }) => {
 									/>
 								)}
 							/>
+							{!!errors?.brand && <Error className='mt-1'>{errors?.brand?.message}</Error>}
 						</Col>
 					</Row>
 					<Row className="mx-auto d-flex no-wrap mt-4">
