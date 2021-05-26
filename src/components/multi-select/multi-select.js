@@ -10,12 +10,13 @@ export default function AnimatedMulti({
   ref,
   placeholder,
   closeOnSelect,
-  isClearable
+  isClearable,
+  isMulti
 }) {
   return (
     <Select
       closeMenuOnSelect={closeOnSelect ? true : false}
-      isMulti
+      isMulti={isMulti || true}
       options={options || []}
       value={value}
       onChange={(e) => onChange(e)}

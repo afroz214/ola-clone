@@ -232,7 +232,7 @@ const Button = styled.button`
 	padding: 0px 25px;
 	box-sizing: content-box;
 	font-size: 17px;
-	background-color: #f2581b;
+	background-color: #bdd400;
 	font-weight: 600;
 	border: none;
 	color: white;

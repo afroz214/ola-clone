@@ -9,6 +9,7 @@ export const TileWrap = styled.div`
 	margin-bottom: 8px;
 	margin-right: 6px;
 	margin-left: 30px;
+
 	input {
 		clip: rect(0, 0, 0, 0);
 		height: 1px;
@@ -35,15 +36,14 @@ export const Label = styled.div`
 	padding: 0 2px;
 	margin-right: -1px;
 	margin-bottom: 2px;
+	box-shadow: '1px 4px 26px 7px black';
 	/* border: 1px solid #e3e4e8; */
 	border-radius: 0 15px 0px 15px;
-	box-shadow: none;
 	transition: all 0.1s ease-in-out;
 	input:checked + label {
 		font-family: "Inter-SemiBold";
 		background-color: #fff;
 		color: #000;
-		box-shadow: none;
 		border: 1px solid #bdd400 !important;
 	}
 `;
