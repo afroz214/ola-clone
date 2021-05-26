@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Label, TileWrap, Img } from "./style";
 
@@ -14,6 +14,7 @@ const Tile = ({
 	register,
 }) => {
 	// on change method
+	const [ val, setVal ] = useState(null);
 
 	const _renderInput = () => (
 		<>
@@ -25,8 +26,8 @@ const Tile = ({
 						id={id}
 						ref={register}
 						class="keyRadio"
-						value={value}
-						onClick={handleChange ? handleChange : ""}
+						value={val}
+						onClick={() => setVal(value)}
 					/>
 					<Label width={width} height={width}>
 						{logo && <Img src={logo} />}

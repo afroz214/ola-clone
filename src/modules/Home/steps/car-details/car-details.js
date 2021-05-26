@@ -1,10 +1,22 @@
 import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import "./style.css";
 import { Brand } from "./steps";
 
 export const CarDetails = () => {
 	const [Step, setStep] = useState(1);
+	const [brandData, setBrandData] = useState({});
+
+	const stepFn = (stepNo, data) => {
+		setStep(Number(stepNo));
+		switch (Number(stepNo)) {
+			case 1:
+				setBrandData(data);
+				break;
+			default:
+				break;
+		}
+	};
 	return (
 		<>
 			<Row className="w-100 mx-auto my-4" style={{ zIndex: "999" }}>
@@ -22,7 +34,16 @@ export const CarDetails = () => {
 				</Col>
 			</Row>
 			<Row className="w-100 mt-5 mx-auto ">
-				<Brand />
+				{Step > 1 && (
+					<Button
+						size="sm"
+						variant="dark"
+						onClick={() => setStep((prev) => prev - 1)}
+					>
+						Back
+					</Button>
+				)}
+				{Step === 1 && <Brand stepFn={stepFn} />}
 			</Row>
 		</>
 	);

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tile, MultiSelect } from "components";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import _ from "lodash";
 
 const DummyData = {
 	name: "Maruti",
@@ -37,7 +38,7 @@ const yupValidate = yup.object({
 	brand: yup.array().required("Brand is required").nullable(),
 });
 
-export const Brand = () => {
+export const Brand = ({ stepFn }) => {
 	const { handleSubmit, register, watch, control, errors } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
@@ -46,8 +47,18 @@ export const Brand = () => {
 	const [show, setShow] = useState(false);
 
 	const other = watch("brand_other");
-	const brand = watch('brand');
-	console.log(brand)
+	const brand = watch("brand");
+
+	useEffect(() => {
+		if (!_.isEmpty(other)) {
+			stepFn(2, other?.value);
+		}
+		if (brand) {
+			stepFn(2, brand);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [other, brand]);
+
 	return (
 		<>
 			<Row className="w-100 mx-auto">
