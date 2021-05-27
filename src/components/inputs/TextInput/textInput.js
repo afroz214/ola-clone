@@ -17,6 +17,7 @@ const Textbox = ({
 	onBlur,
 	isRequired,
 	onKeyDown,
+	register,
 	...otherProps
 }) => {
 	const _renderInput = () => (
@@ -32,6 +33,7 @@ const Textbox = ({
 					onKeyDown={onKeyDown}
 					onChange={onChange}
 					error={error}
+					ref={register}
 				/>
 				<Label md htmlFor={id}>
 					{fieldName}

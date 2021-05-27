@@ -68,7 +68,7 @@ export const LeadPage = () => {
 								fieldName="First Name"
 								name="first_name"
 								placeholder=" "
-								ref={register}
+								register={register}
 								onChange={handleChange}
 								error={errors?.first_name}
 							/>
@@ -84,7 +84,7 @@ export const LeadPage = () => {
 								fieldName="Last Name"
 								name="last_name"
 								placeholder=" "
-								ref={register}
+								register={register}
 								onChange={handleChange}
 								error={errors?.last_name}
 							/>
@@ -100,7 +100,7 @@ export const LeadPage = () => {
 								fieldName="Mobile No."
 								name="mobile_no"
 								placeholder=" "
-								ref={register}
+								register={register}
 								onChange={handleChange}
 								error={errors?.mobile_no}
 								maxLength="10"
@@ -118,7 +118,7 @@ export const LeadPage = () => {
 								fieldName="Email"
 								name="email"
 								placeholder=" "
-								ref={register}
+								register={register}
 								onChange={handleChange}
 								error={errors?.email}
 							/>
