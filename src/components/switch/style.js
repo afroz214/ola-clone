@@ -57,17 +57,17 @@ export const SwitchInput = styled.input`
 		margin-left: 54px;
 	}
 	&:checked + div {
-		width: 57px;
+		width: 54px;
 		background-position: 0 0;
 		background-color: #ec3b3b;
 		background-color: ${({ dark }) => (dark ? "#000000" : "#000")};
 	}
 	& + div > div {
 		float: left;
-		width: 23px;
+		width: 21px;
 		height: 23px;
 		border-radius: inherit;
-		background: #ffffff;
+		background: #bdd400;
 		-webkit-transition-timing-function: cubic-bezier(1, 0, 0, 1);
 		transition-timing-function: cubic-bezier(1, 0, 0, 1);
 		-webkit-transition-duration: 0.4s;
@@ -82,7 +82,7 @@ export const SwitchInput = styled.input`
 	&:checked + div > div {
 		-webkit-transform: translate3d(20px, 0, 0);
 		transform: translate3d(20px, 0, 0);
-		background-color: #ffffff;
+		background-color: #bdd400;
 	}
 
 	&:checked + div > div {
@@ -147,7 +147,7 @@ export const CustomLabel = styled.label`
 		position: absolute;
 		left: 0;
 		top: -4px;
-		height: 23px;
+		height: 21px;
 		width: 23px;
 		background-color: rgb(228, 228, 228);
 		border-radius: 50%;
