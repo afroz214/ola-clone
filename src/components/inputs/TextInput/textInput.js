@@ -27,7 +27,6 @@ const Textbox = ({
 					id={id}
 					name={name}
 					dobSpace
-					defaultValue={""}
 					placeholder=" "
 					onKeyDown={(e) => {}}
 					onChange={onChange}
