@@ -12,26 +12,24 @@ const Tile = ({
 	height,
 	name,
 	register,
-	imgMargin
+	imgMargin,
+	setValue,
 }) => {
 	// on change method
-	const [ val, setVal ] = useState(null);
 
 	const _renderInput = () => (
 		<>
-			<TileWrap>
+			<TileWrap className='m-2'>
 				<>
-					<input
-						type="radio"
-						name={name}
-						id={id}
-						ref={register}
-						class="keyRadio"
-						value={val}
-						onClick={() => setVal(value)}
-					/>
-					<Label width={width} height={height}>
-						{logo && <Img src={logo} style={imgMargin && {marginBottom: imgMargin}}/>}
+					<input type="hidden" name={name} ref={register} />
+					<Label
+						width={width}
+						height={height}
+						onClick={() => setValue(name, value)}
+					>
+						{logo && (
+							<Img src={logo} style={imgMargin && { marginBottom: imgMargin }} />
+						)}
 						{text}
 					</Label>
 				</>

@@ -39,7 +39,7 @@ const yupValidate = yup.object({
 });
 
 export const Brand = ({ stepFn }) => {
-	const { handleSubmit, register, watch, control, errors } = useForm({
+	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
 		reValidateMode: "onBlur",
@@ -48,6 +48,7 @@ export const Brand = ({ stepFn }) => {
 
 	const other = watch("brand_other");
 	const brand = watch("brand");
+	console.log(brand)
 
 	useEffect(() => {
 		if (!_.isEmpty(other)) {
@@ -80,6 +81,7 @@ export const Brand = ({ stepFn }) => {
 									register={register}
 									name={"brand"}
 									value={index}
+									setValue={setValue}
 								/>
 							</Col>
 						))}

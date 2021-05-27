@@ -5,7 +5,7 @@ import { Brand, Model, FuelType, Variant, City, YearCM } from "./steps";
 import { useHistory } from "react-router";
 
 export const CarDetails = () => {
-	const [Step, setStep] = useState(6);
+	const [Step, setStep] = useState(1);
 	const history = useHistory();
 
 	//formData's

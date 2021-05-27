@@ -206,7 +206,7 @@ export const Container = styled.div`
   background-position: ${props => props.pos || "top right"};
   background-size: 100% 70%;
   background-image: ${props => `url(${props.url})` || ""};
-  height: 33rem;
+  height: 100%;
 
 `;
 

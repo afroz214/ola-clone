@@ -6,17 +6,6 @@ export const TileWrap = styled.div`
 	font-family: "Inter-Medium";
 	border-radius: 2px;
 	margin-bottom: 8px;
-
-	input {
-		clip: rect(0, 0, 0, 0);
-		height: 1px;
-		width: 1px;
-		border: 1px;
-		overflow: hidden;
-		left: 119px;
-		position: relative;
-		top: 17px;
-	}
 `;
 
 export const Label = styled.div`
@@ -28,7 +17,7 @@ export const Label = styled.div`
 	color: #333;
 	font-size: 14px;
 	font-weight: ;
-	letter-spacing:0.5px;
+	letter-spacing: 0.5px;
 	line-height: 17px;
 	text-align: center;
 	padding: 0 2px;
@@ -43,14 +32,15 @@ export const Label = styled.div`
 		font-family: "Inter-SemiBold";
 		background-color: #fff;
 		color: #000;
-		box-shadow: 0px 0px 7px 0px #33CC33;
+		box-shadow: 0px 0px 7px 0px #33cc33;
 	}
 	&:hover,
 	&:focus {
-		box-shadow: 0px 0px 7px 0px #33CC33;
-		-webkit-box-shadow: 0px 0px 7px 0px #33CC33;
-		-moz-box-shadow: 0px 0px 7px 0px #33CC33;
+		box-shadow: 0px 0px 7px 0px #33cc33;
+		-webkit-box-shadow: 0px 0px 7px 0px #33cc33;
+		-moz-box-shadow: 0px 0px 7px 0px #33cc33;
 	}
+	cursor: pointer;
 `;
 
 export const Img = styled.img`
