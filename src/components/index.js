@@ -29,6 +29,7 @@ import {
 	DropDownWrapper,
 	ErrorMsg,
 } from "./label-input/input";
+import Switch from "./switch/switch";
 
 export {
 	EditTooltip,
@@ -65,4 +66,5 @@ export {
 	Layout,
 	Tile,
 	Textbox,
+	Switch,
 };

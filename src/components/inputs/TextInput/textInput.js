@@ -16,6 +16,7 @@ const Textbox = ({
 	inputRef,
 	onBlur,
 	isRequired,
+	register,
 	...otherProps
 }) => {
 	const _renderInput = () => (
@@ -26,7 +27,7 @@ const Textbox = ({
 					type="text"
 					id={id}
 					name={name}
-					dobSpace
+					ref={register}
 					defaultValue={""}
 					placeholder=" "
 					onKeyDown={(e) => {}}
