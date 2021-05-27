@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import "./style.css";
-import { Brand, Model, FuelType, Variant, City } from "./steps";
+import { Brand, Model, FuelType, Variant, City, YearCM } from "./steps";
+import { useHistory } from "react-router";
 
 export const CarDetails = () => {
-	const [Step, setStep] = useState(5);
+	const [Step, setStep] = useState(6);
+	const history = useHistory();
 
 	//formData's
 	const [brandData, setBrandData] = useState({});
@@ -12,6 +14,7 @@ export const CarDetails = () => {
 	const [FuelData, setFuelData] = useState({});
 	const [VariantData, setVariantData] = useState({});
 	const [CitytData, setCityData] = useState({});
+	const [YearData, setYearData] = useState({});
 
 	const stepFn = (stepNo, data, newStep) => {
 		setStep(Number(newStep));
@@ -31,6 +34,9 @@ export const CarDetails = () => {
 			case 5:
 				setCityData(data);
 				break;
+			case 6:
+				setYearData(data);
+				break;
 			default:
 				break;
 		}
@@ -47,10 +53,21 @@ export const CarDetails = () => {
 				return "Select the Variant of your Car";
 			case 5:
 				return "Enter City Details";
+			case 6:
+				return "Enter the Vehicle registration year";
 			default:
 				break;
 		}
 	};
+
+	//After Completion
+	useEffect(() => {
+		if (Step > 6) {
+			history.push("/details-form");
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [Step]);
+
 	return (
 		<>
 			<Row className="w-100 mx-auto my-4" style={{ zIndex: "999" }}>
@@ -86,6 +103,7 @@ export const CarDetails = () => {
 				{Step === 3 && <FuelType stepFn={stepFn} />}
 				{Step === 4 && <Variant stepFn={stepFn} />}
 				{Step === 5 && <City stepFn={stepFn} />}
+				{Step === 6 && <YearCM stepFn={stepFn} />}
 			</Row>
 		</>
 	);
