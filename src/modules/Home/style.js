@@ -201,12 +201,13 @@ export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: top;
   background-repeat: no-repeat;
-  background-position: top right;
-  background-size: 100% 100%;
+  background-position: ${props => props.pos || "top right"};
+  background-size: 100% 70%;
   background-image: ${props => `url(${props.url})` || ""};
   height: 100%;
+
 `;
 
 export const FormContainer = styled.div`

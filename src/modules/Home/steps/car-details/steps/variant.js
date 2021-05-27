@@ -6,28 +6,28 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
 
+
 const DummyData = {
-	name: "Maruti",
-	logo: "/assets/images/logo/logo12.png",
+	name: "Variants",
 	id: "1",
 };
 
 const DummyOthers = [
 	{
-		name: "Audi",
-		label: "Audi",
+		name: "Variant 1",
+		label: "Variant 1",
 		value: "2",
 		id: "2",
 	},
 	{
-		name: "BMW",
-		label: "BMW",
+		name: "Variant 2",
+		label: "Variant 2",
 		value: "3",
 		id: "3",
 	},
 	{
-		name: "Ferrari",
-		label: "Ferrari",
+		name: "Variant 3",
+		label: "Variant 3",
 		value: "4",
 		id: "4",
 	},
@@ -35,10 +35,10 @@ const DummyOthers = [
 
 // validation schema
 const yupValidate = yup.object({
-	brand: yup.string().required("Brand is required"),
+	variant: yup.string().required("Variant is required"),
 });
 
-export const Brand = ({ stepFn }) => {
+export const Variant = ({ stepFn }) => {
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
@@ -46,19 +46,18 @@ export const Brand = ({ stepFn }) => {
 	});
 	const [show, setShow] = useState(false);
 
-	const other = watch("brand_other");
-	const brand = watch("brand");
-	console.log(brand)
+	const other = watch("variant_other");
+	const variant = watch("variant");
 
 	useEffect(() => {
 		if (!_.isEmpty(other)) {
-			stepFn(1, other?.value, 2);
+			stepFn(4, other?.value, 5);
 		}
-		if (brand) {
-			stepFn(1, brand, 2);
+		if (variant) {
+			stepFn(4, variant, 5);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [other, brand]);
+	}, [other, variant]);
 
 	return (
 		<>
@@ -75,14 +74,14 @@ export const Brand = ({ stepFn }) => {
 								className="d-flex justify-content-center"
 							>
 								<Tile
-									logo={DummyData?.logo}
 									text={DummyData?.name}
 									id={index}
 									register={register}
-									name={"brand"}
+									name={"variant"}
 									value={index}
+									height={"50px"}
 									setValue={setValue}
-									Selected={brand}
+									Selected={variant}
 								/>
 							</Col>
 						))}
@@ -90,7 +89,7 @@ export const Brand = ({ stepFn }) => {
 					<Row className="mx-auto d-flex no-wrap mt-4">
 						<Col xs="12" sm="12" md="12" lg="12" xl="12" className="linkLine">
 							<Button variant="link" className="" onClick={() => setShow(true)}>
-								Don't See your Car's Brand? Click Here
+								Don't See your Car's variant? Click Here
 							</Button>
 						</Col>
 					</Row>
@@ -101,7 +100,7 @@ export const Brand = ({ stepFn }) => {
 						<Col xs="12" sm="12" md="12" lg="12" xl="12">
 							<Controller
 								control={control}
-								name="brand_other"
+								name="variant_other"
 								defaultValue={""}
 								render={({ onChange, onBlur, value, name }) => (
 									<MultiSelect
@@ -112,14 +111,14 @@ export const Brand = ({ stepFn }) => {
 										onBlur={onBlur}
 										isMulti={false}
 										options={DummyOthers}
-										placeholder={"Select Brand"}
-										errors={errors.brand}
+										placeholder={"Select Variant"}
+										errors={errors.variant}
 										Styled
 										closeOnSelect
 									/>
 								)}
 							/>
-							{!!errors?.brand && <Error className='mt-1'>{errors?.brand?.message}</Error>}
+							{!!errors?.variant && <Error className='mt-1'>{errors?.variant?.message}</Error>}
 						</Col>
 					</Row>
 					<Row className="mx-auto d-flex no-wrap mt-4">

@@ -13,10 +13,10 @@ export default function AnimatedMulti({
 	closeOnSelect,
 	isClearable,
 	isMulti,
-  errors,
-  Styled
+	errors,
+	Styled,
+	required,
 }) {
-
 	const lessthan480 = useMediaPredicate("(max-width: 480px)");
 
 	// styling
@@ -122,6 +122,7 @@ export default function AnimatedMulti({
 
 	return (
 		<Select
+			required={required}
 			closeMenuOnSelect={closeOnSelect ? true : false}
 			isMulti={isMulti}
 			options={options || []}
@@ -136,7 +137,7 @@ export default function AnimatedMulti({
 			hideSelectedOptions={false}
 			placeholder={placeholder || "Select..."}
 			isClearable={isClearable}
-      styles={Styled && MemoizedStyle}
+			styles={Styled && MemoizedStyle}
 		/>
 	);
 }
