@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
 import { Tile, Button as Btn, TextInput, Label, Error } from "components";
+import swal from 'sweetalert';
 
 const Fuel = [
 	{
@@ -12,46 +13,52 @@ const Fuel = [
 		label: "Petrol",
 		value: "1",
 		id: "1",
-        logo:"/assets/images/fuel/fuel-station.png"  
+		logo: "/assets/images/fuel/fuel-station.png",
 	},
 	{
 		name: "Diesel",
 		label: "Diesel",
 		value: "2",
 		id: "2",
-        logo:"/assets/images/fuel/diesel.png"  
+		logo: "/assets/images/fuel/diesel.png",
 	},
 	{
 		name: "CNG",
 		label: "CNG",
 		value: "3",
 		id: "3",
-        logo:"/assets/images/fuel/gas-bottle.png"  
+		logo: "/assets/images/fuel/gas-bottle.png",
 	},
 ];
 
 // validation schema
 const yupValidate = yup.object({
-	brand: yup.array().required("Brand is required").nullable(),
+	fuel: yup.string().required("Fuel type is required").nullable(),
 	kit_val: yup.string().required("Kit value is required"),
 });
 
 export const FuelType = ({ stepFn }) => {
-	const { handleSubmit, register, watch, control, errors } = useForm({
+	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
 		reValidateMode: "onBlur",
 	});
 
-	const other = watch("brand_other");
+	const kit_val = watch("kit_val");
 	const fuel = watch("fuel");
 
 	const onSubmit = (data) => {
-        console.log(data)
+		console.log(data);
 		stepFn(3, data, 4);
 	};
 
-    const handleChange = () => {}
+	useEffect(() => {
+		if (errors?.fuel?.message) {
+			swal(errors?.fuel?.message, "", 'error');
+		}
+	}, [errors]);
+
+	const handleChange = () => {};
 
 	return (
 		<>
@@ -75,19 +82,15 @@ export const FuelType = ({ stepFn }) => {
 										register={register}
 										name={"fuel"}
 										value={item?.value}
-                                        height='100px'
-                                        width='150px'
-                                        imgMargin={'10px'}
+										height="100px"
+										width="150px"
+										imgMargin={"10px"}
+										setValue={setValue}
+										Selected={fuel}
 									/>
 								</Col>
 							))}
-							<Col
-								sm="12"
-								md="12"
-								lg="12"
-								xl="12"
-								className="mt-4"
-							>
+							<Col sm="12" md="12" lg="12" xl="12" className="mt-4">
 								<TextInput
 									lg
 									type="text"
@@ -101,7 +104,9 @@ export const FuelType = ({ stepFn }) => {
 								<Label lg htmlFor="kit_val">
 									Enter kit value
 								</Label>
-                                {!!errors?.kit_val && <Error className='mt-1'>{errors?.kit_val?.message}</Error>}
+								{!!errors?.kit_val && (
+									<Error className="mt-1">{errors?.kit_val?.message}</Error>
+								)}
 							</Col>
 						</Row>
 						<Row>

@@ -28,12 +28,6 @@ export const Label = styled.div`
 	/* border: 1px solid #e3e4e8; */
 	border-radius: 0 15px 0px 15px;
 	transition: all 0.1s ease-in-out;
-	input:checked + label {
-		font-family: "Inter-SemiBold";
-		background-color: #fff;
-		color: #000;
-		box-shadow: 0px 0px 7px 0px #33cc33;
-	}
 	&:hover,
 	&:focus {
 		box-shadow: 0px 0px 7px 0px #33cc33;

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Label, TileWrap, Img } from "./style";
+import './input.css'
 
 const Tile = ({
 	text,
@@ -14,9 +15,10 @@ const Tile = ({
 	register,
 	imgMargin,
 	setValue,
+	Selected
 }) => {
 	// on change method
-
+	console.log(Selected, value)
 	const _renderInput = () => (
 		<>
 			<TileWrap className='m-2'>
@@ -25,7 +27,8 @@ const Tile = ({
 					<Label
 						width={width}
 						height={height}
-						onClick={() => setValue(name, value)}
+						onClick={() => setValue ? setValue(name, value) : {}}
+						className={Selected && (Number(value) === Number(Selected)) ? "Selected" : ""}
 					>
 						{logo && (
 							<Img src={logo} style={imgMargin && { marginBottom: imgMargin }} />

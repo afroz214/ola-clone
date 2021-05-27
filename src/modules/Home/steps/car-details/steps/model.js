@@ -38,7 +38,7 @@ const yupValidate = yup.object({
 });
 
 export const Model = ({ stepFn }) => {
-	const { handleSubmit, register, watch, control, errors } = useForm({
+	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
 		reValidateMode: "onBlur",
@@ -79,6 +79,8 @@ export const Model = ({ stepFn }) => {
 									name={"model"}
 									value={index}
                                     height={'50px'}
+									setValue={setValue}
+									Selected={model}
 								/>
 							</Col>
 						))}

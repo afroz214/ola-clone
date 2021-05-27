@@ -5,7 +5,7 @@ import { Brand, Model, FuelType, Variant, City, YearCM } from "./steps";
 import { useHistory } from "react-router";
 
 export const CarDetails = () => {
-	const [Step, setStep] = useState(1);
+	const [Step, setStep] = useState(3);
 	const history = useHistory();
 
 	//formData's
@@ -96,7 +96,7 @@ export const CarDetails = () => {
 					>
 						<img src={"/assets/images/back-button.png"} alt="bck" />
 					</Button>
-					<h3 className="text-center w-100">{TitleFn(Step)}</h3>
+					<h3 className="text-center w-100 mb-4">{TitleFn(Step)}</h3>
 				</Row>
 				{Step === 1 && <Brand stepFn={stepFn} />}
 				{Step === 2 && <Model stepFn={stepFn} />}

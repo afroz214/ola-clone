@@ -82,6 +82,7 @@ export const Brand = ({ stepFn }) => {
 									name={"brand"}
 									value={index}
 									setValue={setValue}
+									Selected={brand}
 								/>
 							</Col>
 						))}
