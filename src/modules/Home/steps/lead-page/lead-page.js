@@ -6,6 +6,7 @@ import styled from "styled-components";
 import * as yup from "yup";
 import { numOnly } from "utils";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useHistory } from 'react-router';
 
 // validation schema
 const yupValidate = yup.object({
@@ -36,6 +37,7 @@ const yupValidate = yup.object({
 });
 
 export const LeadPage = () => {
+    const history = useHistory();
 	const { handleSubmit, register, errors } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
@@ -45,6 +47,7 @@ export const LeadPage = () => {
 
 	const onSubmit = (data) => {
 		console.log(data);
+        history.push('/registration');
 	};
 
 	return (
