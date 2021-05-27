@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FormGroup, Label, TextInput } from "./style";
+import { FormGroup, Label, TextInput, Req } from "./style";
 
 const Textbox = ({
 	fieldName,
@@ -36,6 +36,7 @@ const Textbox = ({
 				/>
 				<Label md htmlFor={id}>
 					{fieldName}
+					<Req>{isRequired ? "*" : ""}</Req>
 				</Label>
 			</FormGroup>
 		</>
