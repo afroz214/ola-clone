@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Error404 from "components/ErrorPages/404";
 import { Loader, Header, Layout, Footer } from "components";
-import { Home } from "modules";
+import { Home, Proposal } from "modules";
 
 const Router = (props) => {
 	return (
@@ -13,6 +13,7 @@ const Router = (props) => {
 					<Route exact path="/" component={Home} />
 					<Route exact path="/registration" component={Home} />
 					<Route exact path="/car-details" component={Home} />
+					<Route exact path="/proposal-page" component={Proposal} />
 					<Route exact path="/loader" component={(props) => <Loader {...props} />} />
 					<Route exact path="/404" component={Error404} />
 					<Redirect to="/404" />

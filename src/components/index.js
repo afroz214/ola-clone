@@ -28,6 +28,7 @@ import {
 	AgeWrapper,
 	DropDownWrapper,
 	ErrorMsg,
+	BackButton
 } from "./label-input/input";
 
 export {
@@ -65,4 +66,5 @@ export {
 	Layout,
 	Tile,
 	Textbox,
+	BackButton
 };
