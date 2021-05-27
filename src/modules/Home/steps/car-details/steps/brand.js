@@ -35,7 +35,7 @@ const DummyOthers = [
 
 // validation schema
 const yupValidate = yup.object({
-	brand: yup.array().required("Brand is required").nullable(),
+	brand: yup.string().required("Brand is required"),
 });
 
 export const Brand = ({ stepFn }) => {

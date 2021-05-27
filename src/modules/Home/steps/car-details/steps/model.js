@@ -34,7 +34,7 @@ const DummyOthers = [
 
 // validation schema
 const yupValidate = yup.object({
-	model: yup.array().required("Model is required").nullable(),
+	model: yup.string().required("Model is required"),
 });
 
 export const Model = ({ stepFn }) => {
