@@ -16,6 +16,7 @@ const Textbox = ({
 	inputRef,
 	onBlur,
 	isRequired,
+	onKeyDown,
 	...otherProps
 }) => {
 	const _renderInput = () => (
@@ -28,7 +29,7 @@ const Textbox = ({
 					name={name}
 					dobSpace
 					placeholder=" "
-					onKeyDown={(e) => {}}
+					onKeyDown={onKeyDown}
 					onChange={onChange}
 					error={error}
 				/>
