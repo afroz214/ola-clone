@@ -11,6 +11,7 @@ const Router = (props) => {
 			<Layout>
 				<Switch>
 					<Route exact path="/" component={Home} />
+					<Route exact path="/car-details" component={Home} />
 					<Route exact path="/loader" component={(props) => <Loader {...props} />} />
 					<Route exact path="/404" component={Error404} />
 					<Redirect to="/404" />

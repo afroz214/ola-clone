@@ -201,7 +201,13 @@ export const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: top;
+  background-repeat: no-repeat;
+  background-position: ${props => props.pos || "top right"};
+  background-size: 100% 70%;
+  background-image: ${props => `url(${props.url})` || ""};
+  height: 100%;
+
 `;
 
 export const FormContainer = styled.div`
@@ -209,7 +215,7 @@ export const FormContainer = styled.div`
   width: ${({ width }) => width || '690px'};
   @media (max-width: 991px) {
     width: ${({ width }) => width === '1007.990px' ? '750px' : width || '690px'};
-    margin: 0 15px 50px;
+    margin: 0 0px 00px;
   }
   @media (max-width: 767px) {
     width: 100%;
