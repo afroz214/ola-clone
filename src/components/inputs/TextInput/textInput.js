@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FormGroup, Label, TextInput, Req } from "./style";
+import { FormGroup, Label, TextInput } from "./style";
 
 const Textbox = ({
 	fieldName,
@@ -16,6 +16,7 @@ const Textbox = ({
 	inputRef,
 	onBlur,
 	isRequired,
+	onKeyDown,
 	register,
 	...otherProps
 }) => {
@@ -27,16 +28,15 @@ const Textbox = ({
 					type="text"
 					id={id}
 					name={name}
-					ref={register}
-					defaultValue={""}
+					dobSpace
 					placeholder=" "
-					onKeyDown={(e) => {}}
+					onKeyDown={onKeyDown}
 					onChange={onChange}
 					error={error}
+					ref={register}
 				/>
 				<Label md htmlFor={id}>
 					{fieldName}
-					<Req>{isRequired ? "*" : ""}</Req>
 				</Label>
 			</FormGroup>
 		</>

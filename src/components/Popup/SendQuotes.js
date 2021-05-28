@@ -140,7 +140,7 @@ font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 `;
 
 const ConfirmButton = styled.button`
-background-color:#f2581b;
+background-color:#bdd400;
 display:block;
 margin:25px 30%;
 font-size: 15px;

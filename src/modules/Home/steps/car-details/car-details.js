@@ -5,7 +5,7 @@ import { Brand, Model, FuelType, Variant, City, YearCM } from "./steps";
 import { useHistory } from "react-router";
 
 export const CarDetails = () => {
-	const [Step, setStep] = useState(3);
+	const [Step, setStep] = useState(1);
 	const history = useHistory();
 
 	//formData's
@@ -44,13 +44,13 @@ export const CarDetails = () => {
 	const TitleFn = (Step) => {
 		switch (Step) {
 			case 1:
-				return "Select the Brand of your Car";
+				return "Select the Brand of your Vehicle";
 			case 2:
-				return "Select the Model of your Car";
+				return "Select the Model of your Vehicle";
 			case 3:
-				return "Select Fuel type of your Car";
+				return "Select Fuel type of your Vehicle";
 			case 4:
-				return "Select the Variant of your Car";
+				return "Select the Variant of your Vehicle";
 			case 5:
 				return "Enter City Details";
 			case 6:
@@ -63,7 +63,7 @@ export const CarDetails = () => {
 	//After Completion
 	useEffect(() => {
 		if (Step > 6) {
-			history.push("/details-form");
+			history.push("/quote-page");
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [Step]);

@@ -13,7 +13,7 @@ import CompactCard from "./compact-card/Card";
 import EditTooltip from "./tooltip/tooltip";
 import MultiSelect from "./multi-select/multi-select";
 import Header from "./header/Header";
-import { Footer, Layout } from "./footer/footer";
+import { Footer, Layout } from "./footer/Footer";
 import Tile from "./tile/tile";
 import Textbox from "./inputs/TextInput/textInput";
 import {
@@ -28,8 +28,8 @@ import {
 	AgeWrapper,
 	DropDownWrapper,
 	ErrorMsg,
+	BackButton
 } from "./label-input/input";
-import Switch from "./switch/switch";
 
 export {
 	EditTooltip,
@@ -66,5 +66,5 @@ export {
 	Layout,
 	Tile,
 	Textbox,
-	Switch,
+	BackButton
 };
