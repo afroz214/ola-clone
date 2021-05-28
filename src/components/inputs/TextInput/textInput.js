@@ -16,6 +16,8 @@ const Textbox = ({
 	inputRef,
 	onBlur,
 	isRequired,
+	onKeyDown,
+	register,
 	...otherProps
 }) => {
 	const _renderInput = () => (
@@ -27,11 +29,11 @@ const Textbox = ({
 					id={id}
 					name={name}
 					dobSpace
-					defaultValue={""}
 					placeholder=" "
-					onKeyDown={(e) => {}}
+					onKeyDown={onKeyDown}
 					onChange={onChange}
 					error={error}
+					ref={register}
 				/>
 				<Label md htmlFor={id}>
 					{fieldName}

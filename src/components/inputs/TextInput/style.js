@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+const colorsecondary = "#e3e4e8";
+const danger = "#bf1650";
+
 export const TextInput = styled.input`
 	width: 100%;
 	border-radius: 50px;
@@ -9,7 +12,7 @@ export const TextInput = styled.input`
 	font-weight: 400;
 	font-family: "Inter-Light";
 	font-size: 14px;
-	border: solid 1px #e3e4e8;
+	border: 1px solid  ${(props) => (props.error ? danger : '#e3e4e8')};
 	height: 50px;
 
 	& ~ label {
@@ -18,11 +21,8 @@ export const TextInput = styled.input`
 	}
 	&:focus {
 		outline: none;
-		border: ${(props) => {
-				if (props.error) return "2px solid";
-				else return "2px solid";
-			}}
-			${(props) => (props.error === "danger" ? "" : "")};
+		border:  ${(props) => (props.error ? "2px" : "2px")} solid
+			${(props) => (props.error ? danger : '')};
 		& ~ label {
 			font-size: 12px;
 			top: 2px;

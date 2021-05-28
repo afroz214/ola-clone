@@ -4,7 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import { useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, FormContainer } from "./style";
-import { Registration, CarDetails } from "./steps";
+import { Registration, CarDetails, LeadPage } from "./steps";
 export const Home = () => {
 	const location = useLocation();
 
@@ -38,7 +38,8 @@ export const Home = () => {
 				pos={SplashPos(location.pathname)}
 			>
 				<FormContainer>
-					{location.pathname === "/" && <Registration />}
+					{location.pathname === "/" && <LeadPage />}
+					{location.pathname === "/registration" && <Registration />}
 					{location.pathname === "/car-details" && <CarDetails />}
 				</FormContainer>
 			</Container>

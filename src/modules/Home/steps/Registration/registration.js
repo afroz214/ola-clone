@@ -3,12 +3,34 @@ import { Row, Col, Form } from "react-bootstrap";
 import { TextInput, Button, ErrorMsg, Label } from "components";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useHistory } from 'react-router';
+
+// validation schema
+const yupValidate = yup.object({
+	reg_no: yup
+		.string()
+		.required("Registration No. is required")
+		
+});
+
+// .matches(
+// 	/^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$/,
+// 	"Invalid Registration Number"
+// )
 
 export const Registration = () => {
-	const { handleSubmit, register, errors } = useForm();
+	const history = useHistory();
+	const { handleSubmit, register, errors } = useForm({
+		resolver: yupResolver(yupValidate),
+		mode: "all",
+		reValidateMode: "onBlur",
+	});
 	const handleChange = () => {};
 	const onSubmit = (data) => {
 		console.log(data);
+		history.push('/car-details')
 	};
 
 	return (
@@ -35,16 +57,18 @@ export const Registration = () => {
 								placeholder=" "
 								ref={register}
 								onChange={handleChange}
-								error={errors?.phone}
-								maxLength="10"
+								error={errors?.reg_no}
 							/>
 							<Label lg htmlFor="reg_no">
-								Enter your Car Number
+								Enter your Vehicle Number
 							</Label>
-							<Form.Text className="text-muted">
-								<text style={{ color: "#bdbdbd" }}>e.g MH-01-AR-7294</text>
-							</Form.Text>
-							{!!errors.phone && <ErrorMsg>{errors.phone.message}</ErrorMsg>}
+							{!!errors.reg_no ? (
+								<ErrorMsg>{errors.reg_no.message}</ErrorMsg>
+							) : (
+								<Form.Text className="text-muted">
+									<text style={{ color: "#bdbdbd" }}>e.g MH-01-AR-7294</text>
+								</Form.Text>
+							)}
 						</div>
 					</StyledCol>
 					<StyledCol sm="12" md="12" lg="2" xl="2" className="p-0 my-2 mx-2 d-flex">
@@ -77,6 +101,7 @@ export const Registration = () => {
 						hex1="#006400"
 						hex2="#228B22"
 						borderRadius="5px"
+						onClick={() => history.push('/car-details')}
 					>
 						<label style={{ cursor: "pointer" }} className="p-0 m-0">
 							Proceed without reg. no.
@@ -88,6 +113,7 @@ export const Registration = () => {
 						hex1="#006400"
 						hex2="#228B22"
 						borderRadius="5px"
+						onClick={() => history.push('/car-details')}
 					>
 						<label style={{ cursor: "pointer" }} className="p-0 m-0">
 							New Car? Click Here
