@@ -110,7 +110,7 @@ export const City = ({ stepFn }) => {
 				</Col>
 				{city && (
 					<Col xs="12" sm="12" md="12" lg="12" xl="12" className="mt-4 w-100">
-						<h2 className="w-100 text-center mb-4">Sub Number</h2>
+						<h2 className="w-100 text-center mb-4">RTO</h2>
 						<Controller
 							control={control}
 							name="sub_no"

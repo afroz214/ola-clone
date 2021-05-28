@@ -12,6 +12,25 @@ import { subYears } from "date-fns";
 
 /*----------------Validation Schema---------------------*/
 const yupValidate = yup.object({
+	pincode: yup
+		.string()
+		.required("Pincode is Required")
+		.matches(/^[0-9]+$/, "Must be only digits")
+		.min(6, "Must be 6 digits")
+		.max(6, "Must be 6 digits"),
+	address_line_1: yup.string().required("Address1 is Required"),
+	address_line_2: yup.string().required("Address2 is Required"),
+	address_line_3: yup.string().required("Address3 is Required"),
+	city_id: yup.string().required("Required"),
+	state_id: yup.string().required("Required"),
+	gstin: yup
+		.string()
+		.nullable()
+		.transform((v, o) => (o === "" ? null : v))
+		.matches(
+			/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/,
+			"GST number invalid"
+		),
 	pan_no: yup
 		.string()
 		.nullable()
@@ -54,10 +73,20 @@ const yupValidate = yup.object({
 });
 /*----------x------Validation Schema----------x-----------*/
 
-const OwnerCard = ({ onSubmitOwner }) => {
+/*---------------date config----------------*/
+const AdultCheck = subYears(new Date(Date.now() - 86400000), 18);
+/*-----x---------date config-----x----------*/
+
+const Occupations = [
+	{ name: "Occupation 1", id: 1 },
+	{ name: "Occupation 2", id: 2 },
+	{ name: "Occupation 3", id: 3 },
+];
+
+const OwnerCard = ({ onSubmitOwner, owner }) => {
 	const { handleSubmit, register, errors, control, reset, setValue, watch } =
 		useForm({
-			defaultValues: {},
+			defaultValues: !_.isEmpty(owner) ? owner : {},
 			resolver: yupResolver(yupValidate),
 			mode: "onBlur",
 			reValidateMode: "onBlur",
@@ -107,12 +136,14 @@ const OwnerCard = ({ onSubmitOwner }) => {
 	const [radioValue2, setRadioValue2] = useState(watch("marital_status"));
 	/*----x---- marital status--x--*/
 
-	/*---------------date config----------------*/
-	const AdultCheck = subYears(new Date(Date.now() - 86400000), 18);
-	/*-----x---------date config-----x----------*/
+	//setting hidden i/p
+	const OccupationType = watch("occupation_type");
+	const OccupationName = Occupations.filter(
+		({ id }) => id === Number(OccupationType)
+	)[0]?.name;
 
 	return (
-		<Form>
+		<Form onSubmit={handleSubmit(onSubmitOwner)}>
 			<Row style={{ margin: "-60px -20px 20px -30px" }} className="p-1">
 				<H4Tag2>Almost Done! Help me with few more details.</H4Tag2>
 				<ColDiv
@@ -336,6 +367,52 @@ const OwnerCard = ({ onSubmitOwner }) => {
 					</div>
 				</Col>
 				<Col xs={12} sm={12} md={12} lg={6} xl={4} className="">
+					<div className="py-2">
+						<FormGroupTag>GSTIN (Optional)</FormGroupTag>
+						<Form.Control
+							type="text"
+							placeholder="GSTIN"
+							size="sm"
+							ref={register}
+							name="gstin"
+							onInput={(e) => (e.target.value = ("" + e.target.value).toUpperCase())}
+						/>
+						{errors.gstin ? (
+							<ErrorMsg fontSize={"12px"}>{errors.gstin.message}</ErrorMsg>
+						) : (
+							<Form.Text className="text-muted">
+								<text style={{ color: "#bdbdbd" }}>e.g 18AABCU9603R1ZM</text>
+							</Form.Text>
+						)}
+					</div>
+				</Col>
+				<Col xs={12} sm={12} md={12} lg={6} xl={4} className="">
+					<div className="py-2 fname">
+						<FormGroupTag>Occupation Type</FormGroupTag>
+						<Form.Control
+							as="select"
+							size="sm"
+							ref={register}
+							name="occupation_type"
+							className="title_list"
+						>
+							{Occupations.map(({ name, id }, index) => (
+								<option selected={index === 0 ? true : false} value={id}>
+									{name}
+								</option>
+							))}
+						</Form.Control>
+					</div>
+					{watch("occupation_type") && (
+						<input
+							type="hidden"
+							ref={register}
+							name="occupation_name"
+							value={OccupationName}
+						/>
+					)}
+				</Col>
+				<Col xs={12} sm={12} md={12} lg={6} xl={4} className="">
 					<FormGroupTag style={{ paddingTop: "10px" }}>Marital Status</FormGroupTag>
 					<div className="" style={{ width: "100%", paddingTop: "2px" }}>
 						<ButtonGroupTag toggle style={{ width: "100%" }}>
@@ -375,31 +452,175 @@ const OwnerCard = ({ onSubmitOwner }) => {
 							{errors.marital_status.message}
 						</ErrorMsg>
 					)}
-				</Col> <Col
-          sm={12}
-          lg={12}
-          className="d-flex justify-content-center mb-2 mt-3"
-        >
-          <Button
-            type="submit"
-            buttonStyle="outline-solid"
-            hex1={'#4ca729'}
-            hex2={'#4ca729'}
-            borderRadius="5px"
-            color="white"
-          >
-            <text
-              style={{
-                fontSize: "15px",
-                padding: "-20px",
-                margin: "-20px -5px -20px -5px",
-                fontWeight: "400",
-              }}
-            >
-              {'Proceed to Nominee'}
-            </text>
-          </Button>
-        </Col>
+				</Col>
+				<Col
+					xs={12}
+					sm={12}
+					md={12}
+					lg={12}
+					xl={12}
+					className=" mt-1"
+					style={{ marginBottom: "-10px" }}
+				>
+					<p
+						style={{
+							color: "#1a5105",
+							fontSize: "16px",
+							fontWeight: "600",
+						}}
+					>
+						Communication Address
+					</p>
+				</Col>
+				<Col xs={12} sm={12} md={12} lg={6} xl={4} className="">
+					<div className="py-2">
+						<FormGroupTag>Address Line 1</FormGroupTag>
+						<Form.Control
+							type="text"
+							placeholder="Address Line 1"
+							name="address_line_1"
+							maxLength="50"
+							minlength="2"
+							ref={register}
+							onInput={(e) =>
+								(e.target.value =
+									e.target.value.length <= 1
+										? ("" + e.target.value).toUpperCase()
+										: e.target.value)
+							}
+							errors={errors.address_line_1}
+							size="sm"
+						/>
+						{!!errors.address_line_1 && (
+							<ErrorMsg fontSize={"12px"}>{errors.address_line_1.message}</ErrorMsg>
+						)}
+					</div>
+				</Col>
+				<Col xs={12} sm={12} md={12} lg={6} xl={4} className="">
+					<div className="py-2">
+						<FormGroupTag>Address Line 2</FormGroupTag>
+						<Form.Control
+							type="text"
+							placeholder="Address Line 2"
+							name="address_line_2"
+							maxLength="50"
+							minlength="2"
+							ref={register}
+							onInput={(e) =>
+								(e.target.value =
+									e.target.value.length <= 1
+										? ("" + e.target.value).toUpperCase()
+										: e.target.value)
+							}
+							errors={errors.address_line_2}
+							size="sm"
+						/>
+						{!!errors.address_line_2 && (
+							<ErrorMsg fontSize={"12px"}>{errors.address_line_2.message}</ErrorMsg>
+						)}
+					</div>
+				</Col>
+				<Col xs={12} sm={12} md={12} lg={6} xl={4} className="">
+					<div className="py-2">
+						<FormGroupTag>Address Line 3</FormGroupTag>
+						<Form.Control
+							type="text"
+							placeholder="Address Line 3"
+							name="address_line_3"
+							maxLength="50"
+							minlength="2"
+							ref={register}
+							onInput={(e) =>
+								(e.target.value =
+									e.target.value.length <= 1
+										? ("" + e.target.value).toUpperCase()
+										: e.target.value)
+							}
+							errors={errors.address_line_3}
+							size="sm"
+						/>
+						{!!errors.address_line_3 && (
+							<ErrorMsg fontSize={"12px"}>{errors.address_line_3.message}</ErrorMsg>
+						)}
+					</div>
+				</Col>
+				<Col xs={12} sm={12} md={12} lg={6} xl={4} className="">
+					<div className="py-2">
+						<FormGroupTag>Pincode</FormGroupTag>
+						<Form.Control
+							name="pincode"
+							ref={register}
+							type="tel"
+							placeholder="Pincode"
+							errors={errors.pincode}
+							size="sm"
+							onKeyDown={numOnly}
+							maxLength="6"
+						/>
+						{!!errors.pincode && (
+							<ErrorMsg fontSize={"12px"}>{errors.pincode.message}</ErrorMsg>
+						)}
+					</div>
+				</Col>
+				<Col xs={12} sm={12} md={12} lg={6} xl={4} className="">
+					<div className="py-2">
+						<FormGroupTag>State</FormGroupTag>
+						<Form.Control
+							name="state"
+							ref={register}
+							type="text"
+							placeholder="State"
+							errors={errors.state}
+							size="sm"
+							defaultValue={"Maharastra"}
+							readOnly
+						/>
+						{!!errors.state && (
+							<ErrorMsg fontSize={"12px"}>{errors.state.message}</ErrorMsg>
+						)}
+					</div>
+					<input name="state_id" ref={register} type="hidden" value={"1"} />
+				</Col>
+				<Col xs={12} sm={12} md={12} lg={6} xl={4} className="">
+					<div className="py-2">
+						<FormGroupTag>City</FormGroupTag>
+						<Form.Control
+							name="city"
+							ref={register}
+							type="text"
+							placeholder="City"
+							errors={errors.city}
+							size="sm"
+							defaultValue={"Mumbai"}
+							readOnly
+						/>
+						{!!errors.city && (
+							<ErrorMsg fontSize={"12px"}>{errors.city.message}</ErrorMsg>
+						)}
+					</div>
+					<input name="city_id" ref={register} type="hidden" value={"1"} />
+				</Col>
+				<Col sm={12} lg={12} className="d-flex justify-content-center mt-5">
+					<Button
+						type="submit"
+						buttonStyle="outline-solid"
+						hex1={"#4ca729"}
+						hex2={"#4ca729"}
+						borderRadius="5px"
+						color="white"
+					>
+						<text
+							style={{
+								fontSize: "15px",
+								padding: "-20px",
+								margin: "-20px -5px -20px -5px",
+								fontWeight: "400",
+							}}
+						>
+							{"Proceed to Nominee Details"}
+						</text>
+					</Button>
+				</Col>
 			</Row>
 		</Form>
 	);
