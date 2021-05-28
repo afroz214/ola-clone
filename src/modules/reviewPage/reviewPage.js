@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import {
 	BackBtn,
 	FormHeader,
@@ -8,14 +9,20 @@ import {
 	SubmitBtn,
 } from "./reviewPage.style";
 import backButton from "../../assets/img/back-button.png";
+
 import ReviewCard from "./reviewCard/reviewCard";
 import InfoCard from "./reviewSideCard/info-card";
 import { Row, Col } from "react-bootstrap";
 export const ReviewPage = () => {
 	document.body.style.backgroundColor = "#ebecf3";
+	const history = useHistory();
 	return (
 		<>
-			<BackBtn>
+			<BackBtn
+				onClick={() => {
+					history.push(`/quotes`);
+				}}
+			>
 				<img src={backButton} />
 			</BackBtn>
 			<FormHeader />
