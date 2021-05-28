@@ -4136,7 +4136,7 @@ i.flag.zw:before {
   }
 }
 .respo-iner span {
-  color: rgb(2, 140, 200);
+  color: #006600;
   letter-spacing: 1px;
   font-weight: 400;
   font-size: 11px;
@@ -4202,7 +4202,7 @@ i.flag.zw:before {
 }
 
 .switch input:checked + .slider {
-  background-color: #45a8d2;
+  background-color: #006600;
 }
 
 @media (max-width: 1280px) {

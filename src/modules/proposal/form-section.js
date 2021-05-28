@@ -14,9 +14,11 @@ import moment from "moment";
 /*---cards---*/
 import OwnerCard from "./cards/owner-card";
 import NomineeCard from "./cards/nominee-card";
+import VehicleCard from './cards/vehicle-card';
 /*---summary---*/
 import SummaryOwner from "./summary/summary-owner";
 import SummaryProposal from "./summary/summary-proposal";
+import SummaryVehicle from './summary/summary-vehicle';
 
 const FormSection = (props) => {
 	const history = useHistory();
@@ -79,7 +81,6 @@ const FormSection = (props) => {
 	//nominee
 	const onSubmitNominee = (data) => {
 		setNominee(data);
-		console.log(data);
 	};
 
 	//switch(nominee -> vehicle)
@@ -89,6 +90,20 @@ const FormSection = (props) => {
 			setFormVehicle("form");
 		}
 	}, [nominee]);
+
+	//vehicle
+	const onSubmitVehicle = (data) => {
+		setVehicle(data);
+		console.log(data);
+	};
+
+	//switch(vehicle -> pre-policy)
+	useEffect(() => {
+		if (!_.isEmpty(vehicle)) {
+			setFormVehicle("summary");
+			setFormPrepolicy("form");
+		}
+	}, [vehicle]);
 	/*---------x----------form onSubmits----------------x-----------*/
 
 	/*---------------------------card titles------------------------*/
@@ -119,6 +134,8 @@ const FormSection = (props) => {
 	const titleOwnerSummary = titleFn("Owner Details", setFormOwner);
 	//nominee
 	const titleNomineeSummary = titleFn("Nominee Details", setFormNominee);
+	//vehicle
+	const titleVehicleSummary = titleFn("Vehicle Details", setFormVehicle);
 
 	return (
 		<div>
@@ -209,6 +226,54 @@ const FormSection = (props) => {
 				</div>
 			</Card>
 			{/*---------------x----End of Nominee Details Card--------x-----------*/}
+			{/*---------------------------Vehicle Details Card-----------------------*/}
+			<Card
+				title={
+					formVehicle === "summary" ? (
+						titleVehicleSummary
+					) : (
+						<Label>Vehicle Details</Label>
+					)
+				}
+				removeBottomHeader={true}
+				marginTop={formVehicle === "hidden" ? "5px" : ""}
+				id="vehicle"
+			>
+				<div
+					style={
+						formVehicle === "hidden"
+							? { maxHeight: "0", transition: "max-height 0.4s ease-in-out" }
+							: {
+									maxHeight: "100%",
+									transition: "max-height 0.4s ease-in-out",
+							  }
+					}
+				>
+					{formVehicle === "form" ? (
+						<div className="ElemFade m-0 p-1">
+							<VehicleCard
+								onSubmitVehicle={onSubmitVehicle}
+								vehicle={vehicle}
+								// buttonstate={buttonNominee}
+								// FetchedData={FetchedData}
+								// traveller={prefillTraveller}
+								// IcId={
+								// 	policy?.selected_plan?.ic_id
+								// 		? policy?.selected_plan?.ic_id
+								// 		: policy?.ic_id
+								// }
+							/>
+						</div>
+					) : formVehicle === "summary" ? (
+						<div className="m-0 p-1">
+							<SummaryVehicle summary={vehicle} />
+						</div>
+					) : (
+						<noscript />
+					)}
+				</div>
+			</Card>
+			{/*---------------x----End of Vehicle Details Card--------x-----------*/}
 		</div>
 	);
 };

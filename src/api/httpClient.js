@@ -48,7 +48,8 @@ const httpClient = async (url = '', options = defaultOptions, noBaseUrl) => {
                 data: response?.data || {},
                 errors: response?.data.errors,
                 error: response?.data.error,
-                message: response?.data.message,
+                message: response?.message,
+                // message: response?.data.message,
                 success: (response?.status === 200
                     || response?.status === 201)
                     && response?.data?.status
@@ -57,7 +58,8 @@ const httpClient = async (url = '', options = defaultOptions, noBaseUrl) => {
         .catch(err => ({
             data: err,
             success: false,
-            message: err?.response?.data?.message
+            // message: err?.response?.data?.message,
+            message: err?.response?.message
         })
         );
 };

@@ -12,6 +12,8 @@ export const Home = () => {
 		switch (url) {
 			case "/":
 				return "/assets/images/landing-page/bg-2.png";
+			case "/registration":
+				return "/assets/images/landing-page/bg-2.png";
 			case "/car-details":
 				return "/assets/images/splashFT.png";
 			default:
@@ -22,6 +24,8 @@ export const Home = () => {
 	const SplashPos = (url) => {
 		switch (url) {
 			case "/":
+				return "top right";
+			case "/registration":
 				return "top right";
 			case "/car-details":
 				return "center bottom";
