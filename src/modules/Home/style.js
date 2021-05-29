@@ -228,6 +228,7 @@ export const FormContainer = styled.div`
 
 export const Avatar = styled.img`
   width: 114px;
+  height: 114px;
   border: solid 2px #d2d3d4;
   border-radius: 50%;
   box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.2);

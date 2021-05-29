@@ -3956,7 +3956,7 @@ i.flag.zw:before {
 /* After */
 
 .landing-laxmi {
-  margin-top: -70px !important;
+  margin-top: -60px !important;
 }
 @media (max-width: 768px) {
   .headerDiv {
@@ -3970,7 +3970,7 @@ i.flag.zw:before {
     margin-right: -10px !important ;
   }
   .landing-laxmi {
-    margin-top: 0 !important;
+    margin-top: 20px !important;
   }
 }
 

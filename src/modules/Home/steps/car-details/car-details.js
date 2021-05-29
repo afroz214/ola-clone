@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import "./style.css";
 import { Brand, Model, FuelType, Variant, City, YearCM } from "./steps";
+import { scrollToTargetAdjusted } from "utils";
 import { useHistory } from "react-router";
 import { BackButton } from "components";
 
@@ -13,6 +14,11 @@ export const CarDetails = () => {
 	/*----------x----- back button-------x-------------*/
 	const [Step, setStep] = useState(1);
 	const history = useHistory();
+
+	//center auto scroll
+	useEffect(() => {
+		scrollToTargetAdjusted("stepper", 45);
+	}, []);
 
 	//formData's
 	const [brandData, setBrandData] = useState({});
@@ -85,9 +91,9 @@ export const CarDetails = () => {
 					<text style={{ color: "black" }}>Back</text>
 				</BackButton>
 			</div>
-			<Row className="w-100 mx-auto my-4" style={{ zIndex: "999" }}>
-				<Col sm="12" md="12" lg="12" xl="12" className="p-0 my-0 m-0 w-100">
-					<div className="wrapper-progressBar">
+			<Row className="w-100 mx-auto my-4" style={{ zIndex: "999" }} id="stepper">
+				<Col sm="12" md="12" lg="12" xl="12" className="p-0 my-0 m-0 w-100" >
+					<div className="wrapper-progressBar" >
 						<ul className="progressBar">
 							<li className={Step > 0 ? "active" : ""}>Brand</li>
 							<li className={Step > 1 ? "active" : ""}>Model</li>
