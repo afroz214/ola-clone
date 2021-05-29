@@ -101,7 +101,7 @@ height:100px;
 width: 100px;
 border-radius:50%;
 box-shadow: 0px 4px 13px rgba(41,41,41,0.35);
-border: 2.5px solid #004b83;
+border: 2.5px solid #006600;
 `;
 
 const MainWrapper = styled.div`
