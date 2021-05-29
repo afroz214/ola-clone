@@ -8,10 +8,11 @@ import {
 	SwitchInput,
 	FormLabel,
 	SpanLabel,
-	Img
+	Img,
+	ToggleValues,
 } from "./style";
 
-export const Switch = ({ onChange, value, label, dark }) => {
+const Switch = ({ onChange, value, label, dark }) => {
 	const [isChecked, setIsChecked] = useState(false);
 
 	const handleChange = (e) => {
@@ -30,6 +31,7 @@ export const Switch = ({ onChange, value, label, dark }) => {
 		<InputBorder>
 			<CustomControl>
 				<SwitchContainer>
+					<ToggleValues>Yes</ToggleValues>
 					<label>
 						<SwitchInput
 							dark={dark}
@@ -41,15 +43,11 @@ export const Switch = ({ onChange, value, label, dark }) => {
 							<div></div>
 						</div>
 					</label>
+					<ToggleValues>No</ToggleValues>
 				</SwitchContainer>
 			</CustomControl>
 
 			{/* top label */}
-			<FormLabel htmlFor="name">
-				<SpanLabel>{label}
-					<sup> <Img alt="important" src='/assets/images/inputs/important.png' /> </sup>
-				</SpanLabel>
-			</FormLabel>
 		</InputBorder>
 	);
 };
@@ -57,7 +55,7 @@ export const Switch = ({ onChange, value, label, dark }) => {
 // default props
 Switch.defaultProps = {
 	value: 0,
-	label: "Status",
+	label: "",
 };
 
 // props types
@@ -65,3 +63,5 @@ Switch.propTypes = {
 	onChange: PropTypes.func,
 	value: PropTypes.number,
 };
+
+export default Switch;

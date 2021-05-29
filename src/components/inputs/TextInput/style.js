@@ -57,3 +57,6 @@ export const Label = styled.label`
 	font-weight: 500px;
 	font-size: 16px;
 `;
+export const Req = styled.label`
+	color: red;
+`;
