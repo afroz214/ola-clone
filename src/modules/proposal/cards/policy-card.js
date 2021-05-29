@@ -152,7 +152,7 @@ const PolicyCard = ({ onSubmitPrepolicy, prepolicy }) => {
 						)}
 					</div>
 				</Col>
-				<Col sm={12} lg={12} className="d-flex justify-content-center mt-5">
+				<Col sm={12} lg={12} md={12} xl={12} className="d-flex justify-content-center mt-5">
 					<Button
 						type="submit"
 						buttonStyle="outline-solid"

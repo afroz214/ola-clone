@@ -463,7 +463,7 @@ const VehicleCard = ({ onSubmitVehicle, vehicle }) => {
 						</Col>
 					</>
 				)}
-				<Col sm={12} lg={12} className="d-flex justify-content-center mt-5">
+				<Col sm={12} lg={12} md={12} xl={12}  className="d-flex justify-content-center mt-5">
 					<Button
 						type="submit"
 						buttonStyle="outline-solid"
@@ -480,7 +480,7 @@ const VehicleCard = ({ onSubmitVehicle, vehicle }) => {
 								fontWeight: "400",
 							}}
 						>
-							{"Proceed to Policy Details"}
+							{"Proceed to Policy"}
 						</text>
 					</Button>
 				</Col>
