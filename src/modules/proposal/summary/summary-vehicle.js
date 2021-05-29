@@ -18,10 +18,10 @@ const SummaryVehicle = ({ summary }) => {
 	const question = (ques, ans) => {
 		return (
 			<Col sm={12} xs={12} md={12} lg={12} xl={12} className="py-2 px-2 w-100">
-				<Col sm={12} xs={12} md={12} lg={12} xl={12} className="py-1 px-0 w-100">
+				<Col sm={12} xs={12} md={12} lg={12} xl={12} className="py-1 px-0">
 					<div style={{ fontSize: "12px", fontWeight: "600" }}>{ques}</div>
 				</Col>
-				<Col sm={12} xs={12} md={12} lg={12} xl={12} className="py-2 px-0 w-100">
+				<Col sm={12} xs={12} md={12} lg={12} xl={12} className="py-2 px-0">
 					<div style={{ fontSize: "12px", fontWeight: "600" }}>
 						{ans ? "Yes" : "No"}
 					</div>

@@ -69,7 +69,10 @@ export const VehicleType = () => {
 									type="button"
 									onClick={() => (index === 2 ? setSelected(index) : onSubmit(index))}
 								>
-									<div className="w-100 h-100">
+									<div
+										className="w-100 h-100 d-flex flex-column justify-content-center align-content-center mx-auto p-0"
+										// style={{ minWidth: "100px", maxWidth: "100px" }}
+									>
 										<div
 											style={{ maxHeight: "40px", minHeight: "40px" }}
 											className="text-center w-100"
@@ -78,15 +81,17 @@ export const VehicleType = () => {
 												src="/assets/images/truck.svg"
 												alt="img"
 												className={selected === index ? "filter-white" : "filter-green"}
+												height="65"
+												width="65"
 											/>
 										</div>
 										<div
-											style={{ maxHeight: "35px", minHeight: "35px" }}
-											className="text-center w-100 h-100 mt-1"
+											style={{ maxHeight: "40px", minHeight: "40px" }}
+											className="text-center w-100 h-100 mt-4"
 										>
 											<label
-												style={{ fontSize: "14px" }}
-												className="text-center h-100 text-break overflow-auto"
+												style={{ fontSize: "14px", fontWeight:'800' }}
+												className="text-center h-100 w-100 overflow-auto label-text"
 											>
 												{"Truck"}
 											</label>
