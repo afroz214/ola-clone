@@ -52,7 +52,7 @@ export const Registration = () => {
 						<h4 className="text-center w-100">
 							Smart choice, We'll make it quick and easy for you.
 						</h4>
-						<h3 className="text-center w-100">
+						<h3 className="text-center w-100 mt-1">
 							Let's begin with your vehicle registration number
 						</h3>
 					</div>
