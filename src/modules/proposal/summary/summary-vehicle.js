@@ -39,7 +39,7 @@ const SummaryVehicle = ({ summary }) => {
 				lg={3}
 				xl={3}
 				style={{ width: "100%" }}
-				className="d-flex p-1"
+				className="d-flex p-0"
 			>
 				{!_.isEmpty(summary) ? (
 					<>

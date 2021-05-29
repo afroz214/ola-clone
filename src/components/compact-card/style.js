@@ -198,6 +198,12 @@ const SpanTag = styled.div`
     margin-left: 32%;
     margin-top: -60px;
   }
+
+  @media screen and (max-width: 766px) {
+    margin-left: 38%;
+    margin-top: -60px;
+  }
+
   @media screen and (max-width: 686px) {
     margin-left: 38%;
     margin-top: -60px;
