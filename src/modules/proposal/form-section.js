@@ -14,9 +14,12 @@ import moment from "moment";
 /*---cards---*/
 import OwnerCard from "./cards/owner-card";
 import NomineeCard from "./cards/nominee-card";
+import VehicleCard from "./cards/vehicle-card";
+import PolicyCard from "./cards/policy-card";
 /*---summary---*/
 import SummaryOwner from "./summary/summary-owner";
 import SummaryProposal from "./summary/summary-proposal";
+import SummaryVehicle from "./summary/summary-vehicle";
 
 const FormSection = (props) => {
 	const history = useHistory();
@@ -79,7 +82,6 @@ const FormSection = (props) => {
 	//nominee
 	const onSubmitNominee = (data) => {
 		setNominee(data);
-		console.log(data);
 	};
 
 	//switch(nominee -> vehicle)
@@ -89,7 +91,113 @@ const FormSection = (props) => {
 			setFormVehicle("form");
 		}
 	}, [nominee]);
+
+	//vehicle
+	const onSubmitVehicle = (data) => {
+		setVehicle(data);
+	};
+
+	//switch(vehicle -> pre-policy)
+	useEffect(() => {
+		if (!_.isEmpty(vehicle)) {
+			setFormVehicle("summary");
+			setFormPrepolicy("form");
+		}
+	}, [vehicle]);
+
+	//pre-policy
+	const onSubmitPrepolicy = (data) => {
+		setPrepolicy(data);
+		console.log(data);
+	};
+
+	//switch(pre-policy -> review & submit)
+	useEffect(() => {
+		if (!_.isEmpty(prepolicy)) {
+			setFormPrepolicy("summary");
+		}
+	}, [prepolicy]);
 	/*---------x----------form onSubmits----------------x-----------*/
+
+	/*--------------------Review & Submit Section End-------------------*/
+	const [finalSubmit, setFinalSubmit] = useState(true);
+	useEffect(() => {
+		if (
+			[formOwner, formNominee, formVehicle, formPrepolicy].every(
+				(elem) => elem === "summary"
+			)
+		) {
+			setFinalSubmit(true);
+		} else {
+			setFinalSubmit(false);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [formOwner, formNominee, formVehicle, formPrepolicy]);
+
+	const onFinalSubmit = () => {
+		console.log("submitted");
+	};
+	//to store checkbox value
+	const [terms_condition, setTerms_condition] = useState(false);
+	const FinalSubmit = (
+		<Row style={{ padding: "10.5px" }}>
+			<Col xl="12" lg="12" md="12" sm="12">
+				<SubmitDiv>
+					<label className="checkbox-container">
+						<input
+							className="bajajCheck"
+							defaultChecked={false}
+							name="accept"
+							type="checkbox"
+							value={terms_condition}
+							onChange={(e) => {
+								setTerms_condition(e.target.checked);
+							}}
+						/>
+						<span className="checkmark"></span>
+					</label>
+					<p className="privacyPolicy">
+						I confirm all the details shared are correct and accurate as per my
+						knowledge and I agree with all the T&C. I also declare that the
+						information provided above is true and accept that if it is found to be
+						false, it may impact claims. I agree any changes to the details post
+						payment might require additional payment. OLA Pvt. Ltd. (including its
+						representatives) shall not be held liable for any changes due to incorrect
+						information.
+					</p>
+				</SubmitDiv>
+			</Col>
+			<Col
+				sm="12"
+				md="12"
+				lg="12"
+				xl="12"
+				className="d-flex justify-content-center"
+			>
+				<Button
+					type="submit"
+					buttonStyle="outline-solid"
+					hex1={"#4ca729"}
+					hex2={"#4ca729"}
+					borderRadius="5px"
+					color="white"
+					onClick={onFinalSubmit}
+				>
+					<text
+						style={{
+							fontSize: "15px",
+							padding: "-20px",
+							margin: "-20px -5px -20px -5px",
+							fontWeight: "400",
+						}}
+					>
+						{"Review & Submit"}
+					</text>
+				</Button>
+			</Col>
+		</Row>
+	);
+	/*---------------x----Review & Submit Section End----x--------------*/
 
 	/*---------------------------card titles------------------------*/
 	//Card Title Function
@@ -119,6 +227,13 @@ const FormSection = (props) => {
 	const titleOwnerSummary = titleFn("Owner Details", setFormOwner);
 	//nominee
 	const titleNomineeSummary = titleFn("Nominee Details", setFormNominee);
+	//vehicle
+	const titleVehicleSummary = titleFn("Vehicle Details", setFormVehicle);
+	//pre-policy
+	const titlePrepolicySummary = titleFn(
+		"Previous Policy Details",
+		setFormPrepolicy
+	);
 
 	return (
 		<div>
@@ -209,6 +324,105 @@ const FormSection = (props) => {
 				</div>
 			</Card>
 			{/*---------------x----End of Nominee Details Card--------x-----------*/}
+			{/*---------------------------Vehicle Details Card-----------------------*/}
+			<Card
+				title={
+					formVehicle === "summary" ? (
+						titleVehicleSummary
+					) : (
+						<Label>Vehicle Details</Label>
+					)
+				}
+				removeBottomHeader={true}
+				marginTop={formVehicle === "hidden" ? "5px" : ""}
+				id="vehicle"
+			>
+				<div
+					style={
+						formVehicle === "hidden"
+							? { maxHeight: "0", transition: "max-height 0.4s ease-in-out" }
+							: {
+									maxHeight: "100%",
+									transition: "max-height 0.4s ease-in-out",
+							  }
+					}
+				>
+					{formVehicle === "form" ? (
+						<div className="ElemFade m-0 p-1">
+							<VehicleCard
+								onSubmitVehicle={onSubmitVehicle}
+								vehicle={vehicle}
+								// buttonstate={buttonNominee}
+								// FetchedData={FetchedData}
+								// traveller={prefillTraveller}
+								// IcId={
+								// 	policy?.selected_plan?.ic_id
+								// 		? policy?.selected_plan?.ic_id
+								// 		: policy?.ic_id
+								// }
+							/>
+						</div>
+					) : formVehicle === "summary" ? (
+						<div className="m-0 p-1">
+							<SummaryVehicle summary={vehicle} />
+						</div>
+					) : (
+						<noscript />
+					)}
+				</div>
+			</Card>
+			{/*---------------x----End of Vehicle Details Card--------x-----------*/}
+			{/*---------------------------Policy Details Card-----------------------*/}
+			<Card
+				title={
+					formPrepolicy === "summary" ? (
+						titlePrepolicySummary
+					) : (
+						<Label>Previous Policy Details</Label>
+					)
+				}
+				removeBottomHeader={true}
+				marginTop={formPrepolicy === "hidden" ? "5px" : ""}
+				id="nominee"
+			>
+				<div
+					style={
+						formPrepolicy === "hidden"
+							? { maxHeight: "0", transition: "max-height 0.4s ease-in-out" }
+							: {
+									maxHeight: "100%",
+									transition: "max-height 0.4s ease-in-out",
+							  }
+					}
+				>
+					{formPrepolicy === "form" ? (
+						<div className="ElemFade m-0 p-1">
+							<PolicyCard
+								onSubmitPrepolicy={onSubmitPrepolicy}
+								prepolicy={prepolicy}
+								// buttonstate={buttonNominee}
+								// FetchedData={FetchedData}
+								// traveller={prefillTraveller}
+								// IcId={
+								// 	policy?.selected_plan?.ic_id
+								// 		? policy?.selected_plan?.ic_id
+								// 		: policy?.ic_id
+								// }
+							/>
+						</div>
+					) : formPrepolicy === "summary" ? (
+						<div className="m-0 p-1">
+							<SummaryProposal data={prepolicy} />
+						</div>
+					) : (
+						<noscript />
+					)}
+				</div>
+			</Card>
+			{/*---------------x----End of Policy Details Card--------x-----------*/}
+			{/*---------------x----Review & Submit--------x-----------*/}
+			<div id="review-submit">{finalSubmit && FinalSubmit}</div>
+			{/*---------------x----End of Review & Submit--------x-----------*/}
 		</div>
 	);
 };
