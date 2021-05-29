@@ -204,7 +204,7 @@ export const Container = styled.div`
   align-items: top;
   background-repeat: no-repeat;
   background-position: ${props => props.pos || "top right"};
-  background-size: 100% 70%;
+  background-size: 100% ${props => props.heightPer || '70%'};
   background-image: ${props => `url(${props.url})` || ""};
   height: 100%;
 

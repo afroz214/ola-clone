@@ -12,6 +12,8 @@ export const Home = () => {
 		switch (url) {
 			case "/lead-page":
 				return "/assets/images/landing-page/bg-2.png";
+			case "/vehicle-type":
+				return "/assets/images/landing-page/bg-2.png";
 			case "/registration":
 				return "/assets/images/landing-page/bg-2.png";
 			case "/car-details":
@@ -27,6 +29,8 @@ export const Home = () => {
 				return "top right";
 			case "/registration":
 				return "top right";
+			case "/vehicle-type":
+				return "center bottom";
 			case "/car-details":
 				return "center bottom";
 			default:
@@ -39,6 +43,7 @@ export const Home = () => {
 			<Container
 				url={backgroundSplash(location.pathname)}
 				pos={SplashPos(location.pathname)}
+				heightPer={["/car-details"].includes(location.pathname) ? "70%" : "100%"}
 			>
 				<FormContainer>
 					{location.pathname === "/lead-page" && <LeadPage />}
