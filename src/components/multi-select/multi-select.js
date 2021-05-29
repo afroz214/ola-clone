@@ -31,8 +31,8 @@ export default function AnimatedMulti({
 				)
 					? "#d43d3d"
 					: isFocused || isSelected
-					? "#107591"
-					: "hsl(0,0%,80%)",
+					? "#006600"
+					: "#006600",
 				borderWidth:
 					isFocused || isSelected
 						? "2px"
@@ -48,13 +48,13 @@ export default function AnimatedMulti({
 				fontSize: "18px",
 				cursor: "text",
 				"&:hover": {
-					border: "2px solid #107591",
+					border: "2px solid #006600",
 				},
 			}),
 			menu: (provided) => ({
 				...provided,
 				zIndex: 9999,
-				border: "2px solid #107591",
+				border: "2px solid #006600",
 				boxShadow: "0",
 				marginTop: "-1px",
 				borderRadius: "0",

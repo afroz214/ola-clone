@@ -8,7 +8,7 @@ import styled from "styled-components";
 */
 const tablet = "768px";
 const colorgrey = "#777777";
-const colorsecondary = "#287692";
+const colorsecondary = "#006600";
 const danger = "#bf1650";
 export const FormWrapper = styled.div`
   display: flex;

@@ -10,17 +10,17 @@ const Router = (props) => {
 			<Header />
 			<Layout>
 				<Switch>
-					<Route exact path="/" component={Home} />
+					<Route exact path="/">
+						<Redirect to="/lead-page" />
+					</Route>
+					<Route exact path="/lead-page" component={Home} />
 					<Route exact path="/registration" component={Home} />
+					<Route exact path="/vehicle-type" component={Home} />
 					<Route exact path="/car-details" component={Home} />
 					<Route exact path="/quotes" component={QuotesPage} />
 					<Route exact path="/review" component={ReviewPage} />
 					<Route exact path="/proposal-page" component={Proposal} />
-					<Route
-						exact
-						path="/loader"
-						component={(props) => <Loader {...props} />}
-					/>
+					<Route exact path="/loader" component={(props) => <Loader {...props} />} />
 					<Route exact path="/404" component={Error404} />
 					<Redirect to="/404" />
 				</Switch>
