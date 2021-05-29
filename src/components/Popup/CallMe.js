@@ -109,7 +109,7 @@ const CallMe = ({ show, onClose }) => {
 		<>
 			<Content1>
 				<div className="contact__imgbox">
-					<ContactImg src="/assets/images/laxmiImg.png" alt="Lakshmi"></ContactImg>
+					<ContactImg src="/assets/images/auto-car.jpg" alt="Lakshmi"></ContactImg>
 				</div>
 				<ContactText>
 					<p>

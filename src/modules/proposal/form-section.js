@@ -247,7 +247,7 @@ const FormSection = (props) => {
 					)
 				}
 				removeBottomHeader={true}
-				image={"/assets/images/laxmiImg.png"}
+				image={"/assets/images/auto-car.jpg"}
 				imageStyle={{
 					position: "relative",
 					top: "6px",
