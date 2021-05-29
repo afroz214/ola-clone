@@ -3,7 +3,7 @@ import swal from "sweetalert";
 import { Col, Row } from "react-bootstrap";
 import { useLocation } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, FormContainer } from "./style";
+import { Container, FormContainer, Avatar } from "./style";
 import { Registration, CarDetails, LeadPage, VehicleType } from "./steps";
 export const Home = () => {
 	const location = useLocation();
@@ -46,6 +46,13 @@ export const Home = () => {
 				heightPer={["/car-details"].includes(location.pathname) ? "70%" : "100%"}
 			>
 				<FormContainer>
+					<Row>
+						<Col className="landing-laxmi mx-auto" xl={3} lg={3} md={3}>
+							<div className="review-details3 text-center">
+								<Avatar src="/assets/images/auto-car.jpg" alt="avatarImage" />
+							</div>
+						</Col>
+					</Row>
 					{location.pathname === "/lead-page" && <LeadPage />}
 					{location.pathname === "/registration" && <Registration />}
 					{location.pathname === "/vehicle-type" && <VehicleType />}
