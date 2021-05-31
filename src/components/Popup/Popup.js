@@ -95,7 +95,7 @@ const Content = styled.div`
 	position: absolute;
 	animation: ${moveDown} 0.5s;
 	top: ${({ position }) =>
-		position === "top" ? "20%" : position === "bottom" ? "50%" : "35%"};
+		position === "top" ? "20%" : position === "bottom" ? "60%" : "35%"};
 	height: ${({ height }) => height};
 	width: ${({ width }) => width};
 	left: ${({ left }) => (left ? left : "50%")};
