@@ -1,17 +1,41 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import KnowMorePopup from "./quotesPopup/knowMorePopup";
 import { FilterContainer } from "./filterConatiner/filterConatiner";
 import { QuoteCard } from "./quoteCard/quoteCard";
 import { AddOnsCard } from "./addOnCard/addOnCard";
 
+import { BackButton } from "components";
+
 import "./quotePage.css";
 export const QuotesPage = () => {
 	const [knowMore, setKnowMore] = useState(false);
+	const history = useHistory();
+	const back = () => {
+		history.push("/vehicle-details");
+	};
 	return (
 		<>
 			<MainContainer>
+				<div className="backBtn" style={{}}>
+					<BackButton
+						type="button"
+						onClick={back}
+						style={{ marginTop: "-20px", left: "-20px", top: "200px" }}
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className=""
+							viewBox="0 0 24 24"
+						>
+							<path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z" />
+							<path d="M0 0h24v24H0z" fill="none" />
+						</svg>
+						<text style={{ color: "black" }}>Back</text>
+					</BackButton>
+				</div>
 				<FilterContainer quotesPage={true}></FilterContainer>
 				<CardContainer>
 					<CardOtherItemWrap>
