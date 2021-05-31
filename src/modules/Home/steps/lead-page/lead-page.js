@@ -54,7 +54,7 @@ export const LeadPage = () => {
 		<div className="ml-4 my-4 w-100">
 			<Row className="text-center w-100">
 				<div className="mt-4 d-flex flex-column justify-content-center w-100">
-					<h4 className="text-center w-100">Enter Details.</h4>
+					<h4 className="text-center w-100">Please Enter Your Details.</h4>
 				</div>
 			</Row>
 			<Form onSubmit={handleSubmit(onSubmit)}>
