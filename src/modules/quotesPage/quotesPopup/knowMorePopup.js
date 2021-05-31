@@ -507,7 +507,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 	return (
 		<Popup
 			height={"auto"}
-			width="75%"
+			width="83%"
 			show={show}
 			onClose={onClose}
 			content={content}
