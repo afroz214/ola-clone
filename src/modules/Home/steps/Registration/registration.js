@@ -97,7 +97,7 @@ export const Registration = () => {
 					</Row>
 				</Form>
 				<Row className="w-100 d-flex no-wrap mt-4">
-					<Col sm="12" md="12" lg="12" xl="12" className="text-center ">
+					<Col sm="12" md="12" lg="12" xl="12" className="text-center mx-auto d-flex justify-content-center">
 						<h4 className="font-weight-bolder">OR</h4>
 					</Col>
 					<Col
