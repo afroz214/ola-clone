@@ -13,7 +13,7 @@ const Fuel = [
 		label: "Petrol",
 		value: "1",
 		id: "1",
-		logo: "/assets/images/petrol4.png",
+		logo: "/assets/images/petrol8.png",
 	},
 	{
 		name: "Diesel",
