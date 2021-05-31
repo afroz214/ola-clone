@@ -32,7 +32,7 @@ export const VehicleType = () => {
 
 	const onSubmit = (VehicalType, subType) => {
 		console.log(VehicalType, subType);
-		history.push("/car-details");
+		history.push("/vehicle-details");
 	};
 
 	return (
