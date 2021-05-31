@@ -1,65 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import demoLogo from "../../../assets/img/logo02.png";
+
 import { useHistory } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
-export const QuoteCard = () => {
+export const QuoteCard = ({ setKnow }) => {
 	const history = useHistory();
-	return (
-		<Col lg={4}>
-			<QuoteCardMain>
-				<CardOtherItemInner>
-					<Row>
-						<Col lg={12}>
-							<LogoImg src={demoLogo} alt="Plan Logo" />
-						</Col>
-						<Col lg={12}>
-							<CardOtherName>ICICI Lombard Insurance</CardOtherName>
-						</Col>
-					</Row>
-					<CardOtherIdv>IDV Value : ₹ 3,02,575</CardOtherIdv>
-					<CardBuyButton
-						onClick={() => {
-							history.push(`/review`);
-						}}
-					>
-						BUY NOW
-						<span>₹ 5,300</span>
-					</CardBuyButton>
-				</CardOtherItemInner>
 
-				<CardOtherItemNoBorder>
-					<Row>
-						<Col lg={8}>
-							<ItemName>Base Premium</ItemName>
+	return (
+		<>
+			<Col lg={4}>
+				<QuoteCardMain>
+					<CardOtherItemInner>
+						<Row>
+							<Col lg={12}>
+								<LogoImg src={demoLogo} alt="Plan Logo" />
+							</Col>
+							<Col lg={12}>
+								<CardOtherName>ICICI Lombard Insurance</CardOtherName>
+							</Col>
+						</Row>
+						<CardOtherIdv>IDV Value : ₹ 3,02,575</CardOtherIdv>
+						<CardBuyButton
+							onClick={() => {
+								history.push(`/review`);
+							}}
+						>
+							BUY NOW
+							<span>₹ 5,300</span>
+						</CardBuyButton>
+					</CardOtherItemInner>
+
+					<CardOtherItemNoBorder>
+						<Row>
+							<Col lg={8}>
+								<ItemName>Base Premium</ItemName>
+							</Col>
+							<Col lg={4}>
+								<ItemPrice>₹ 7,561</ItemPrice>
+							</Col>
+							<Col lg={8}>
+								<ItemName>Zero Depreciation</ItemName>
+							</Col>
+							<Col lg={4}>
+								<ItemPrice>₹ 7,561</ItemPrice>
+							</Col>
+							<Col lg={8}>
+								<ItemName>Road Side Assistance </ItemName>
+							</Col>
+							<Col lg={4}>
+								<ItemPrice>₹ 7,561</ItemPrice>
+							</Col>
+						</Row>
+					</CardOtherItemNoBorder>
+					<Row
+						mb-10
+						style={{ marginBottom: "10px" }}
+						onClick={() => setKnow(true)}
+					>
+						<Col lg={6}>
+							<CardOtherItemBtn>Cashless Garages</CardOtherItemBtn>
 						</Col>
-						<Col lg={4}>
-							<ItemPrice>₹ 7,561</ItemPrice>
-						</Col>
-						<Col lg={8}>
-							<ItemName>Zero Depreciation</ItemName>
-						</Col>
-						<Col lg={4}>
-							<ItemPrice>₹ 7,561</ItemPrice>
-						</Col>
-						<Col lg={8}>
-							<ItemName>Road Side Assistance </ItemName>
-						</Col>
-						<Col lg={4}>
-							<ItemPrice>₹ 7,561</ItemPrice>
+						<Col lg={6}>
+							<CardOtherItemBtn>Premium Breakup</CardOtherItemBtn>
 						</Col>
 					</Row>
-				</CardOtherItemNoBorder>
-				<Row mb-10 style={{ marginBottom: "10px" }}>
-					<Col lg={6}>
-						<CardOtherItemBtn>Cashless Garages</CardOtherItemBtn>
-					</Col>
-					<Col lg={6}>
-						<CardOtherItemBtn>Premium Breakup</CardOtherItemBtn>
-					</Col>
-				</Row>
-			</QuoteCardMain>
-		</Col>
+				</QuoteCardMain>
+			</Col>
+		</>
 	);
 };
 

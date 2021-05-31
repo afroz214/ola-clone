@@ -1,103 +1,181 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useForm, Controller } from "react-hook-form";
 import editImg from "../../../assets/img/edit.png";
+import PolicyTypePopup from "../quotesPopup/policyTypePopup";
+import IDVPopup from "../quotesPopup/IDVPopup";
+import NCBPopup from "../quotesPopup/NCBPopup";
+import { useHistory } from "react-router-dom";
+import { ErrorMsg } from "components";
+import PrevInsurerPopup from "../quotesPopup/prevInsurerPopup";
+import DateInput from "../../proposal/DateInput";
 import { Row, Col } from "react-bootstrap";
 export const FilterContainer = (quotesPage) => {
+	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
+		// resolver: yupResolver(yupValidate),
+		// mode: "all",
+		// reValidateMode: "onBlur",
+	});
+	const history = useHistory();
+	const [policyPopup, setPolicyPopup] = useState(true);
+	const [idvPopup, setIdvPopup] = useState(false);
+	const [prevPopup, setPrevPopup] = useState(false);
+	const [ncbPopup, setNcbPopup] = useState(false);
+	const [policyType, setPolicyType] = useState("Comprehensive");
 	return (
-		<FilterContainerMain>
-			<FilterMenuWrap>
-				<FilterMenuRow>
-					<FilterMenuOpenWrap>
-						<FilterMenuOpenEdit />
-						<FilterMenuOpenTitle>
-							Volkswagen Polo - Dreamline 1197 CC{" "}
-						</FilterMenuOpenTitle>
-						<FilterMenuOpenSub>
-							Private Car | Petrol | MH01 AR 7294
-							<img src={editImg} />
-						</FilterMenuOpenSub>
-					</FilterMenuOpenWrap>
-
-					<FilterMenuOpenWrap>
-						<FilterMenuOpenSub>
-							Previous policy type:
-							<FilterMenuOpenSubBold>
-								Comprehensive <img src={editImg} />
-							</FilterMenuOpenSubBold>
-						</FilterMenuOpenSub>
-						<FilterMenuOpenEdit>
-							<FilterMenuOpenTitle>
-								Previous Insurer:
-								<FilterMenuOpenSubBold>
-									<b>Bajaj Allianz</b> <img src={editImg} />
-								</FilterMenuOpenSubBold>
-							</FilterMenuOpenTitle>
-						</FilterMenuOpenEdit>
-					</FilterMenuOpenWrap>
-
-					<FilterMenuTopBoxWrap>
-						<FilterMenuTopBoxWrap>
-							<div>
-								Policy Expiry:{" "}
-								<span>
-									<b>30-Apr-2021</b>
-								</span>
-							</div>
-							<div>
-								Registered on:{" "}
-								<span>
-									<b>01-Apr-2018</b>
-									<img src={editImg} />
-								</span>
-							</div>
-						</FilterMenuTopBoxWrap>
-						<FilterTopBoxRs></FilterTopBoxRs>
-					</FilterMenuTopBoxWrap>
-
-					<FilterMenuTopBoxWrap>
-						<FilterMenuTopBoxWrap>
-							<div>
-								New NCB:{" "}
-								<span>
-									<b>10%</b>
-								</span>
-							</div>
-							<div>
-								Previous NCB:{" "}
-								<span>
-									<b>10%</b>
-									<img src={editImg} />
-								</span>
-							</div>
-						</FilterMenuTopBoxWrap>
-						<FilterTopBoxRs></FilterTopBoxRs>
-					</FilterMenuTopBoxWrap>
-				</FilterMenuRow>
-				{quotesPage && (
+		<>
+			<FilterContainerMain>
+				<FilterMenuWrap>
 					<FilterMenuRow>
-						<FilterMenuQuoteBoxWrap>
-							<FilterTopBoxChange>
+						<FilterMenuOpenWrap
+							onClick={() => {
+								history.push(`/`);
+							}}
+						>
+							<FilterMenuOpenEdit />
+							<FilterMenuOpenTitle>
+								Volkswagen Polo - Dreamline 1197 CC{" "}
+							</FilterMenuOpenTitle>
+							<FilterMenuOpenSub>
+								Private Car | Petrol | MH01 AR 7294
 								<img src={editImg} />
-							</FilterTopBoxChange>
-							<FilterTopBoxTitle>
-								Vehicle Value (IDV) <span>₹ 3,02,575</span>
-							</FilterTopBoxTitle>
-						</FilterMenuQuoteBoxWrap>
-						<FilterSubMenuCont>
-							<FilterSubMenuWrap>
-								<InclusiveGstWrap>
-									<PremiumFilterWrap>
-										<PremiumFilterlabel>
-											Sort by:<b> Relevance</b>
-										</PremiumFilterlabel>
-									</PremiumFilterWrap>
-								</InclusiveGstWrap>
-							</FilterSubMenuWrap>
-						</FilterSubMenuCont>
+							</FilterMenuOpenSub>
+						</FilterMenuOpenWrap>
+
+						<FilterMenuOpenWrap>
+							<FilterMenuOpenSub onClick={() => setPolicyPopup(true)}>
+								Previous policy type:
+								<FilterMenuOpenSubBold>
+									{policyType} <img src={editImg} />
+								</FilterMenuOpenSubBold>
+							</FilterMenuOpenSub>
+							<FilterMenuOpenEdit>
+								<FilterMenuOpenTitle onClick={() => setPrevPopup(true)}>
+									Previous Insurer:
+									<FilterMenuOpenSubBold>
+										<b>Bajaj Allianz</b> <img src={editImg} />
+									</FilterMenuOpenSubBold>
+								</FilterMenuOpenTitle>
+							</FilterMenuOpenEdit>
+						</FilterMenuOpenWrap>
+
+						<FilterMenuTopBoxWrap>
+							<FilterMenuTopBoxWrap>
+								<div>
+									Policy Expiry:{" "}
+									<span>
+										<b>30-Apr-2021</b>
+									</span>
+									{/* <div className="py-2 dateTimeOne">
+										<Controller
+											control={control}
+											name="policyExpiry"
+											render={({ onChange, onBlur, value, name }) => (
+												<DateInput
+													minDate={false}
+													value={value}
+													name={name}
+													onChange={onChange}
+													ref={register}
+												/>
+											)}
+										/>
+										{!!errors.policyExpiry && (
+											<ErrorMsg fontSize={"12px"}>
+												{errors.policyExpiry.message}
+											</ErrorMsg>
+										)}
+									</div> */}
+								</div>
+								<div>
+									Registered on:{" "}
+									<span>
+										<b>01-Apr-2018</b>
+										<img src={editImg} />
+									</span>
+									{/* <div className="py-2 dateTimeOne">
+										<Controller
+											control={control}
+											name="policyReg"
+											render={({ onChange, onBlur, value, name }) => (
+												<DateInput
+													minDate={false}
+													value={value}
+													name={name}
+													onChange={onChange}
+													ref={register}
+												/>
+											)}
+										/>
+										{!!errors.policyReg && (
+											<ErrorMsg fontSize={"12px"}>
+												{errors.policyReg.message}
+											</ErrorMsg>
+										)}
+									</div> */}
+								</div>
+							</FilterMenuTopBoxWrap>
+							<FilterTopBoxRs></FilterTopBoxRs>
+						</FilterMenuTopBoxWrap>
+
+						<FilterMenuTopBoxWrap>
+							<FilterMenuTopBoxWrap onClick={() => setNcbPopup(true)}>
+								<div>
+									New NCB:{" "}
+									<span>
+										<b>10%</b>
+									</span>
+								</div>
+								<div>
+									Previous NCB:{" "}
+									<span>
+										<b>10%</b>
+										<img src={editImg} onClick={() => setNcbPopup(true)} />
+									</span>
+								</div>
+							</FilterMenuTopBoxWrap>
+							<FilterTopBoxRs></FilterTopBoxRs>
+						</FilterMenuTopBoxWrap>
 					</FilterMenuRow>
-				)}
-			</FilterMenuWrap>
-		</FilterContainerMain>
+					{quotesPage && (
+						<FilterMenuRow>
+							<FilterMenuQuoteBoxWrap onClick={() => setIdvPopup(true)}>
+								<FilterTopBoxChange>
+									<img src={editImg} />
+								</FilterTopBoxChange>
+								<FilterTopBoxTitle>
+									Vehicle Value (IDV) <span>₹ 3,02,575</span>
+								</FilterTopBoxTitle>
+							</FilterMenuQuoteBoxWrap>
+							<FilterSubMenuCont>
+								<FilterSubMenuWrap>
+									<InclusiveGstWrap>
+										<PremiumFilterWrap>
+											<PremiumFilterlabel>
+												Sort by:<b> Relevance</b>
+											</PremiumFilterlabel>
+										</PremiumFilterWrap>
+									</InclusiveGstWrap>
+								</FilterSubMenuWrap>
+							</FilterSubMenuCont>
+						</FilterMenuRow>
+					)}
+				</FilterMenuWrap>
+			</FilterContainerMain>
+			{policyPopup && (
+				<PolicyTypePopup
+					setPolicy={setPolicyType}
+					policyType={policyType}
+					show={policyPopup}
+					onClose={setPolicyPopup}
+				/>
+			)}
+			{idvPopup && <IDVPopup show={idvPopup} onClose={setIdvPopup} />}
+			{prevPopup && (
+				<PrevInsurerPopup show={prevPopup} onClose={setPrevPopup} />
+			)}
+			{ncbPopup && <NCBPopup show={ncbPopup} onClose={setNcbPopup} />}
+		</>
 	);
 };
 
@@ -203,7 +281,7 @@ const FilterTopBoxRs = styled.span`
 	margin-right: 4px;
 `;
 
-const FilterMenuQuoteBoxWrap = styled.div`
+const FilterMenuQuoteBoxWrap = styled.button`
 	margin-top: 1px;
 	margin-left: -75px;
 	background: #fff;
@@ -216,6 +294,7 @@ const FilterMenuQuoteBoxWrap = styled.div`
 	float: right;
 	position: relative;
 	padding: 5px 16px 7px;
+	z-index: 2;
 `;
 
 const FilterTopBoxChange = styled.div`

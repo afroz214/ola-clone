@@ -11,10 +11,17 @@ import {
 	ReviewIconfirmWrap1,
 } from "./reviewCard.style";
 import "./reviewCard.css";
+import { useForm, Controller } from "react-hook-form";
 import { Row, Col } from "react-bootstrap";
 import Switch from "../../../components/switch/switch";
-import { Textbox } from "components";
+import DateInput from "../../proposal/DateInput";
+import { Textbox, ErrorMsg } from "components";
 const ReviewCard = () => {
+	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
+		// resolver: yupResolver(yupValidate),
+		// mode: "all",
+		// reValidateMode: "onBlur",
+	});
 	return (
 		<>
 			<FormRightMainCont>
@@ -73,11 +80,60 @@ const ReviewCard = () => {
 						</Col>
 						<Col md={7}>
 							<Row>
-								<Col md={6}>
-									<Textbox fieldName="" />
+								<Col
+									xs={12}
+									sm={12}
+									md={12}
+									lg={6}
+									xl={5}
+									className=""
+									style={{
+										marginRight: "25px",
+										marginLeft: "10px",
+									}}
+								>
+									<div className="py-2 dateTimeOne">
+										<Controller
+											control={control}
+											name="date1"
+											render={({ onChange, onBlur, value, name }) => (
+												<DateInput
+													minDate={false}
+													value={value}
+													name={name}
+													onChange={onChange}
+													ref={register}
+												/>
+											)}
+										/>
+										{!!errors.date1 && (
+											<ErrorMsg fontSize={"12px"}>
+												{errors.date1.message}
+											</ErrorMsg>
+										)}
+									</div>
 								</Col>
-								<Col md={6}>
-									<Textbox fieldName="" />
+								<Col xs={12} sm={12} md={12} lg={6} xl={5} className="">
+									<div className="py-2 dateTimeOne">
+										<Controller
+											control={control}
+											name="date2"
+											render={({ onChange, onBlur, value, name }) => (
+												<DateInput
+													minDate={false}
+													value={value}
+													name={name}
+													onChange={onChange}
+													ref={register}
+												/>
+											)}
+										/>
+										{!!errors.date2 && (
+											<ErrorMsg fontSize={"12px"}>
+												{errors.date2.message}
+											</ErrorMsg>
+										)}
+									</div>
 								</Col>
 							</Row>
 						</Col>
