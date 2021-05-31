@@ -15,7 +15,8 @@ const Tile = ({
 	register,
 	imgMargin,
 	setValue,
-	Selected
+	Selected,
+	Imgheight
 }) => {
 	// on change method
 	console.log(Selected, value)
@@ -31,7 +32,7 @@ const Tile = ({
 						className={Selected && (Number(value) === Number(Selected)) ? "Selected" : ""}
 					>
 						{logo && (
-							<Img src={logo} style={imgMargin && { marginBottom: imgMargin }} />
+							<Img src={logo} Imgheight={Imgheight} style={imgMargin && { marginBottom: imgMargin }} />
 						)}
 						{text}
 					</Label>
