@@ -16,6 +16,7 @@ export default function AnimatedMulti({
 	errors,
 	Styled,
 	required,
+	knowMore,
 }) {
 	const lessthan480 = useMediaPredicate("(max-width: 480px)");
 
@@ -31,7 +32,9 @@ export default function AnimatedMulti({
 				)
 					? "#d43d3d"
 					: isFocused || isSelected
-					? "#107591"
+					? knowMore
+						? "#000"
+						: "#107591"
 					: "hsl(0,0%,80%)",
 				borderWidth:
 					isFocused || isSelected
@@ -42,19 +45,19 @@ export default function AnimatedMulti({
 						  )
 						? "2px"
 						: "1px",
-				minHeight: "60px",
+				minHeight: knowMore ? "48px" : "60px",
 				boxShadow: "0",
-				borderRadius: "2.5px",
-				fontSize: "18px",
+				borderRadius: knowMore ? "50px" : "2.5px",
+				fontSize: knowMore ? "14px" : "18px",
 				cursor: "text",
 				"&:hover": {
-					border: "2px solid #107591",
+					border: `2px solid  ${knowMore ? "#000" : "#107591"}`,
 				},
 			}),
 			menu: (provided) => ({
 				...provided,
 				zIndex: 9999,
-				border: "2px solid #107591",
+				border: `2px solid  ${knowMore ? "#000" : "#107591"}`,
 				boxShadow: "0",
 				marginTop: "-1px",
 				borderRadius: "0",
@@ -62,7 +65,7 @@ export default function AnimatedMulti({
 			multiValue: (styles) => ({
 				...styles,
 				padding: "5px",
-				fontSize: lessthan480 ? "19px" : "21px",
+				fontSize: lessthan480 ? "19px" : knowMore ? "14px" : "21px",
 				lineHeight: "25px",
 				fontWeight: "500",
 				color: "#666666",
@@ -91,7 +94,7 @@ export default function AnimatedMulti({
 				// borderBottom: '1px dotted pink',
 				backgroundColor: state.isFocused ? "rgba(0,0,0,.05)" : "#FFFFFF",
 				padding: "10px 20px",
-				fontSize: lessthan480 ? "18px" : "20px",
+				fontSize: lessthan480 ? "18px" : knowMore ? "14px" : "20px",
 				lineHeight: "25px",
 				cursor: "pointer",
 				color: "#666666",

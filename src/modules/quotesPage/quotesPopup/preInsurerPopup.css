@@ -1,0 +1,100 @@
+.yesNoToggle {
+	justify-content: "Center";
+	margin-right: "50px !important;";
+}
+
+.vehRadioWrap {
+	float: left;
+	width: 100%;
+	margin: 0 0 20px;
+	overflow: hidden;
+}
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked),
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+	position: absolute;
+	left: -9999px;
+	width: 0;
+	height: 0;
+	visibility: hidden;
+}
+.vehRadioWrap input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+input[type="checkbox"],
+input[type="radio"] {
+	margin: 4px 0 0;
+	margin-top: 1px\9;
+	line-height: normal;
+}
+input {
+	padding: 10px;
+	width: 100%;
+	font-size: 17px;
+	border: 1px solid #d4d5d9;
+	box-shadow: none !important;
+}
+.vehRadioWrap input:checked + label {
+	font-family: "Inter-SemiBold";
+	background-color: #000;
+	color: #fff;
+	box-shadow: none;
+	border: none;
+}
+.vehRadioWrap input:checked + label {
+	font-family: "Inter-SemiBold";
+	background-color: #000;
+	color: #fff;
+	box-shadow: none;
+	border: none;
+}
+.vehRadioWrap.ncsPercentCheck label {
+	height: 40px;
+	width: 40px;
+	margin-right: 9px;
+	padding: 11px 0;
+	border-radius: 2px;
+}
+.vehRadioWrap label {
+	height: 32px;
+	width: 80px;
+	background-color: #e4e4e4;
+	color: #333;
+	font-family: "Inter-Regular";
+	font-size: 14px;
+	line-height: 17px;
+	text-align: center;
+	padding: 6px 0;
+	margin-right: 12px;
+	margin-bottom: 0;
+	border-radius: 8px;
+	font-weight: normal;
+	transition: all 0.1s ease-in-out;
+}
+:checked + label {
+	border: solid 1px transparent !important;
+}
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked),
+[type="radio"]:checked,
+[type="radio"]:not(:checked) {
+	position: absolute;
+	left: -9999px;
+	width: 0;
+	height: 0;
+	visibility: hidden;
+}
+.vehRadioWrap input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
