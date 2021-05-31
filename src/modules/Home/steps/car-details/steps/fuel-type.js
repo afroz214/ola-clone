@@ -13,21 +13,21 @@ const Fuel = [
 		label: "Petrol",
 		value: "1",
 		id: "1",
-		logo: "/assets/images/fuel/fuel-station.png",
+		logo: "/assets/images/petrol4.png",
 	},
 	{
 		name: "Diesel",
 		label: "Diesel",
 		value: "2",
 		id: "2",
-		logo: "/assets/images/fuel/diesel.png",
+		logo: "/assets/images/oil.png",
 	},
 	{
 		name: "CNG/LPG",
 		label: "CNG/LPG",
 		value: "3",
 		id: "3",
-		logo: "/assets/images/fuel/gas-bottle.png",
+		logo: "/assets/images/cng2.png",
 	},
 ];
 
@@ -76,17 +76,18 @@ export const FuelType = ({ stepFn }) => {
 									className="d-flex justify-content-center"
 								>
 									<Tile
-										// logo={item?.logo}
+										logo={item?.logo}
 										text={item?.name}
 										id={item?.id}
 										register={register}
 										name={"fuel"}
 										value={item?.value}
-										height="100px"
+										height="130px"
 										width="150px"
 										imgMargin={"10px"}
 										setValue={setValue}
 										Selected={fuel}
+										Imgheight={'70px'}
 									/>
 								</Col>
 							))}

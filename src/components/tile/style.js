@@ -42,5 +42,5 @@ export const Img = styled.img`
 	margin: 0 33px;
 	display: block;
 	vertical-align: middle;
-	height: 45px;
+	height: ${props => props.Imgheight || '45px'};
 `;
