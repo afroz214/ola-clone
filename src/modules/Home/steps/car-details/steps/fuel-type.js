@@ -23,8 +23,8 @@ const Fuel = [
 		logo: "/assets/images/fuel/diesel.png",
 	},
 	{
-		name: "CNG",
-		label: "CNG",
+		name: "CNG/LPG",
+		label: "CNG/LPG",
 		value: "3",
 		id: "3",
 		logo: "/assets/images/fuel/gas-bottle.png",
