@@ -5,7 +5,7 @@ export const Button = styled.button`
   font-size: 13px;
   font-weight: bold;
   letter-spacing: 0;
-  outline: none;
+  outline: none ;
   // -webkit-touch-callout: none;
   // -webkit-user-select: none;
   // -khtml-user-select: none;
@@ -111,15 +111,17 @@ export const Button = styled.button`
         color:${theme.Button?.outline_solid?.text_color || 'white'} ;
         letter-spacing: 1px;
         font-size: 14px;
-        border: 1px solid ${theme.Button?.outline_solid?.border_color || '#D0D0D0'};
+        border: 1px solid ${theme.Button?.outline_solid?.border_color || hex1 || '#4ca729'};
         padding: 10px 40px;
         box-shadow: ${ shadow || '0px 7px 15px -3px #b6b6b6, 0 4px 6px -2px #F9FBE7'};
         &:not(:disabled):not(.disabled).active,
         &:not(:disabled):not(.disabled):active {
+          outline: none !important;
+          box-shadow: none;
           background-image: none;
           color: ${hex1};
         }
-        height: ${ height || 'auto'}
+        height: ${ height || 'auto'};
       `;
 
       default:

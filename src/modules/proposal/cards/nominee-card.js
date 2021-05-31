@@ -128,7 +128,7 @@ const NomineeCard = ({ onSubmitNominee, nominee }) => {
 						/>
 					)}
 				</Col>
-				<Col sm={12} lg={12} className="d-flex justify-content-center mt-5">
+				<Col sm={12} lg={12} md={12} xl={12} className="d-flex justify-content-center mt-5">
 					<Button
 						type="submit"
 						buttonStyle="outline-solid"
@@ -145,7 +145,7 @@ const NomineeCard = ({ onSubmitNominee, nominee }) => {
 								fontWeight: "400",
 							}}
 						>
-							{"Proceed to Vehicle Details"}
+							{"Proceed to Vehicle"}
 						</text>
 					</Button>
 				</Col>

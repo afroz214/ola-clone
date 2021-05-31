@@ -37,7 +37,7 @@ export const SendQuotes = ({ show, onClose }) => {
       </svg>
       <FlexDiv>
         <LaxmiWrapper>
-          <Laxmi src="/assets/images/laxmiImg.png" alt="Laxmi" />
+          <Laxmi src="/assets/images/auto-car.jpg" alt="Laxmi" />
         </LaxmiWrapper>
         <Wrapper>
           <Text>
@@ -53,7 +53,7 @@ export const SendQuotes = ({ show, onClose }) => {
     <>
       <MainWrapper>
         <LaxmiWrapper>
-          <Laxmi src="/assets/images/laxmiImg.png" alt="Laxmi" />
+          <Laxmi src="/assets/images/auto-car.jpg" alt="Laxmi" />
         </LaxmiWrapper>
         <Wrapper>
           <Text>
@@ -97,10 +97,11 @@ margin-right:28px;
 `;
 
 const Laxmi = styled.img`
-height:90px;
+height:100px;
+width: 100px;
 border-radius:50%;
 box-shadow: 0px 4px 13px rgba(41,41,41,0.35);
-border: 2.5px solid #004b83;
+border: 2.5px solid #006600;
 `;
 
 const MainWrapper = styled.div`

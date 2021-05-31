@@ -78,13 +78,15 @@ const AnchorTag = styled.a`
  color: #fff;
  text-transform: uppercase;
  padding: 13px 23px;
- background: #ff6300;
+ background: #006600;
+ border: 1px solid #006600;
  font-size: 18px;
  -webkit-transition: 0.2s all;
  transition: 0.2s all;
  &:hover {
-  color: #ff6300;
-  background: #211b19;
+  color: #006600;
+  background: #FFF;
+  border: 1px solid #006600;
   }
 @media only screen and (max-width: 480px) {
   padding: 7px 15px;

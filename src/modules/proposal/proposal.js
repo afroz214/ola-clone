@@ -13,7 +13,7 @@ export const Proposal = () => {
 
 	/*---------------- back button---------------------*/
 	const back = () => {
-		history.push("/quote-page");
+		history.push("/quotes");
 	};
 	/*----------x----- back button-------x-------------*/
 	return (
@@ -32,7 +32,7 @@ export const Proposal = () => {
 					<InfoCard  />
 				</DivTag1>
 				<DivTag2 className="col-12 col-lg-9 col-sm-12 col-xs-12 col-md-8">
-					<H4Tag>Almost Done! Help me with few more details.</H4Tag>
+					<H4Tag>Almost Done! Just a few more details.</H4Tag>
 					<FormSection
 						// submitStatus={submitStatus}
 						// getPolicyData={policy}

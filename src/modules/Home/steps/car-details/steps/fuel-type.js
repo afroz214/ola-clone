@@ -115,7 +115,7 @@ export const FuelType = ({ stepFn }) => {
 								md="12"
 								lg="12"
 								xl="12"
-								className="d-flex justify-content-center mt-4"
+								className="d-flex justify-content-center mt-5"
 							>
 								<Btn
 									buttonStyle="outline-solid"

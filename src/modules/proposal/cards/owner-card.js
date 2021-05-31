@@ -145,7 +145,7 @@ const OwnerCard = ({ onSubmitOwner, owner }) => {
 	return (
 		<Form onSubmit={handleSubmit(onSubmitOwner)}>
 			<Row style={{ margin: "-60px -20px 20px -30px" }} className="p-1">
-				<H4Tag2>Almost Done! Help me with few more details.</H4Tag2>
+				<H4Tag2>Almost Done! Just a few more details.</H4Tag2>
 				<ColDiv
 					xs={12}
 					sm={12}
@@ -600,7 +600,7 @@ const OwnerCard = ({ onSubmitOwner, owner }) => {
 					</div>
 					<input name="city_id" ref={register} type="hidden" value={"1"} />
 				</Col>
-				<Col sm={12} lg={12} className="d-flex justify-content-center mt-5">
+				<Col sm={12} lg={12} md={12} xl={12} className="d-flex justify-content-center mt-5">
 					<Button
 						type="submit"
 						buttonStyle="outline-solid"
@@ -617,7 +617,7 @@ const OwnerCard = ({ onSubmitOwner, owner }) => {
 								fontWeight: "400",
 							}}
 						>
-							{"Proceed to Nominee Details"}
+							{"Proceed to Nominee"}
 						</text>
 					</Button>
 				</Col>

@@ -51,13 +51,13 @@ export default function AnimatedMulti({
 				fontSize: knowMore ? "14px" : "18px",
 				cursor: "text",
 				"&:hover": {
-					border: `2px solid  ${knowMore ? "#000" : "#107591"}`,
+					border: `2px solid  ${knowMore ? "#000" : "#006600"}`,
 				},
 			}),
 			menu: (provided) => ({
 				...provided,
 				zIndex: 9999,
-				border: `2px solid  ${knowMore ? "#000" : "#107591"}`,
+				border: `2px solid  ${knowMore ? "#000" : "#006600"}`,
 				boxShadow: "0",
 				marginTop: "-1px",
 				borderRadius: "0",

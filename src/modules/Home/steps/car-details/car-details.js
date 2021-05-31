@@ -2,11 +2,23 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import "./style.css";
 import { Brand, Model, FuelType, Variant, City, YearCM } from "./steps";
+import { scrollToTargetAdjusted } from "utils";
 import { useHistory } from "react-router";
+import { BackButton } from "components";
 
 export const CarDetails = () => {
+	/*---------------- back button---------------------*/
+	const back = () => {
+		history.push("/vehicle-type");
+	};
+	/*----------x----- back button-------x-------------*/
 	const [Step, setStep] = useState(1);
 	const history = useHistory();
+
+	//center auto scroll
+	useEffect(() => {
+		scrollToTargetAdjusted("stepper", 45);
+	}, []);
 
 	//formData's
 	const [brandData, setBrandData] = useState({});
@@ -63,16 +75,25 @@ export const CarDetails = () => {
 	//After Completion
 	useEffect(() => {
 		if (Step > 6) {
-			history.push("/quote-page");
+			history.push("/quotes");
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [Step]);
 
 	return (
 		<>
-			<Row className="w-100 mx-auto my-4" style={{ zIndex: "999" }}>
-				<Col sm="12" md="12" lg="12" xl="12" className="p-0 my-0 m-0 w-100">
-					<div className="wrapper-progressBar">
+			<div className="backBtn" style={{ paddingBottom: "30px" }}>
+				<BackButton type="button" onClick={back} style={{ marginTop: "-20px" }}>
+					<svg xmlns="http://www.w3.org/2000/svg" className="" viewBox="0 0 24 24">
+						<path d="M11.67 3.87L9.9 2.1 0 12l9.9 9.9 1.77-1.77L3.54 12z" />
+						<path d="M0 0h24v24H0z" fill="none" />
+					</svg>
+					<text style={{ color: "black" }}>Back</text>
+				</BackButton>
+			</div>
+			<Row className="w-100 mx-auto my-4" style={{ zIndex: "999" }} id="stepper">
+				<Col sm="12" md="12" lg="12" xl="12" className="p-0 my-0 m-0 w-100" >
+					<div className="wrapper-progressBar" >
 						<ul className="progressBar">
 							<li className={Step > 0 ? "active" : ""}>Brand</li>
 							<li className={Step > 1 ? "active" : ""}>Model</li>
