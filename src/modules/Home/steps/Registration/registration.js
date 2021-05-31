@@ -113,7 +113,7 @@ export const Registration = () => {
 							hex1="#006400"
 							hex2="#228B22"
 							borderRadius="5px"
-							onClick={() => history.push("/car-details")}
+							onClick={() => history.push("/vehicle-details")}
 						>
 							<label style={{ cursor: "pointer" }} className="p-0 m-0">
 								Proceed without reg. no.
@@ -125,7 +125,7 @@ export const Registration = () => {
 							hex1="#006400"
 							hex2="#228B22"
 							borderRadius="5px"
-							onClick={() => history.push("/car-details")}
+							onClick={() => history.push("/vehicle-details")}
 						>
 							<label style={{ cursor: "pointer" }} className="p-0 m-0">
 								New Car? Click Here
