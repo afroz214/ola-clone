@@ -8,6 +8,8 @@ import {
 	ErrorMsg,
 	CustomRadio,
 } from "components";
+import tooltip from "../../../assets/img/tooltip.svg";
+import CustomTooltip from "../../../components/tooltip/CustomTooltip";
 
 import Checkbox from "../../../components/inputs/checkbox/checkbox";
 import { Row, Col, Form } from "react-bootstrap";
@@ -55,7 +57,26 @@ export const AddOnsCard = () => {
 	return (
 		<CardOtherItem>
 			<Col lg={12} style={{ textAlign: "left", padding: "16px 12px" }}>
-				<AddOnTitle>Add-ons & Others</AddOnTitle>
+				<AddOnTitle>
+					Add-ons & Others
+					<span style={{ marginLeft: "3px" }}>
+						<CustomTooltip
+							rider="true"
+							id="RiderInbuilt__Tooltip"
+							place={"bottom"}
+							customClassName="mt-3 riderPageTooltip "
+						>
+							<img
+								data-tip="<h3 >Add-ons & Others</h3> <div>Additional covers which you may add in your policy for better financial protection of your car or the individuals traveling in your car.</div>"
+								data-html={true}
+								data-for="RiderInbuilt__Tooltip"
+								src={tooltip}
+								alt="tooltip"
+								className="toolTipRiderChild"
+							/>
+						</CustomTooltip>
+					</span>
+				</AddOnTitle>
 				<Col md={12} style={{ padding: "0" }}>
 					<AccordionTab>
 						<CustomAccordion id="addons" noPadding>

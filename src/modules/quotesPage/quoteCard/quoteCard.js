@@ -27,7 +27,7 @@ export const QuoteCard = ({ setKnow }) => {
 							}}
 						>
 							BUY NOW
-							<span>₹ 5,300</span>
+							<span> ₹ 5,300</span>
 						</CardBuyButton>
 					</CardOtherItemInner>
 
@@ -121,6 +121,7 @@ const CardOtherIdv = styled.div`
 const CardBuyButton = styled.button`
 	float: left;
 	width: 220px;
+	display: flex;
 	height: 47px;
 	margin-top: 6px;
 	background-color: #bdd400 !important;
@@ -140,8 +141,9 @@ const CardBuyButton = styled.button`
 	padding: 3px 0;
 	margin-bottom: 16px !important;
 	margin: 0 auto;
+	justify-contnet: space-between;
 	& span {
-		font-size: 19px;
+		font-size: 15px;
 		display: contents;
 		font-family: "Inter-Light";
 	}
@@ -176,3 +178,7 @@ const CardOtherItemBtn = styled.span`
 	/* text-align: left; */
 	font-weight: 600;
 `;
+
+// const AmontContainer = styled.span`
+// 	font-size: 14px;
+// `;

@@ -22,7 +22,7 @@ export const FormHeader = styled.div`
 
 export const ReviewPageWrap = styled.div`
 	width: 1089px;
-	margin: 16px auto;
+	margin: 0px auto 16px;
 	display: table;
 	position: relative;
 `;
@@ -34,6 +34,9 @@ export const ReviewCardHeader = styled.div`
 	position: relative;
 	left: 58px;
 	margin: 0 0 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 export const FormFooter = styled.div`
