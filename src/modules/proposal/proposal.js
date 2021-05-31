@@ -13,7 +13,7 @@ export const Proposal = () => {
 
 	/*---------------- back button---------------------*/
 	const back = () => {
-		history.push("/quotes");
+		history.push("/review");
 	};
 	/*----------x----- back button-------x-------------*/
 	return (

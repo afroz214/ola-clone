@@ -34,7 +34,7 @@ export default function AnimatedMulti({
 					: isFocused || isSelected
 					? knowMore
 						? "#000"
-						: "#107591"
+						: "#006600"
 					: "hsl(0,0%,80%)",
 				borderWidth:
 					isFocused || isSelected
