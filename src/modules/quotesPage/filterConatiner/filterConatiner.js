@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
 import editImg from "../../../assets/img/edit.png";
@@ -16,12 +16,26 @@ export const FilterContainer = (quotesPage) => {
 		// mode: "all",
 		// reValidateMode: "onBlur",
 	});
+
+	const regDate = watch("regDate");
+
 	const history = useHistory();
 	const [policyPopup, setPolicyPopup] = useState(true);
 	const [idvPopup, setIdvPopup] = useState(false);
 	const [prevPopup, setPrevPopup] = useState(false);
 	const [ncbPopup, setNcbPopup] = useState(false);
 	const [policyType, setPolicyType] = useState("Comprehensive");
+	const [dateEditor, setDateEditor] = useState(false);
+	const [regisDate, setRegisDate] = useState("01-Apr-2018");
+	console.log(regDate, dateEditor);
+	useEffect(() => {
+		if (regDate) {
+			setRegisDate(regDate);
+			setDateEditor(false);
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [regDate]);
 	return (
 		<>
 			<FilterContainerMain>
@@ -66,53 +80,38 @@ export const FilterContainer = (quotesPage) => {
 									<span>
 										<b>30-Apr-2021</b>
 									</span>
-									{/* <div className="py-2 dateTimeOne">
-										<Controller
-											control={control}
-											name="policyExpiry"
-											render={({ onChange, onBlur, value, name }) => (
-												<DateInput
-													minDate={false}
-													value={value}
-													name={name}
-													onChange={onChange}
-													ref={register}
-												/>
-											)}
-										/>
-										{!!errors.policyExpiry && (
-											<ErrorMsg fontSize={"12px"}>
-												{errors.policyExpiry.message}
-											</ErrorMsg>
-										)}
-									</div> */}
 								</div>
 								<div>
 									Registered on:{" "}
 									<span>
-										<b>01-Apr-2018</b>
-										<img src={editImg} />
+										<b>{regisDate}</b>
+										<img src={editImg} onClick={() => setDateEditor(true)} />
 									</span>
-									{/* <div className="py-2 dateTimeOne">
-										<Controller
-											control={control}
-											name="policyReg"
-											render={({ onChange, onBlur, value, name }) => (
-												<DateInput
-													minDate={false}
-													value={value}
-													name={name}
-													onChange={onChange}
-													ref={register}
-												/>
+									{dateEditor && (
+										<div
+											className="py-2 dateTimeOne"
+											style={{ position: "relative", bottom: "33px" }}
+										>
+											<Controller
+												control={control}
+												name="regDate"
+												render={({ onChange, onBlur, value, name }) => (
+													<DateInput
+														minDate={false}
+														value={value}
+														name={name}
+														onChange={onChange}
+														ref={register}
+													/>
+												)}
+											/>
+											{!!errors.regDate && (
+												<ErrorMsg fontSize={"12px"}>
+													{errors.regDate.message}
+												</ErrorMsg>
 											)}
-										/>
-										{!!errors.policyReg && (
-											<ErrorMsg fontSize={"12px"}>
-												{errors.policyReg.message}
-											</ErrorMsg>
-										)}
-									</div> */}
+										</div>
+									)}
 								</div>
 							</FilterMenuTopBoxWrap>
 							<FilterTopBoxRs></FilterTopBoxRs>
@@ -199,6 +198,7 @@ const FilterMenuRow = styled.div`
 	float: left;
 	width: 100%;
 	margin-bottom: 23px;
+	max-height: 70px;
 	&:last-child {
 		margin-bottom: 0;
 		margin-top: -10px;

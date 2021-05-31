@@ -90,14 +90,14 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 		<>
 			<Body>
 				<Row>
+					<BackBtn
+						onClick={() => {
+							setStep(step - 1);
+						}}
+					>
+						<img src={backButton} />
+					</BackBtn>
 					<ModelWrap>
-						<BackBtn
-							onClick={() => {
-								setStep(step - 1);
-							}}
-						>
-							<img src={backButton} />
-						</BackBtn>
 						<RegiHeading>
 							Is there any claim made in your previous policy term?
 						</RegiHeading>
@@ -139,7 +139,11 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 						<div class="col-md-12 text-center">
 							<div
 								class="popupSubHead ncsSubHeadNo"
-								style={{ display: "block", marginTop: "30px" }}
+								style={{
+									display: "block",
+									marginTop: "30px",
+									marginBottom: "30px",
+								}}
 							>
 								Please select your existing NCB
 							</div>
@@ -200,15 +204,15 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 	const Page3 = (
 		<>
 			<Body>
+				<BackBtn
+					onClick={() => {
+						setStep(step - 1);
+					}}
+				>
+					<img src={backButton} />
+				</BackBtn>
 				<Row>
 					<ModelWrap>
-						<BackBtn
-							onClick={() => {
-								setStep(step - 1);
-							}}
-						>
-							<img src={backButton} />
-						</BackBtn>
 						<RegiHeading>When is your previous policy expiring?</RegiHeading>
 						<TileConatiner>
 							<Row

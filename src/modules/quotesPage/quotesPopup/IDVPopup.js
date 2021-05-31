@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
-
+import tooltip from "../../../assets/img/tooltip.svg";
+import CustomTooltip from "../../../components/tooltip/CustomTooltip";
 import Popup from "../../../components/Popup/Popup";
 import "./idvPopup.css";
 
@@ -24,30 +25,29 @@ const IDVPopup = ({ show, onClose, idv, setIDV }) => {
 							data-content="Insured Value (IDV) Text"
 							data-original-title="Insured Value (IDV)"
 						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								width="13"
-								height="13"
-								viewBox="0 0 13 13"
+							<span
+								class="cardTooltipSvg"
+								data-toggle="popover"
+								title=""
+								data-content="Insured Value (IDV) Text"
+								data-original-title="Insured Value (IDV)"
 							>
-								<g transform="translate(-.5 -.5)">
-									<g transform="translate(1 1)">
-										<circle
-											cx="6"
-											cy="6"
-											r="6"
-											fill="none"
-											stroke="#333"
-										></circle>
-										<path
-											fill="#333"
-											d="M7.359 8.409h1.025v-.06c0-1.359 1.615-.983 1.615-2.6A1.79 1.79 0 0 0 8.025 4 2 2 0 0 0 6 5.265l1.06.453a.951.951 0 0 1 .914-.684.749.749 0 0 1 .826.726c0 .966-1.444.649-1.444 2.589zm.513 2.354a.752.752 0 1 0-.752-.752.72.72 0 0 0 .751.752z"
-											data-name="?-copy"
-											transform="translate(-2.056 -1.37)"
-										></path>
-									</g>
-								</g>
-							</svg>
+								<CustomTooltip
+									rider="true"
+									id="RiderInbuilt__Tooltip"
+									place={"bottom"}
+									customClassName="mt-3 riderPageTooltip "
+								>
+									<img
+										data-tip="<h3 >Insured Value (IDV)</h3> <div>Insured Value (IDV) Text</div>"
+										data-html={true}
+										data-for="RiderInbuilt__Tooltip"
+										src={tooltip}
+										alt="tooltip"
+										className="toolTipRiderChild"
+									/>
+								</CustomTooltip>
+							</span>
 						</span>
 					</PaymentTermTitle>
 					<PopupSubTitle>

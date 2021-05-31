@@ -44,7 +44,7 @@ input {
 	line-height: 17px;
 	font-weight: normal;
 	color: #000;
-	border: none;
+	border: 1px solid #fff;
 	cursor: pointer;
 	padding-left: 35px;
 }

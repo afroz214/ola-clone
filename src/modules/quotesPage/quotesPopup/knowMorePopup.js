@@ -511,7 +511,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 			show={show}
 			onClose={onClose}
 			content={content}
-			position="bottom"
+			position={key === "premiumBreakupPop" ? "bottom" : "middle"}
 		/>
 	);
 };
