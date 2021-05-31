@@ -9,7 +9,7 @@ import { useOutsideClick } from '../../hoc'
 import { useDispatch, useSelector } from 'react-redux';
 import { reloadPage } from '../../utils';
 
-const includeRoute = ['/proposal-page'];
+const includeRoute = ['/proposal-page', '/review', '/quotes'];
 const excludeRoute = ['/fg/payment/success', '/payment/success',
   '/bharti/payment/success', '/otp-verification-tata',
   '/payment/failed', '/payment-gateway', '/404'];
