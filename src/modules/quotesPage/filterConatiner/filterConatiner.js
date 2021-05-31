@@ -10,6 +10,7 @@ import { ErrorMsg } from "components";
 import PrevInsurerPopup from "../quotesPopup/prevInsurerPopup";
 import DateInput from "../../proposal/DateInput";
 import { Row, Col } from "react-bootstrap";
+import swal from "sweetalert";
 export const FilterContainer = (quotesPage) => {
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		// resolver: yupResolver(yupValidate),
@@ -43,7 +44,18 @@ export const FilterContainer = (quotesPage) => {
 					<FilterMenuRow>
 						<FilterMenuOpenWrap
 							onClick={() => {
-								history.push(`/`);
+								swal({
+									title: "Do you want to edit details",
+									text: "",
+									icon: "info",
+									buttons: true,
+									dangerMode: true,
+								}).then((willEdit) => {
+									if (willEdit) {
+										history.push(`/vehicle-details`);
+									} else {
+									}
+								});
 							}}
 						>
 							<FilterMenuOpenEdit />
