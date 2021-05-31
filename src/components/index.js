@@ -10,10 +10,16 @@ import AccordionContent from "./accordion/accordion-content";
 import { Head, Text, Typography, Marker, Error } from "./view/view";
 import { Loader } from "./loader/loader";
 import CompactCard from "./compact-card/Card";
-import EditTooltip from "./tooltip/tooltip";
+
 import MultiSelect from "./multi-select/multi-select";
 import Header from "./header/Header";
-import { Footer, Layout } from './footer/Footer';
+import { Footer, Layout } from "./footer/footer";
+import Tile from "./tile/tile";
+import Textbox from "./inputs/TextInput/textInput";
+import Switch from "./switch/switch";
+import Checkbox from "./inputs/checkbox/checkbox";
+import CustomRadio from "./inputs/CustomRadio/CustomRadio";
+
 import {
 	FormWrapper,
 	FormGroup,
@@ -26,10 +32,10 @@ import {
 	AgeWrapper,
 	DropDownWrapper,
 	ErrorMsg,
+	BackButton,
 } from "./label-input/input";
 
 export {
-	EditTooltip,
 	Button,
 	Card,
 	CardBlue,
@@ -48,7 +54,7 @@ export {
 	CompactCard,
 	MultiSelect,
 	Header,
-    FormWrapper,
+	FormWrapper,
 	FormGroup,
 	Label,
 	TextInput,
@@ -59,5 +65,12 @@ export {
 	AgeWrapper,
 	DropDownWrapper,
 	ErrorMsg,
-    Footer, Layout
+	Footer,
+	Layout,
+	Tile,
+	Textbox,
+	BackButton,
+	Switch,
+	Checkbox,
+	CustomRadio,
 };

@@ -8,7 +8,7 @@ import styled from "styled-components";
 */
 const tablet = "768px";
 const colorgrey = "#777777";
-const colorsecondary = "#287692";
+const colorsecondary = "#006600";
 const danger = "#bf1650";
 export const FormWrapper = styled.div`
   display: flex;
@@ -284,3 +284,19 @@ line-height: 17px;
 font-size: ${props => props.fontSize || "14px"};
 color: #d43d3d;
 font-family: 'basier_squareregular';`
+
+export const BackButton = styled.button`
+	margin: -40px 60px 20px 30px !important;
+	outline: none !important;
+	border: none !important;
+	color: black;
+	@media (max-width: 992px) {
+		margin: -20px 60px 20px 30px !important;
+	}
+	@media (max-width: 767px) {
+		margin: 0px 60px 20px 60px !important;
+	}
+	@media (max-width: 600px) {
+		margin: 0px 0 20px 30px !important;
+	}
+`;

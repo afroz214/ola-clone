@@ -1,5 +1,8 @@
-import React from 'react';
+import React from "react";
+import { Textbox } from "components";
 
-export const Dummy = () => {
-    return <h2>Dummy Module</h2>
-}
+const Dummy = () => {
+	return <Textbox fieldName="First Name" />;
+};
+
+export default Dummy;

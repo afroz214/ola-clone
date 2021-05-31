@@ -9,7 +9,7 @@ import { useOutsideClick } from '../../hoc'
 import { useDispatch, useSelector } from 'react-redux';
 import { reloadPage } from '../../utils';
 
-const includeRoute = ['/', '/proposal-form'];
+const includeRoute = ['/proposal-page', '/review', '/quotes'];
 const excludeRoute = ['/fg/payment/success', '/payment/success',
   '/bharti/payment/success', '/otp-verification-tata',
   '/payment/failed', '/payment-gateway', '/404'];
@@ -86,14 +86,14 @@ const Header = () => {
             <div>
               <ConfirmButton onClick={() => setModal(true)}>
                 <img src={'/assets/images/phone.png'} alt='phone' className='mr-2 my-auto' />
-              <label style={{fontSize:'16px'}}>Call Us</label>
+              <label className='m-0 p-0' style={{fontSize:'16px'}}>Call Us</label>
             </ConfirmButton>
             </div>
             <div>
               {includeRoute.includes(location.pathname) &&
                 <ConfirmButton onClick={() => setSendQuotes(true)}>
                   {/* <i class="fa mr-2 fa-share-alt" style={{ fontSize: '25px' }}></i> */}
-               <label style={{fontSize:'16px'}}>Send Quotes</label> 
+               <label className='m-0 p-0' style={{fontSize:'16px'}}>Send Quotes</label> 
             </ConfirmButton>
               }
             </div>
