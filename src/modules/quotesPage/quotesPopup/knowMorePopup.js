@@ -59,455 +59,469 @@ const KnowMorePopup = ({ show, onClose }) => {
 	const content = (
 		<>
 			<ContentWrap>
-				<DetailsPopHeadWrap>
-					<InfoCardKnowMore />
-					<CardTopRightCenter>
-						<BuyButton>
-							<div>
-								<span>BUY NOW</span>
-							</div>
-						</BuyButton>
-					</CardTopRightCenter>
-				</DetailsPopHeadWrap>
-				<DetailPopTabs>
-					<ul className="nav nav-tabs">
-						<li className={key === "premiumBreakupPop" ? "active" : ""}>
-							<a
-								data-toggle="tab"
-								aria-expanded="true"
-								onClick={() => setKey("premiumBreakupPop")}
-							>
-								Premium Breakup
-							</a>
-						</li>
-
-						<li className={key === "cashlessGaragesPop" ? "active" : ""}>
-							<a
-								data-toggle="tab"
-								aria-expanded="false"
-								onClick={() => setKey("cashlessGaragesPop")}
-							>
-								Cashless Garages
-							</a>
-						</li>
-					</ul>
-
-					<TabContet>
-						<div class={key === "premiumBreakupPop" ? "showDiv" : "hideDiv"}>
-							<Body>
-								<PdfMail>
-									<a>
-										<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-										&nbsp; PDF&nbsp;&nbsp;
+				<Row>
+					<Col lg={4} md={4}>
+						<DetailsPopHeadWrap>
+							<InfoCardKnowMore />
+							<CardTopRightCenter>
+								<BuyButton>
+									<div>
+										<span>BUY NOW</span>
+									</div>
+								</BuyButton>
+							</CardTopRightCenter>
+						</DetailsPopHeadWrap>
+					</Col>
+					<Col lg={8} md={8}>
+						<DetailPopTabs>
+							<ul className="nav nav-tabs">
+								<li className={key === "premiumBreakupPop" ? "active" : ""}>
+									<a
+										data-toggle="tab"
+										aria-expanded="true"
+										onClick={() => setKey("premiumBreakupPop")}
+									>
+										Premium Breakup
 									</a>
-									<a>
-										<i class="fa fa-envelope" aria-hidden="true"></i>
-										&nbsp; EMAIL
-									</a>
-								</PdfMail>
-								<div>
-									<Row>
-										<Col md={6}>
-											<Table bordered>
-												<tbody>
-													<tr>
-														<td
-															rowspan="5"
-															style={{
-																verticalAlign: "middle",
-																width: "20%",
-																borderRight: "1px solid #ccc",
-															}}
-														>
-															<img
-																src={demoLogo}
-																alt=""
-																class="icon"
-																id="premium_breakup_ic_img"
-																style={{ height: "auto", width: "100%" }}
-															/>
-														</td>
-														<td>Go Digit General insurance</td>
-													</tr>
-													<tr>
-														<td>Go Digit General insurance</td>
-													</tr>
-													<tr>
-														<td>Go Digit General insurance</td>
-													</tr>
-													<tr>
-														<td>Go Digit General insurance</td>
-													</tr>
-												</tbody>
-											</Table>
-										</Col>
-										<Col md={6}>
-											<Table bordered>
-												<tbody>
-													<tr>
-														<td>Go Digit General insurance</td>
-													</tr>
-													<tr>
-														<td>Go Digit General insurance</td>
-													</tr>
-													<tr>
-														<td>Go Digit General insurance</td>
-													</tr>
-													<tr>
-														<td>Go Digit General insurance</td>
-													</tr>
-												</tbody>
-											</Table>
-										</Col>
-									</Row>
-									<Row>
-										<Col md={6}>
-											<Table bordered>
-												<thead>
-													<tr>
-														<th
-															style={{
-																textAlign: "center",
-															}}
-														>
-															Own Damage
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-												</tbody>
-											</Table>
-										</Col>
-										<Col md={6}>
-											<Table bordered>
-												<thead>
-													<tr>
-														<th
-															style={{
-																textAlign: "center",
-															}}
-														>
-															Liability
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-												</tbody>
-											</Table>
-										</Col>
-									</Row>
-									<Row>
-										<Col md={6}>
-											<Table bordered>
-												<thead>
-													<tr>
-														<th
-															style={{
-																textAlign: "center",
-															}}
-														>
-															Discounts
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															<div
-																style={{
-																	display: "flex",
-																	justifyContent: "space-between",
-																}}
-															>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</div>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-												</tbody>
-											</Table>
-										</Col>
-										<Col md={6}>
-											<Table bordered>
-												<thead>
-													<tr>
-														<th
-															style={{
-																textAlign: "center",
-															}}
-														>
-															Add-ons
-														</th>
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-												</tbody>
-											</Table>
-										</Col>
-									</Row>
-									<Row>
-										<Col md={12}>
-											<Table bordered>
-												<tbody>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-													<tr>
-														<td>
-															{" "}
-															<DetailRow>
-																<span> Basic Own Damage(OD)</span>
-																<span>₹ 13,913</span>
-															</DetailRow>
-														</td>
-													</tr>
-												</tbody>
-											</Table>
-										</Col>
-									</Row>
-								</div>
-							</Body>
-						</div>
-						<div class={key === "premiumBreakupPop" ? "hideDiv" : "showDiv"}>
-							<Body>
-								<Row>
-									<Col md={4}>
-										<Controller
-											control={control}
-											name="state_other"
-											defaultValue={""}
-											render={({ onChange, onBlur, value, name }) => (
-												<MultiSelect
-													knowMore
-													name={name}
-													onChange={onChange}
-													ref={register}
-													value={value}
-													onBlur={onBlur}
-													isMulti={false}
-													options={DummyState}
-													placeholder={"State"}
-													errors={errors.state}
-													Styled
-													closeOnSelect
-												/>
-											)}
-										/>
-										{!!errors?.state && (
-											<Error className="mt-1">{errors?.state?.message}</Error>
-										)}
-									</Col>
-									<Col md={4}>
-										<Controller
-											control={control}
-											name="city_other"
-											defaultValue={""}
-											render={({ onChange, onBlur, value, name }) => (
-												<MultiSelect
-													knowMore
-													name={name}
-													onChange={onChange}
-													ref={register}
-													value={value}
-													onBlur={onBlur}
-													isMulti={false}
-													options={DummyCity}
-													placeholder={"City"}
-													errors={errors.city}
-													Styled
-													closeOnSelect
-												/>
-											)}
-										/>
-										{!!errors?.city && (
-											<Error className="mt-1">{errors?.city?.message}</Error>
-										)}
-									</Col>
-								</Row>
+								</li>
 
-								<Table
-									striped
-									bordered
-									hover
-									style={{
-										marginTop: "33px",
-									}}
+								<li className={key === "cashlessGaragesPop" ? "active" : ""}>
+									<a
+										data-toggle="tab"
+										aria-expanded="false"
+										onClick={() => setKey("cashlessGaragesPop")}
+									>
+										Cashless Garages
+									</a>
+								</li>
+							</ul>
+
+							<TabContet>
+								<div
+									class={key === "premiumBreakupPop" ? "showDiv" : "hideDiv"}
 								>
-									<thead>
-										<tr>
-											<th>Cashless Garage</th>
-											<th>Contact Number</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<b>Ace Kudale Car Pvt Ltd</b>
-												<br />
-												S.No 232/2, Bhosarigaon, Pune-Nashik Road, Near Janseva
-												Saha
-											</td>
-											<td>9689914041</td>
-										</tr>
-										<tr>
-											<td>
-												<b>Ahura Car Care</b>
-												<br />8 Sant Savita Cross Lane 2 Byculla East
-											</td>
-											<td>9821065206</td>
-										</tr>
-										<tr>
-											<td>
-												<b>Allied Automobile Works</b>
-												<br />
-												86/20 Ambedkar Road, Khar West
-											</td>
-											<td>8286058967</td>
-										</tr>
-									</tbody>
-								</Table>
-							</Body>
-						</div>
-					</TabContet>
-				</DetailPopTabs>
+									<Body>
+										<PdfMail>
+											<a>
+												<i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+												&nbsp; PDF&nbsp;&nbsp;
+											</a>
+											<a>
+												<i class="fa fa-envelope" aria-hidden="true"></i>
+												&nbsp; EMAIL
+											</a>
+										</PdfMail>
+										<div>
+											<Row>
+												<Col md={6}>
+													<Table bordered>
+														<tbody>
+															<tr>
+																<td
+																	rowspan="5"
+																	style={{
+																		verticalAlign: "middle",
+																		width: "20%",
+																		borderRight: "1px solid #ccc",
+																	}}
+																>
+																	<img
+																		src={demoLogo}
+																		alt=""
+																		class="icon"
+																		id="premium_breakup_ic_img"
+																		style={{ height: "auto", width: "100%" }}
+																	/>
+																</td>
+																<td>Go Digit General insurance</td>
+															</tr>
+															<tr>
+																<td>Go Digit General insurance</td>
+															</tr>
+															<tr>
+																<td>Go Digit General insurance</td>
+															</tr>
+															<tr>
+																<td>Go Digit General insurance</td>
+															</tr>
+														</tbody>
+													</Table>
+												</Col>
+												<Col md={6}>
+													<Table bordered>
+														<tbody>
+															<tr>
+																<td>Go Digit General insurance</td>
+															</tr>
+															<tr>
+																<td>Go Digit General insurance</td>
+															</tr>
+															<tr>
+																<td>Go Digit General insurance</td>
+															</tr>
+															<tr>
+																<td>Go Digit General insurance</td>
+															</tr>
+														</tbody>
+													</Table>
+												</Col>
+											</Row>
+											<Row>
+												<Col md={6}>
+													<Table bordered>
+														<thead>
+															<tr>
+																<th
+																	style={{
+																		textAlign: "center",
+																	}}
+																>
+																	Own Damage
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+														</tbody>
+													</Table>
+												</Col>
+												<Col md={6}>
+													<Table bordered>
+														<thead>
+															<tr>
+																<th
+																	style={{
+																		textAlign: "center",
+																	}}
+																>
+																	Liability
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+														</tbody>
+													</Table>
+												</Col>
+											</Row>
+											<Row>
+												<Col md={6}>
+													<Table bordered>
+														<thead>
+															<tr>
+																<th
+																	style={{
+																		textAlign: "center",
+																	}}
+																>
+																	Discounts
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																	<div
+																		style={{
+																			display: "flex",
+																			justifyContent: "space-between",
+																		}}
+																	>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</div>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+														</tbody>
+													</Table>
+												</Col>
+												<Col md={6}>
+													<Table bordered>
+														<thead>
+															<tr>
+																<th
+																	style={{
+																		textAlign: "center",
+																	}}
+																>
+																	Add-ons
+																</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+														</tbody>
+													</Table>
+												</Col>
+											</Row>
+											<Row>
+												<Col md={12}>
+													<Table bordered>
+														<tbody>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+															<tr>
+																<td>
+																	{" "}
+																	<DetailRow>
+																		<span> Basic Own Damage(OD)</span>
+																		<span>₹ 13,913</span>
+																	</DetailRow>
+																</td>
+															</tr>
+														</tbody>
+													</Table>
+												</Col>
+											</Row>
+										</div>
+									</Body>
+								</div>
+								<div
+									class={key === "premiumBreakupPop" ? "hideDiv" : "showDiv"}
+								>
+									<Body>
+										<Row>
+											<Col md={6}>
+												<Controller
+													control={control}
+													name="state_other"
+													defaultValue={""}
+													render={({ onChange, onBlur, value, name }) => (
+														<MultiSelect
+															knowMore
+															name={name}
+															onChange={onChange}
+															ref={register}
+															value={value}
+															onBlur={onBlur}
+															isMulti={false}
+															options={DummyState}
+															placeholder={"State"}
+															errors={errors.state}
+															Styled
+															closeOnSelect
+														/>
+													)}
+												/>
+												{!!errors?.state && (
+													<Error className="mt-1">
+														{errors?.state?.message}
+													</Error>
+												)}
+											</Col>
+											<Col md={6}>
+												<Controller
+													control={control}
+													name="city_other"
+													defaultValue={""}
+													render={({ onChange, onBlur, value, name }) => (
+														<MultiSelect
+															knowMore
+															name={name}
+															onChange={onChange}
+															ref={register}
+															value={value}
+															onBlur={onBlur}
+															isMulti={false}
+															options={DummyCity}
+															placeholder={"City"}
+															errors={errors.city}
+															Styled
+															closeOnSelect
+														/>
+													)}
+												/>
+												{!!errors?.city && (
+													<Error className="mt-1">
+														{errors?.city?.message}
+													</Error>
+												)}
+											</Col>
+										</Row>
+
+										<Table
+											striped
+											bordered
+											hover
+											style={{
+												marginTop: "33px",
+											}}
+										>
+											<thead>
+												<tr>
+													<th>Cashless Garage</th>
+													<th>Contact Number</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>
+														<b>Ace Kudale Car Pvt Ltd</b>
+														<br />
+														S.No 232/2, Bhosarigaon, Pune-Nashik Road, Near
+														Janseva Saha
+													</td>
+													<td>9689914041</td>
+												</tr>
+												<tr>
+													<td>
+														<b>Ahura Car Care</b>
+														<br />8 Sant Savita Cross Lane 2 Byculla East
+													</td>
+													<td>9821065206</td>
+												</tr>
+												<tr>
+													<td>
+														<b>Allied Automobile Works</b>
+														<br />
+														86/20 Ambedkar Road, Khar West
+													</td>
+													<td>8286058967</td>
+												</tr>
+											</tbody>
+										</Table>
+									</Body>
+								</div>
+							</TabContet>
+						</DetailPopTabs>
+					</Col>
+				</Row>
 			</ContentWrap>
 		</>
 	);
 	return (
 		<Popup
 			height={"auto"}
-			width="83%"
+			width="max-content"
 			show={show}
 			onClose={onClose}
 			content={content}
@@ -580,7 +594,7 @@ const DetailPopTabs = styled.div`
 	float: left;
 	margin-top: -14px;
 	border-left: 1px solid #e3e4e8;
-	width: 777px;
+	/*	width: 777px;*/
 `;
 
 const TabContet = styled.div`
