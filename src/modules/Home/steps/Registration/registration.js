@@ -105,7 +105,7 @@ export const Registration = () => {
 						md="12"
 						lg="12"
 						xl="12"
-						className="text-center mt-4 d-flex flex-wrap justify-content-center p-0 my-2 mx-2"
+						className="text-center mt-4 d-flex flex-wrap justify-content-center p-0 my-2 mx-auto"
 					>
 						<Button
 							className="mx-2 my-2"
@@ -116,7 +116,7 @@ export const Registration = () => {
 							onClick={() => history.push("/vehicle-details")}
 						>
 							<label style={{ cursor: "pointer" }} className="p-0 m-0">
-								Proceed without reg. no.
+								Proceed without no.
 							</label>
 						</Button>
 						<Button
