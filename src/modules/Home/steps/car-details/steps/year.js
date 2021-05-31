@@ -5,6 +5,7 @@ import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
+import DateInput from "../DateInput";
 
 const DummyOthers = [
 	{
@@ -60,27 +61,26 @@ export const YearCM = ({ stepFn }) => {
 		<Row className="mx-auto d-flex no-wrap mt-4 w-100">
 			<Form onSubmit={handleSubmit(onSubmit)} className="w-100">
 				<Col xs="12" sm="12" md="12" lg="12" xl="12" className="w-100">
-					<Controller
-						control={control}
-						name="year"
-						defaultValue={""}
-						render={({ onChange, onBlur, value, name }) => (
-							<MultiSelect
-								name={name}
-								onChange={onChange}
-								ref={register}
-								value={value}
-								onBlur={onBlur}
-								isMulti={false}
-								options={DummyOthers}
-								placeholder={"Select year"}
-								errors={errors.year}
-								Styled
-								closeOnSelect={true}
-							/>
+					<div className="py-2 dateTimeThree">
+						<Controller
+							control={control}
+							name="year"
+							defaultValue={""}
+							render={({ onChange, onBlur, value, name }) => (
+								<DateInput
+									minDate={false}
+									value={value}
+									name={name}
+									onChange={onChange}
+									ref={register}
+									error={errors && errors?.year}
+								/>
+							)}
+						/>
+						{!!errors?.year && (
+							<Error className="mt-1">{errors?.year?.message}</Error>
 						)}
-					/>
-					{!!errors?.year && <Error className="mt-1">{errors?.year?.message}</Error>}
+					</div>
 				</Col>
 				<Col
 					sm="12"
