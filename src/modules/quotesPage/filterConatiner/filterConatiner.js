@@ -251,6 +251,9 @@ const FilterMenuOpenWrap = styled.div`
 	@media (max-width: 996px) {
 		display: flex !important;
 		min-height: 50px;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
 	}
 `;
 //
@@ -307,6 +310,9 @@ const FilterMenuTopBoxWrap = styled.div`
 	@media (max-width: 996px) {
 		display: flex !important;
 		min-height: 70px;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
 	}
 `;
 
