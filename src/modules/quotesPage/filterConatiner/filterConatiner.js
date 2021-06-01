@@ -271,7 +271,7 @@ const FilterMenuOpenEdit = styled.div`
 
 const FilterMenuOpenTitle = styled.div`
 	float: left;
-	width: 100%;
+	// width: 100%;
 	font-size: 14px;
 	line-height: 20px;
 	margin-bottom: 8px;
@@ -285,7 +285,7 @@ const FilterMenuOpenSub = styled.div`
 	color: #000000;
 	font-weight: 600;
 	float: left;
-	width: 100%;
+	// width: 100%;
 	font-size: 14px;
 	line-height: 17px;
 	color: #707070;
