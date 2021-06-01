@@ -9,7 +9,7 @@ export const QuoteCard = ({ setKnow }) => {
 
 	return (
 		<>
-			<Col lg={4}>
+			<Col lg={4} md={12} sm={12}>
 				<QuoteCardMain>
 					<CardOtherItemInner>
 						<Row>
@@ -84,6 +84,9 @@ const QuoteCardMain = styled.div`
 
 	background-color: #ffffff;
 	text-align: center;
+	@media screen and (max-width: 1290px) {
+		width: 95%;
+	}
 `;
 const CardOtherItemInner = styled.div`
 	border-bottom: solid 1px #e3e4e8;

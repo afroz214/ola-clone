@@ -2,16 +2,33 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import tooltip from "../../../assets/img/tooltip.svg";
 import CustomTooltip from "../../../components/tooltip/CustomTooltip";
 import Popup from "../../../components/Popup/Popup";
 import "./idvPopup.css";
 
 const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
+	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
+		// resolver: yupResolver(),
+		// mode: "all",
+		// reValidateMode: "onBlur",
+	});
+
+	const expPloicy = watch("claimMade");
+	const ncbValue = watch("existinNcb");
+	console.log(expPloicy, ncbValue);
 	const onSubmit = (data) => {
-		//setNCB(data);
+		if (expPloicy === "yes") {
+			setNcb("0%");
+		} else {
+			if (ncbValue) {
+				setNcb(ncbValue);
+			}
+		}
 		onClose(false);
 	};
+
 	const content = (
 		<>
 			<Conatiner>
@@ -54,15 +71,92 @@ const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 							id="claimMadeYes"
 							name="claimMade"
 							value="yes"
+							ref={register}
 						/>
 						<label for="claimMadeYes">Yes</label>
-						<input type="radio" id="ownerNo" name="claimMade" value="no" />
+						<input
+							type="radio"
+							id="ownerNo"
+							name="claimMade"
+							value="no"
+							ref={register}
+						/>
 						<label for="ownerNo">No</label>
 					</div>
-					<EligText>
-						Since you have made claim in your existing policy, your NCB will be
-						reset to 0%
-					</EligText>
+
+					{expPloicy === "no" ? (
+						<>
+							<div
+								class="popupSubHead ncsSubHeadNo"
+								style={{ display: "block" }}
+							>
+								Please select your existing NCB
+							</div>
+							<div
+								class="vehRadioWrap ncsPercentCheck"
+								style={{ display: "block" }}
+							>
+								<input
+									type="radio"
+									id="existinNcb0"
+									name="existinNcb"
+									value="0%"
+									ref={register}
+								/>
+								<label for="existinNcb0">0%</label>
+								<input
+									type="radio"
+									id="existinNcb20"
+									name="existinNcb"
+									value="20%"
+									ref={register}
+								/>
+								<label for="existinNcb20">20%</label>
+								<input
+									type="radio"
+									id="existinNcb25"
+									name="existinNcb"
+									value="25%"
+									ref={register}
+								/>
+								<label for="existinNcb25">25%</label>
+								<input
+									type="radio"
+									id="existinNcb35"
+									name="existinNcb"
+									value="35%"
+									ref={register}
+								/>
+								<label for="existinNcb35">35%</label>
+								<input
+									type="radio"
+									id="existinNcb45"
+									name="existinNcb"
+									value="45%"
+									ref={register}
+								/>
+								<label for="existinNcb45">45%</label>
+								<input
+									type="radio"
+									id="existinNcb50"
+									name="existinNcb"
+									value="50%"
+									ref={register}
+								/>
+								<label for="existinNcb50">50%</label>
+							</div>
+
+							<EligText>
+								You are eligible for {ncbValue} NCB in your new policy
+								<div>Your new NCB is set to {ncbValue}</div>
+							</EligText>
+						</>
+					) : (
+						<EligText>
+							Since you have made claim in your existing policy, your NCB will
+							be reset to 0%
+						</EligText>
+					)}
 					<PaymentTermRadioWrap>
 						<ApplyButton onClick={() => onSubmit()}>APPLY</ApplyButton>
 					</PaymentTermRadioWrap>
@@ -73,13 +167,13 @@ const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 	return (
 		<Popup
 			height={"auto"}
-			width="360px"
+			width="400px"
 			show={show}
 			onClose={onClose}
 			content={content}
 			position="center"
 			top="top"
-			left="85%"
+			left="80%"
 		/>
 	);
 };

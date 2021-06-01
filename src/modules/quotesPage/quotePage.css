@@ -118,3 +118,9 @@ input {
 	margin-top: -8px;
 	left: -8px;
 }
+
+@media screen and (max-width: 1290px) {
+	.tabs {
+		left: 56.8% !important;
+	}
+}

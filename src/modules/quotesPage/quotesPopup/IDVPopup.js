@@ -25,29 +25,21 @@ const IDVPopup = ({ show, onClose, idv, setIDV }) => {
 							data-content="Insured Value (IDV) Text"
 							data-original-title="Insured Value (IDV)"
 						>
-							<span
-								class="cardTooltipSvg"
-								data-toggle="popover"
-								title=""
-								data-content="Insured Value (IDV) Text"
-								data-original-title="Insured Value (IDV)"
+							<CustomTooltip
+								rider="true"
+								id="RiderInbuilt__Tooltip"
+								place={"bottom"}
+								customClassName="mt-3 riderPageTooltip "
 							>
-								<CustomTooltip
-									rider="true"
-									id="RiderInbuilt__Tooltip"
-									place={"bottom"}
-									customClassName="mt-3 riderPageTooltip "
-								>
-									<img
-										data-tip="<h3 >Insured Value (IDV)</h3> <div>Insured Value (IDV) Text</div>"
-										data-html={true}
-										data-for="RiderInbuilt__Tooltip"
-										src={tooltip}
-										alt="tooltip"
-										className="toolTipRiderChild"
-									/>
-								</CustomTooltip>
-							</span>
+								<img
+									data-tip="<h3 >Insured Value (IDV)</h3> <div>Insured Value (IDV) Text</div>"
+									data-html={true}
+									data-for="RiderInbuilt__Tooltip"
+									src={tooltip}
+									alt="tooltip"
+									className="toolTipRiderChild"
+								/>
+							</CustomTooltip>
 						</span>
 					</PaymentTermTitle>
 					<PopupSubTitle>
