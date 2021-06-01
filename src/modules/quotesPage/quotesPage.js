@@ -40,10 +40,14 @@ export const QuotesPage = () => {
 				<CardContainer>
 					<CardOtherItemWrap>
 						<Row style={{ marginLeft: "38px" }} className="rowBefore">
-							<Col lg={3} style={{ marginTop: "-48px" }}>
+							<Col lg={3} md={12} style={{ marginTop: "-48px" }}>
 								<AddOnsCard />
 							</Col>
-							<Col lg={9} style={{ position: "relative", top: "-43px" }}>
+							<Col
+								lg={9}
+								md={12}
+								style={{ position: "relative", top: "-43px" }}
+							>
 								<div className="tabs">
 									<input type="radio" id="tab1" name="tab-control" />
 									<input type="radio" id="tab2" name="tab-control" />

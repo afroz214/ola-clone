@@ -28,6 +28,7 @@ export const FilterContainer = (quotesPage) => {
 	const [policyType, setPolicyType] = useState("Comprehensive");
 	const [dateEditor, setDateEditor] = useState(false);
 	const [regisDate, setRegisDate] = useState("01-Apr-2018");
+	const [prevNcb, setPrevNcb] = useState("10%");
 	console.log(regDate, dateEditor);
 	useEffect(() => {
 		if (regDate) {
@@ -140,7 +141,7 @@ export const FilterContainer = (quotesPage) => {
 								<div>
 									Previous NCB:{" "}
 									<span>
-										<b>10%</b>
+										<b>{prevNcb}</b>
 										<img src={editImg} onClick={() => setNcbPopup(true)} />
 									</span>
 								</div>
@@ -185,7 +186,9 @@ export const FilterContainer = (quotesPage) => {
 			{prevPopup && (
 				<PrevInsurerPopup show={prevPopup} onClose={setPrevPopup} />
 			)}
-			{ncbPopup && <NCBPopup show={ncbPopup} onClose={setNcbPopup} />}
+			{ncbPopup && (
+				<NCBPopup show={ncbPopup} setNcb={setPrevNcb} onClose={setNcbPopup} />
+			)}
 		</>
 	);
 };
