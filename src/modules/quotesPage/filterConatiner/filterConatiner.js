@@ -43,7 +43,7 @@ export const FilterContainer = (quotesPage) => {
 			<FilterContainerMain>
 				<FilterMenuWrap>
 					<FilterMenuRow>
-						<Row>
+						<Row style={{ margin: "auto" }}>
 							<Col lg={3} md={12}>
 								<FilterMenuOpenWrap
 									onClick={() => {
