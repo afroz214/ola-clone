@@ -9,7 +9,7 @@ export const QuoteCard = ({ setKnow }) => {
 
 	return (
 		<>
-			<Col lg={4} md={12} sm={12}>
+			<Col lg={4} md={12} sm={12} style={{ marginTop: "30px" }}>
 				<QuoteCardMain>
 					<CardOtherItemInner>
 						<Row>
@@ -74,18 +74,19 @@ export const QuoteCard = ({ setKnow }) => {
 const QuoteCardMain = styled.div`
 	display: inline-block;
 	position: relative;
-	width: 303px;
+	// width: 303px;
 	margin-right: 16px;
 	padding: 10px 0 0;
 	border-radius: 4px;
-
+	width: 100%;
+	min-height: "min-content";
 	box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1),
 		0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
 	background-color: #ffffff;
 	text-align: center;
 	@media screen and (max-width: 1290px) {
-		width: 95%;
+		// width: 95%;
 	}
 `;
 const CardOtherItemInner = styled.div`
@@ -123,7 +124,7 @@ const CardOtherIdv = styled.div`
 
 const CardBuyButton = styled.button`
 	float: left;
-	width: 220px;
+	// width: 220px;
 	display: flex;
 	height: 47px;
 	margin-top: 6px;
