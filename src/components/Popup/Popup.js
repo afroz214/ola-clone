@@ -95,7 +95,7 @@ const Content = styled.div`
 	position: absolute;
 	animation: ${moveDown} 0.5s;
 	top: ${({ position }) =>
-		position === "top" ? "20%" : position === "bottom" ? "60%" : "35%"};
+		position === "top" ? "20%" : position === "bottom" ? "70%" : "35%"};
 	height: ${({ height }) => height};
 	width: ${({ width }) => width};
 	left: ${({ left }) => (left ? left : "50%")};
@@ -119,6 +119,8 @@ const CloseButton = styled.a`
 	font-family: "sans-serif";
 	color: #363636;
 	text-decoration: none;
+	position: relative;
+	z-index: 1000;
 	&:link,
 	&:visited,
 	&:hover {
