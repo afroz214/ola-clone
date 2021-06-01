@@ -93,9 +93,10 @@ const PopupC = styled.div`
 
 const Content = styled.div`
 	position: absolute;
+	overflow: auto;
 	animation: ${moveDown} 0.5s;
 	top: ${({ position }) =>
-		position === "top" ? "20%" : position === "bottom" ? "70%" : "35%"};
+		position === "top" ? "20%" : position === "bottom" ? "40%" : "35%"};
 	height: ${({ height }) => height};
 	width: ${({ width }) => width};
 	left: ${({ left }) => (left ? left : "50%")};
@@ -105,6 +106,7 @@ const Content = styled.div`
 		backGround === "grey" ? "rgb(235, 236, 243)" : "#fff"};
 	transition: all 0.5s;
 	border-radius: 4px;
+
 	@media (max-width: ${({ maxwidth }) => maxwidth}) {
 		width: 96% !important;
 		height: auto !important;

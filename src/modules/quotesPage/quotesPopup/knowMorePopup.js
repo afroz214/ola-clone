@@ -520,12 +520,12 @@ const KnowMorePopup = ({ show, onClose }) => {
 	);
 	return (
 		<Popup
-			height={"auto"}
+			height={"700px"}
 			width="max-content"
 			show={show}
 			onClose={onClose}
 			content={content}
-			position={key === "premiumBreakupPop" ? "bottom" : "middle"}
+			position={"bottom"}
 		/>
 	);
 };

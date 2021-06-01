@@ -5,6 +5,7 @@ import {
 	ReviewTabHead,
 	ReviewAnyClaimWrap,
 	ReviewAnyClaimLeft,
+	OwnerText,
 	ReviewIconfirmWrap,
 	ReviewLabel,
 	ReviewButtonTab,
@@ -84,8 +85,8 @@ const ReviewCard = () => {
 									xs={12}
 									sm={12}
 									md={12}
-									lg={6}
-									xl={5}
+									lg={5}
+									xl={4}
 									className=""
 									style={{
 										marginRight: "25px",
@@ -113,7 +114,7 @@ const ReviewCard = () => {
 										)}
 									</div>
 								</Col>
-								<Col xs={12} sm={12} md={12} lg={6} xl={5} className="">
+								<Col xs={12} sm={12} md={12} lg={5} xl={4} className="">
 									<div className="py-2 dateTimeOne">
 										<Controller
 											control={control}
@@ -141,7 +142,14 @@ const ReviewCard = () => {
 					<ReviewAnyClaimWrap>
 						<ReviewAnyClaimLeft>
 							<ReviewTabHead>
-								Did car's ownership change in the last 12 months?
+								<div
+									style={{
+										position: "relative",
+										top: "30px",
+									}}
+								>
+									Did car's ownership change in the last 12 months?
+								</div>
 							</ReviewTabHead>
 							<Switch toggle />
 						</ReviewAnyClaimLeft>
