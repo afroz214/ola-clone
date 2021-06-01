@@ -113,8 +113,8 @@ const FormTextInput = styled.input`
   padding-top: 16px;
   text-align: center;
   box-shadow: 0 0 22px rgba(0, 0, 0, 0.07);
-  border: none;
-  //border-radius: 500px;
+  border: 2px solid #C8C8C8;
+  border-radius: 5px;
   padding-left: 16px;
 	font-family: 'Titillium Web', sans-serif;
 	padding-top: 16px;
