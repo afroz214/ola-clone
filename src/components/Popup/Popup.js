@@ -62,7 +62,7 @@ Popup.defaultProps = {
 	content: null,
 	height: "200px",
 	width: "640px",
-	position: "top",
+	position: "middle",
 };
 
 const moveDown = keyframes`
