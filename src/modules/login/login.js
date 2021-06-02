@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CompactCard, Error, Button } from "components";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Form } from "react-bootstrap";
 import { FormGroup, FormTextInput, FormTextIcon, FormLabel } from "./style";
 import { useForm, Controller } from "react-hook-form";
 import styled, { createGlobalStyle } from "styled-components";
@@ -27,20 +27,32 @@ export const Login = () => {
 	const togglePasswordVisibility = () => {
 		setPasswordShown((prev) => !prev);
 	};
-	const { errors, control } = useForm();
+	const { errors, control, handleSubmit } = useForm();
+
+	const onSubmit = (data) => {
+		console.log(data);
+	};
+
 	return (
+		<Form onSubmit={handleSubmit(onSubmit)} className="w-100">
 			<RowTag className="w-100 mx-auto d-flex justify-content-center my-0 p-0">
-				<Col xs='12' sm="12" md="12" lg="12" xl="12" className="mt-5 mx-auto">
-					<h2 className="text-center w-100 d-flex justify-content-center">
-						<p style={{ color: "#1f0054", fontWeight: "600" }} className="m-0 p-0">
+				<Col xs="12" sm="12" md="12" lg="12" xl="12" className="mt-5 mx-auto">
+					<h2 className="text-center w-100 d-flex justify-content-center d-flex flex-wrap">
+						<p
+							style={{ color: "#1f0054", fontWeight: "600", whiteSpace: "nowrap" }}
+							className="m-0 p-0"
+						>
 							Save Time,
 						</p>
-						<p style={{ color: "#fdbc58", fontWeight: "600" }} className="m-0 p-0">
+						<p
+							style={{ color: "#fdbc58", fontWeight: "600", whiteSpace: "nowrap" }}
+							className="m-0 p-0"
+						>
 							&nbsp;Save Money!
 						</p>
 					</h2>
 				</Col>
-				<Col xs='12' sm="12" md="12" lg="6" xl="6" className='mt-2'>
+				<Col xs="12" sm="12" md="12" lg="6" xl="6" className="mt-2">
 					<CompactCard removeBottomHeader>
 						<h3
 							className="text-center font-weight-bold"
@@ -106,7 +118,7 @@ export const Login = () => {
 									md="12"
 									lg="12"
 									xl="12"
-                                    xs='12'
+									xs="12"
 									className="d-flex justify-content-center mt-5 mb-3"
 								>
 									<Button buttonStyle="outline-solid" borderRadius="5px">
@@ -118,5 +130,6 @@ export const Login = () => {
 					</CompactCard>
 				</Col>
 			</RowTag>
+		</Form>
 	);
 };

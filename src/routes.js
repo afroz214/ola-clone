@@ -10,13 +10,13 @@ import { Home, ReviewPage, QuotesPage, Proposal, Login } from "modules";
 const Router = (props) => {
 	return (
 		<BrowserRouter>
-			<Header />
 			<Switch>
 				<Route exact path="/">
 					<Redirect to="/login" />
 				</Route>
 				<Route exact path="/login" component={Login} />
 				<Layout>
+					<Header />
 					<Switch>
 						<Route exact path="/lead-page" component={Home} />
 						<Route exact path="/registration" component={Home} />
