@@ -16,7 +16,6 @@
 	padding: 0px;
 	top: 50px;
 	/* right: 50px; */
-
 	border-radius: 5px;
 }
 .tabs input[name="tab-control"] {
@@ -119,5 +118,11 @@ input {
 @media screen and (max-width: 1290px) {
 	.tabs {
 		left: 56.8% !important;
+	}
+}
+
+@media screen and (max-width: 660px) {
+	.tabs {
+		top: 0px !important;
 	}
 }
