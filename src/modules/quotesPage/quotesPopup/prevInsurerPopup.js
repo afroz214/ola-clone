@@ -260,6 +260,7 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 			content={step === 1 ? Page1 : step === 2 ? Page2 : Page3}
 			position="bottom"
 			backGround="grey"
+			outside={true}
 		/>
 	);
 };
