@@ -106,8 +106,8 @@ const SubmitDiv = styled.div`
   }
   .checkbox-container .checkmark {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 0 !important;
+    left: 0 !important;
     height: 20px;
     width: 20px;
     background-color: #eee;

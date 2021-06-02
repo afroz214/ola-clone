@@ -13,10 +13,13 @@ const Popup = ({
 	top,
 	left,
 	backGround,
+	outside,
+	overFlowDisable,
 }) => {
 	const dropDownRef = useRef(null);
-	useOutsideClick(dropDownRef, () => onClose(false));
-	console.log(backGround);
+
+	useOutsideClick(dropDownRef, () => onClose(outside));
+
 	return (
 		show && (
 			<PopupC visible={show}>
@@ -28,6 +31,7 @@ const Popup = ({
 					maxwidth={width}
 					left={left}
 					backGround={backGround}
+					overFlowDisable={overFlowDisable}
 				>
 					<CloseButton
 						onClick={() => {
@@ -53,6 +57,7 @@ Popup.propTypes = {
 	position: PropTypes.string,
 	left: PropTypes.string,
 	backGround: PropTypes.string,
+	outside: PropTypes.bool,
 };
 
 // DefaultTypes
@@ -63,6 +68,7 @@ Popup.defaultProps = {
 	height: "200px",
 	width: "640px",
 	position: "middle",
+	outside: false,
 };
 
 const moveDown = keyframes`
@@ -93,9 +99,11 @@ const PopupC = styled.div`
 
 const Content = styled.div`
 	position: absolute;
+	overflow: ${({ overFlowDisable }) =>
+		overFlowDisable === true ? "none" : "auto"};
 	animation: ${moveDown} 0.5s;
 	top: ${({ position }) =>
-		position === "top" ? "20%" : position === "bottom" ? "60%" : "35%"};
+		position === "top" ? "20%" : position === "bottom" ? "45%" : "35%"};
 	height: ${({ height }) => height};
 	width: ${({ width }) => width};
 	left: ${({ left }) => (left ? left : "50%")};
@@ -105,6 +113,7 @@ const Content = styled.div`
 		backGround === "grey" ? "rgb(235, 236, 243)" : "#fff"};
 	transition: all 0.5s;
 	border-radius: 4px;
+
 	@media (max-width: ${({ maxwidth }) => maxwidth}) {
 		width: 96% !important;
 		height: auto !important;
@@ -119,6 +128,8 @@ const CloseButton = styled.a`
 	font-family: "sans-serif";
 	color: #363636;
 	text-decoration: none;
+	position: relative;
+	z-index: 1000;
 	&:link,
 	&:visited,
 	&:hover {

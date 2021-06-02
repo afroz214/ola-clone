@@ -22,13 +22,14 @@ export const FilterContainer = (quotesPage) => {
 
 	const history = useHistory();
 	const [policyPopup, setPolicyPopup] = useState(true);
-	const [idvPopup, setIdvPopup] = useState(false);
+
 	const [prevPopup, setPrevPopup] = useState(false);
 	const [ncbPopup, setNcbPopup] = useState(false);
 	const [policyType, setPolicyType] = useState("Comprehensive");
 	const [dateEditor, setDateEditor] = useState(false);
 	const [regisDate, setRegisDate] = useState("01-Apr-2018");
-	console.log(regDate, dateEditor);
+	const [prevNcb, setPrevNcb] = useState("10%");
+
 	useEffect(() => {
 		if (regDate) {
 			setRegisDate(regDate);
@@ -42,135 +43,116 @@ export const FilterContainer = (quotesPage) => {
 			<FilterContainerMain>
 				<FilterMenuWrap>
 					<FilterMenuRow>
-						<FilterMenuOpenWrap
-							onClick={() => {
-								swal({
-									title: "Do you want to edit details",
-									text: "",
-									icon: "info",
-									buttons: true,
-									dangerMode: true,
-								}).then((willEdit) => {
-									if (willEdit) {
-										history.push(`/vehicle-details`);
-									} else {
-									}
-								});
-							}}
-						>
-							<FilterMenuOpenEdit />
-							<FilterMenuOpenTitle>
-								Volkswagen Polo - Dreamline 1197 CC{" "}
-							</FilterMenuOpenTitle>
-							<FilterMenuOpenSub>
-								Private Car | Petrol | MH01 AR 7294
-								<img src={editImg} />
-							</FilterMenuOpenSub>
-						</FilterMenuOpenWrap>
+						<Row style={{ margin: "auto" }}>
+							<Col lg={3} md={12}>
+								<FilterMenuOpenWrap
+									onClick={() => {
+										swal({
+											title: "Do you want to edit details",
+											text: "",
+											icon: "info",
+											buttons: true,
+											dangerMode: true,
+										}).then((willEdit) => {
+											if (willEdit) {
+												history.push(`/vehicle-details`);
+											} else {
+											}
+										});
+									}}
+								>
+									<FilterMenuOpenTitle>
+										Volkswagen Polo - Dreamline 1197 CC{" "}
+									</FilterMenuOpenTitle>
+									<FilterMenuOpenSub>
+										Private Car | Petrol | MH01 AR 7294
+										<img src={editImg} />
+									</FilterMenuOpenSub>
+								</FilterMenuOpenWrap>
+							</Col>
 
-						<FilterMenuOpenWrap>
-							<FilterMenuOpenSub onClick={() => setPolicyPopup(true)}>
-								Previous policy type:
-								<FilterMenuOpenSubBold>
-									{policyType} <img src={editImg} />
-								</FilterMenuOpenSubBold>
-							</FilterMenuOpenSub>
-							<FilterMenuOpenEdit>
-								<FilterMenuOpenTitle onClick={() => setPrevPopup(true)}>
-									Previous Insurer:
-									<FilterMenuOpenSubBold>
-										<b>Bajaj Allianz</b> <img src={editImg} />
-									</FilterMenuOpenSubBold>
-								</FilterMenuOpenTitle>
-							</FilterMenuOpenEdit>
-						</FilterMenuOpenWrap>
+							<Col lg={3} md={12}>
+								<FilterMenuOpenWrap>
+									<FilterMenuOpenSub onClick={() => setPolicyPopup(true)}>
+										Previous policy type:
+										<FilterMenuOpenSubBold>
+											{policyType} <img src={editImg} />
+										</FilterMenuOpenSubBold>
+									</FilterMenuOpenSub>
+									<FilterMenuOpenEdit>
+										<FilterMenuOpenTitle onClick={() => setPrevPopup(true)}>
+											Previous Insurer:
+											<FilterMenuOpenSubBold>
+												<b>Bajaj Allianz</b> <img src={editImg} />
+											</FilterMenuOpenSubBold>
+										</FilterMenuOpenTitle>
+									</FilterMenuOpenEdit>
+								</FilterMenuOpenWrap>
+							</Col>
 
-						<FilterMenuTopBoxWrap>
-							<FilterMenuTopBoxWrap>
-								<div>
-									Policy Expiry:{" "}
-									<span>
-										<b>30-Apr-2021</b>
-									</span>
-								</div>
-								<div>
-									Registered on:{" "}
-									<span>
-										<b>{regisDate}</b>
-										<img src={editImg} onClick={() => setDateEditor(true)} />
-									</span>
-									{dateEditor && (
-										<div
-											className="py-2 dateTimeOne"
-											style={{ position: "relative", bottom: "33px" }}
-										>
-											<Controller
-												control={control}
-												name="regDate"
-												render={({ onChange, onBlur, value, name }) => (
-													<DateInput
-														minDate={false}
-														value={value}
-														name={name}
-														onChange={onChange}
-														ref={register}
-													/>
+							<Col lg={3} md={12}>
+								<FilterMenuOpenWrap>
+									<FilterMenuOpenSub>
+										Policy Expiry:{" "}
+										<FilterMenuOpenSubBold>30-Apr-2021</FilterMenuOpenSubBold>
+									</FilterMenuOpenSub>
+									<FilterMenuOpenEdit>
+										<FilterMenuOpenTitle>
+											Registered on:{" "}
+											<FilterMenuOpenSubBold>
+												<b>{regisDate}</b>
+												<img
+													src={editImg}
+													onClick={() => setDateEditor(true)}
+												/>
+												{dateEditor && (
+													<div
+														className="py-2 dateTimeOne"
+														style={{ position: "relative", bottom: "33px" }}
+													>
+														<Controller
+															control={control}
+															name="regDate"
+															render={({ onChange, onBlur, value, name }) => (
+																<DateInput
+																	minDate={false}
+																	value={value}
+																	name={name}
+																	onChange={onChange}
+																	ref={register}
+																/>
+															)}
+														/>
+														{!!errors.regDate && (
+															<ErrorMsg fontSize={"12px"}>
+																{errors.regDate.message}
+															</ErrorMsg>
+														)}
+													</div>
 												)}
-											/>
-											{!!errors.regDate && (
-												<ErrorMsg fontSize={"12px"}>
-													{errors.regDate.message}
-												</ErrorMsg>
-											)}
-										</div>
-									)}
-								</div>
-							</FilterMenuTopBoxWrap>
-							<FilterTopBoxRs></FilterTopBoxRs>
-						</FilterMenuTopBoxWrap>
+											</FilterMenuOpenSubBold>
+										</FilterMenuOpenTitle>
+									</FilterMenuOpenEdit>
+								</FilterMenuOpenWrap>
+							</Col>
 
-						<FilterMenuTopBoxWrap>
-							<FilterMenuTopBoxWrap onClick={() => setNcbPopup(true)}>
-								<div>
-									New NCB:{" "}
-									<span>
-										<b>10%</b>
-									</span>
-								</div>
-								<div>
-									Previous NCB:{" "}
-									<span>
-										<b>10%</b>
-										<img src={editImg} onClick={() => setNcbPopup(true)} />
-									</span>
-								</div>
-							</FilterMenuTopBoxWrap>
-							<FilterTopBoxRs></FilterTopBoxRs>
-						</FilterMenuTopBoxWrap>
+							<Col lg={3} md={12}>
+								<FilterMenuOpenWrap>
+									<FilterMenuOpenSub onClick={() => setPolicyPopup(true)}>
+										New NCB: <FilterMenuOpenSubBold>10%</FilterMenuOpenSubBold>
+									</FilterMenuOpenSub>
+									<FilterMenuOpenEdit>
+										<FilterMenuOpenTitle onClick={() => setNcbPopup(true)}>
+											Previous NCB:
+											<FilterMenuOpenSubBold>
+												<b>{prevNcb}</b> <img src={editImg} />
+											</FilterMenuOpenSubBold>
+										</FilterMenuOpenTitle>
+									</FilterMenuOpenEdit>
+								</FilterMenuOpenWrap>
+							</Col>
+						</Row>
 					</FilterMenuRow>
-					{quotesPage && (
-						<FilterMenuRow>
-							<FilterMenuQuoteBoxWrap onClick={() => setIdvPopup(true)}>
-								<FilterTopBoxChange>
-									<img src={editImg} />
-								</FilterTopBoxChange>
-								<FilterTopBoxTitle>
-									Vehicle Value (IDV) <span>₹ 3,02,575</span>
-								</FilterTopBoxTitle>
-							</FilterMenuQuoteBoxWrap>
-							<FilterSubMenuCont>
-								<FilterSubMenuWrap>
-									<InclusiveGstWrap>
-										<PremiumFilterWrap>
-											<PremiumFilterlabel>
-												Sort by:<b> Relevance</b>
-											</PremiumFilterlabel>
-										</PremiumFilterWrap>
-									</InclusiveGstWrap>
-								</FilterSubMenuWrap>
-							</FilterSubMenuCont>
-						</FilterMenuRow>
-					)}
 				</FilterMenuWrap>
 			</FilterContainerMain>
 			{policyPopup && (
@@ -181,11 +163,44 @@ export const FilterContainer = (quotesPage) => {
 					onClose={setPolicyPopup}
 				/>
 			)}
-			{idvPopup && <IDVPopup show={idvPopup} onClose={setIdvPopup} />}
+
 			{prevPopup && (
 				<PrevInsurerPopup show={prevPopup} onClose={setPrevPopup} />
 			)}
-			{ncbPopup && <NCBPopup show={ncbPopup} onClose={setNcbPopup} />}
+			{ncbPopup && (
+				<NCBPopup show={ncbPopup} setNcb={setPrevNcb} onClose={setNcbPopup} />
+			)}
+		</>
+	);
+};
+
+export const Filters = ({}) => {
+	const [idvPopup, setIdvPopup] = useState(false);
+	return (
+		<>
+			<Row>
+				<Col lg={6} md={12}>
+					<FilterMenuQuoteBoxWrap onClick={() => setIdvPopup(true)}>
+						<FilterTopBoxChange>
+							<img src={editImg} />
+						</FilterTopBoxChange>
+						<FilterTopBoxTitle>
+							Vehicle Value (IDV) <span>₹ 3,02,575</span>
+						</FilterTopBoxTitle>
+					</FilterMenuQuoteBoxWrap>
+				</Col>
+				<Col lg={6} md={12}>
+					<FilterMenuQuoteBoxWrap>
+						<FilterTopBoxChange>
+							<img src={editImg} />
+						</FilterTopBoxChange>
+						<FilterTopBoxTitle>
+							Sort by:<b> Relevance</b>
+						</FilterTopBoxTitle>
+					</FilterMenuQuoteBoxWrap>
+				</Col>
+			</Row>
+			{idvPopup && <IDVPopup show={idvPopup} onClose={setIdvPopup} />}
 		</>
 	);
 };
@@ -195,22 +210,27 @@ const FilterContainerMain = styled.div`
 	border-bottom: solid 1px #e3e4e8;
 	box-shadow: 0 24px 34px -8px rgb(0 0 0 / 9%);
 	margin-bottom: 16px;
-	height: 68px;
+	height: auto;
+	display: flex;
+	align-items: end;
+	justify-content: center;
 `;
 const FilterMenuWrap = styled.div`
-	width: 1240px;
-	margin: 0 auto;
-	height: 124px;
+	margin: 10px 20px 0px;
+
 	padding: 8px 0;
 	font-family: "Inter-Regular";
 	color: #333;
+	@media (max-width: 996px) {
+		margin: 10px 20px 0px 40px;
+	}
 `;
 
 const FilterMenuRow = styled.div`
 	float: left;
 	width: 100%;
 	margin-bottom: 23px;
-	max-height: 70px;
+
 	&:last-child {
 		margin-bottom: 0;
 		margin-top: -10px;
@@ -218,53 +238,62 @@ const FilterMenuRow = styled.div`
 `;
 
 const FilterMenuOpenWrap = styled.div`
-	&:first-child {
-		border-right: 1px solid #e3e4e8;
-	}
 	&:nth-child(2) {
 		width: 291px;
 		padding-left: 26px;
 		margin-right: 16px;
 	}
 	float: left;
-	width: 428px;
 	position: relative;
 	padding-bottom: 10px;
-	margin-left: -8px;
+	margin-top: 8px;
+	@media (max-width: 996px) {
+		display: flex !important;
+		min-height: 50px;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+		flex-wrap: wrap !important;
+	}
 `;
 //
 
 const FilterMenuOpenEdit = styled.div`
 	position: absolute;
 	top: 25px;
-	right: 40px;
+
 	font-size: 12px;
 	line-height: 15px;
 	color: #000;
-	padding: 2px 6px;
+	padding: 2px 0px;
 	cursor: pointer;
 `;
 
 const FilterMenuOpenTitle = styled.div`
 	float: left;
-	width: 100%;
+	// width: 100%;
 	font-size: 14px;
 	line-height: 20px;
 	margin-bottom: 8px;
 	padding-right: 7px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
+	@media (max-width: 996px) {
+		margin-bottom: 15px;
+	}
 `;
 
 const FilterMenuOpenSub = styled.div`
 	color: #000000;
 	font-weight: 600;
 	float: left;
-	width: 100%;
+	// width: 100%;
 	font-size: 14px;
 	line-height: 17px;
 	color: #707070;
+	@media (max-width: 996px) {
+		margin-bottom: 15px;
+	}
 `;
 
 const FilterMenuOpenSubBold = styled.span`
@@ -283,6 +312,13 @@ const FilterMenuTopBoxWrap = styled.div`
 	margin-right: 4px;
 	position: relative;
 	bottom: 5px;
+	@media (max-width: 996px) {
+		display: flex !important;
+		min-height: 70px;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
+	}
 `;
 
 const FilterTopBoxRs = styled.span`
@@ -294,19 +330,23 @@ const FilterTopBoxRs = styled.span`
 `;
 
 const FilterMenuQuoteBoxWrap = styled.button`
+	width: 100%;
 	margin-top: 1px;
 	margin-left: -75px;
 	background: #fff;
 	border-radius: 8px;
 	padding-top: 10px;
 	line-height: 27px;
-	height: 45px;
-	margin-right: 220px;
+
 	border: 1px solid #e0e0e0;
 	float: right;
 	position: relative;
 	padding: 5px 16px 7px;
 	z-index: 2;
+	@media only screen and (max-width: 992px) {
+		width: 50%;
+		margin: 10px 30px;
+	}
 `;
 
 const FilterTopBoxChange = styled.div`
@@ -326,7 +366,7 @@ const FilterTopBoxTitle = styled.div`
 	line-height: 20px;
 	margin-bottom: 6px;
 	padding-top: 6px;
-	float: inherit;
+	float: initial;
 `;
 
 const FilterSubMenuCont = styled.div`
@@ -336,7 +376,7 @@ const FilterSubMenuCont = styled.div`
 
 const FilterSubMenuWrap = styled.div`
 	width: 1240px;
-	margin: 0 auto;
+	margin: 10px auto;
 	position: relative;
 `;
 
@@ -346,7 +386,6 @@ const InclusiveGstWrap = styled.div`
 	margin-top: 5px;
 	text-align: right;
 	margin-bottom: 7px;
-	width: 404px;
 `;
 
 const PremiumFilterWrap = styled.div`
@@ -362,7 +401,7 @@ const PremiumFilterWrap = styled.div`
 	margin-left: 610px;
 	padding: 17px 12px;
 	background-color: #ffffff;
-	height: 47px;
+
 	border-radius: 8px;
 `;
 

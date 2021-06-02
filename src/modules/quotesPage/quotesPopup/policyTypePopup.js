@@ -104,6 +104,7 @@ const PolicyTypePopup = ({ show, onClose, setPolicy, policyType }) => {
 			onClose={onClose}
 			content={content}
 			position="center"
+			outside={true}
 		/>
 	);
 };

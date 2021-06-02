@@ -56,7 +56,7 @@ export const AddOnsCard = () => {
 
 	return (
 		<CardOtherItem>
-			<Col lg={12} style={{ textAlign: "left", padding: "16px 12px" }}>
+			<Col lg={12} md={12} style={{ textAlign: "left", padding: "16px 12px" }}>
 				<AddOnTitle>
 					Add-ons & Others
 					<span style={{ marginLeft: "3px" }}>
@@ -365,8 +365,9 @@ const AddOnTitle = styled.div`
 `;
 const CardOtherItem = styled.div`
 	display: inline-block;
+	margin-top: "20px" 
 	position: relative;
-	width: 303px;
+	// width: 303px;
 	margin-right: 16px;
 	padding: 10px 0 0;
 	border-radius: 4px;
@@ -376,6 +377,7 @@ const CardOtherItem = styled.div`
 	/* border: solid 1px #e3e4e8; */
 	background-color: #ffffff;
 	text-align: center;
+	width: 100%;
 `;
 
 const AccordionTab = styled.div`

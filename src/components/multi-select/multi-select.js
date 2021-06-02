@@ -46,6 +46,7 @@ export default function AnimatedMulti({
 						? "2px"
 						: "1px",
 				minHeight: knowMore ? "48px" : "60px",
+				maxHeight: knowMore ? "48px" : "",
 				boxShadow: "0",
 				borderRadius: knowMore ? "50px" : "2.5px",
 				fontSize: knowMore ? "14px" : "18px",

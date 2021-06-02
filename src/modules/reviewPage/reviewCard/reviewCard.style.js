@@ -1,15 +1,13 @@
 import styled from "styled-components";
 
 export const FormRightMainCont = styled.div`
-	width: 765px;
-	float: right;
+	/*	width: 765px*/
 `;
 
 export const FormRightCont = styled.div`
-	margin-left: 54px;
 	float: left;
 	position: relative;
-	width: 775px;
+
 	border-radius: 12px;
 	box-shadow: 0 8px 25px -5px rgb(0 0 0 / 10%), 0 10px 10px -5px rgb(0 0 0 / 4%);
 	border: solid 1px #e3e4e8;
@@ -25,7 +23,6 @@ export const CustomWrap = styled.div`
 `;
 
 export const ReviewTabHead = styled.div`
-	float: left;
 	font-family: "Inter-SemiBold";
 	font-size: 12px;
 	line-height: 20px;
@@ -100,7 +97,7 @@ export const ReviewButtonTab = styled.div`
 
 	& label {
 		height: 42px;
-		width: 198px;
+		width: 100%;
 		background-color: #fff;
 		border: solid 1px #e3e4e8;
 		color: #333;
@@ -190,4 +187,8 @@ export const ReviewLabel = styled.label`
 	cursor: pointer;
 	max-width: 100%;
 	margin-bottom: 5px;
+`;
+
+export const OwnerText = styled.div`
+	position: "fixed !important";
 `;

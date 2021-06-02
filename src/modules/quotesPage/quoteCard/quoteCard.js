@@ -9,7 +9,7 @@ export const QuoteCard = ({ setKnow }) => {
 
 	return (
 		<>
-			<Col lg={4}>
+			<Col lg={4} md={12} sm={12} style={{ marginTop: "30px" }}>
 				<QuoteCardMain>
 					<CardOtherItemInner>
 						<Row>
@@ -33,22 +33,22 @@ export const QuoteCard = ({ setKnow }) => {
 
 					<CardOtherItemNoBorder>
 						<Row>
-							<Col lg={8}>
+							<Col lg={8} md={8} sm={8} xs={8}>
 								<ItemName>Base Premium</ItemName>
 							</Col>
-							<Col lg={4}>
+							<Col lg={4} md={4} sm={4} xs={4}>
 								<ItemPrice>₹ 7,561</ItemPrice>
 							</Col>
-							<Col lg={8}>
+							<Col lg={8} md={8} sm={8} xs={8}>
 								<ItemName>Zero Depreciation</ItemName>
 							</Col>
-							<Col lg={4}>
+							<Col lg={4} md={4} sm={4} xs={4}>
 								<ItemPrice>₹ 7,561</ItemPrice>
 							</Col>
-							<Col lg={8}>
+							<Col lg={8} md={8} sm={8} xs={8}>
 								<ItemName>Road Side Assistance </ItemName>
 							</Col>
-							<Col lg={4}>
+							<Col lg={4} md={4} sm={4} xs={4}>
 								<ItemPrice>₹ 7,561</ItemPrice>
 							</Col>
 						</Row>
@@ -74,16 +74,20 @@ export const QuoteCard = ({ setKnow }) => {
 const QuoteCardMain = styled.div`
 	display: inline-block;
 	position: relative;
-	width: 303px;
+	// width: 303px;
 	margin-right: 16px;
 	padding: 10px 0 0;
 	border-radius: 4px;
-
+	width: 100%;
+	min-height: "min-content";
 	box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1),
 		0 10px 10px -5px rgba(0, 0, 0, 0.04);
 
 	background-color: #ffffff;
 	text-align: center;
+	@media screen and (max-width: 1290px) {
+		// width: 95%;
+	}
 `;
 const CardOtherItemInner = styled.div`
 	border-bottom: solid 1px #e3e4e8;
@@ -120,7 +124,7 @@ const CardOtherIdv = styled.div`
 
 const CardBuyButton = styled.button`
 	float: left;
-	width: 220px;
+	// width: 220px;
 	display: flex;
 	height: 47px;
 	margin-top: 6px;
