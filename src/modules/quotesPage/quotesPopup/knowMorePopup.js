@@ -113,7 +113,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 										</PdfMail>
 										<div>
 											<Row>
-												<Col md={6}>
+												<Col md={6} sm={12}>
 													<Table bordered>
 														<tbody>
 															<tr>
@@ -147,7 +147,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 														</tbody>
 													</Table>
 												</Col>
-												<Col md={6}>
+												<Col md={6} sm={12}>
 													<Table bordered>
 														<tbody>
 															<tr>
@@ -167,7 +167,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 												</Col>
 											</Row>
 											<Row>
-												<Col md={6}>
+												<Col md={6} sm={12}>
 													<Table bordered>
 														<thead>
 															<tr>
@@ -219,7 +219,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 														</tbody>
 													</Table>
 												</Col>
-												<Col md={6}>
+												<Col md={6} sm={12}>
 													<Table bordered>
 														<thead>
 															<tr>
@@ -274,7 +274,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 												</Col>
 											</Row>
 											<Row>
-												<Col md={6}>
+												<Col md={6} sm={12}>
 													<Table bordered>
 														<thead>
 															<tr>
@@ -331,7 +331,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 														</tbody>
 													</Table>
 												</Col>
-												<Col md={6}>
+												<Col md={6} sm={12}>
 													<Table bordered>
 														<thead>
 															<tr>
@@ -368,7 +368,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 												</Col>
 											</Row>
 											<Row>
-												<Col md={12}>
+												<Col md={12} sm={12}>
 													<Table bordered>
 														<tbody>
 															<tr>
@@ -410,7 +410,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 								>
 									<Body>
 										<Row>
-											<Col md={6}>
+											<Col md={6} sm={12}>
 												<Controller
 													control={control}
 													name="state_other"
@@ -438,7 +438,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 													</Error>
 												)}
 											</Col>
-											<Col md={6}>
+											<Col md={6} sm={12}>
 												<Controller
 													control={control}
 													name="city_other"

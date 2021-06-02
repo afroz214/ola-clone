@@ -14,8 +14,7 @@
 	transform: translateX(-50%);
 	position: relative;
 	padding: 0px;
-	top: 50px;
-	/* right: 50px; */
+	top: 40px;
 	border-radius: 5px;
 }
 .tabs input[name="tab-control"] {

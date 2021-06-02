@@ -14,6 +14,7 @@ const Popup = ({
 	left,
 	backGround,
 	outside,
+	overFlowDisable,
 }) => {
 	const dropDownRef = useRef(null);
 
@@ -30,6 +31,7 @@ const Popup = ({
 					maxwidth={width}
 					left={left}
 					backGround={backGround}
+					overFlowDisable={overFlowDisable}
 				>
 					<CloseButton
 						onClick={() => {
@@ -97,7 +99,8 @@ const PopupC = styled.div`
 
 const Content = styled.div`
 	position: absolute;
-	overflow: auto;
+	overflow: ${({ overFlowDisable }) =>
+		overFlowDisable === true ? "none" : "auto"};
 	animation: ${moveDown} 0.5s;
 	top: ${({ position }) =>
 		position === "top" ? "20%" : position === "bottom" ? "45%" : "35%"};
