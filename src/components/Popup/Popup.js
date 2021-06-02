@@ -96,7 +96,7 @@ const Content = styled.div`
 	overflow: auto;
 	animation: ${moveDown} 0.5s;
 	top: ${({ position }) =>
-		position === "top" ? "20%" : position === "bottom" ? "40%" : "35%"};
+		position === "top" ? "20%" : position === "bottom" ? "45%" : "35%"};
 	height: ${({ height }) => height};
 	width: ${({ width }) => width};
 	left: ${({ left }) => (left ? left : "50%")};
