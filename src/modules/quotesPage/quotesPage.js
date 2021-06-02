@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import KnowMorePopup from "./quotesPopup/knowMorePopup";
 import { FilterContainer } from "./filterConatiner/filterConatiner";
 import { QuoteCard } from "./quoteCard/quoteCard";
 import { AddOnsCard } from "./addOnCard/addOnCard";
@@ -11,7 +10,7 @@ import { BackButton } from "components";
 
 import "./quotePage.css";
 export const QuotesPage = () => {
-	const [knowMore, setKnowMore] = useState(false);
+	const [tab, setTab] = useState("tab1");
 	const history = useHistory();
 
 	const back = () => {
@@ -51,12 +50,20 @@ export const QuotesPage = () => {
 							<input type="radio" id="tab4" name="tab-control" />
 							<ul>
 								<li title="Features">
-									<label htmlFor="tab1" role="button">
+									<label
+										htmlFor="tab1"
+										role="button"
+										onClick={() => setTab("tab1")}
+									>
 										<span>Comprehensive</span>
 									</label>
 								</li>
 								<li title="Delivery Contents">
-									<label htmlFor="tab2" role="button">
+									<label
+										htmlFor="tab2"
+										role="button"
+										onClick={() => setTab("tab2")}
+									>
 										<span>Third Party</span>
 									</label>
 								</li>
@@ -77,14 +84,17 @@ export const QuotesPage = () => {
 					</Col>
 					<Col lg={9} lg={9} md={12}>
 						<Row>
-							<QuoteCard setKnow={setKnowMore} />
-							<QuoteCard setKnow={setKnowMore} />
-							<QuoteCard setKnow={setKnowMore} />
+							{tab === "tab1" && (
+								<>
+									<QuoteCard />
+									<QuoteCard />
+									<QuoteCard />
+								</>
+							)}
 						</Row>
 					</Col>
 				</Row>
 			</MainContainer>
-			{knowMore && <KnowMorePopup show={knowMore} onClose={setKnowMore} />}
 		</>
 	);
 };
@@ -93,14 +103,4 @@ const MainContainer = styled.div`
 	width: 100%;
 	background: #fff;
 	overflow: hidden;
-`;
-const CardContainer = styled.div`
-	width: 100%;
-	display: grid;
-`;
-
-const CardOtherItemWrap = styled.div`
-	margin-bottom: 32px;
-	background: #f7f7f7;
-	min-height: 360px;
 `;

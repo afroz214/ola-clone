@@ -1,31 +1,5 @@
 import styled from "styled-components";
-import { Row, Col } from "react-bootstrap";
-export const BackBtn = styled.button`
-	border: none;
-	background: none;
-	color: #808080;
-	font-size: 14px;
-	font-family: "Inter-Regular";
-	margin-top: 24px;
-	margin-left: 62px;
-	display: block;
-	position: absolute;
-	text-transform: uppercase;
-`;
-
-export const FormHeader = styled.div`
-	margin: 0 auto 11px;
-	text-align: center;
-	float: left;
-	width: 100%;
-`;
-
-export const ReviewPageWrap = styled.div`
-	width: 1089px;
-	margin: 0px auto 16px;
-	display: table;
-	position: relative;
-`;
+import { Row } from "react-bootstrap";
 
 export const ReviewCardHeader = styled.div`
 	font-family: "Inter-SemiBold";

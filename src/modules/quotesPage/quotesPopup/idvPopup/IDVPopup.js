@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
-import tooltip from "../../../assets/img/tooltip.svg";
-import CustomTooltip from "../../../components/tooltip/CustomTooltip";
-import Popup from "../../../components/Popup/Popup";
+import tooltip from "../../../../assets/img/tooltip.svg";
+import CustomTooltip from "../../../../components/tooltip/CustomTooltip";
+import Popup from "../../../../components/Popup/Popup";
 import "./idvPopup.css";
 
 const IDVPopup = ({ show, onClose, idv, setIDV }) => {
