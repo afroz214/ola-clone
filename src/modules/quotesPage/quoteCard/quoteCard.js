@@ -33,22 +33,22 @@ export const QuoteCard = ({ setKnow }) => {
 
 					<CardOtherItemNoBorder>
 						<Row>
-							<Col lg={8}>
+							<Col lg={8} md={8} sm={8} xs={8}>
 								<ItemName>Base Premium</ItemName>
 							</Col>
-							<Col lg={4}>
+							<Col lg={4} md={4} sm={4} xs={4}>
 								<ItemPrice>₹ 7,561</ItemPrice>
 							</Col>
-							<Col lg={8}>
+							<Col lg={8} md={8} sm={8} xs={8}>
 								<ItemName>Zero Depreciation</ItemName>
 							</Col>
-							<Col lg={4}>
+							<Col lg={4} md={4} sm={4} xs={4}>
 								<ItemPrice>₹ 7,561</ItemPrice>
 							</Col>
-							<Col lg={8}>
+							<Col lg={8} md={8} sm={8} xs={8}>
 								<ItemName>Road Side Assistance </ItemName>
 							</Col>
-							<Col lg={4}>
+							<Col lg={4} md={4} sm={4} xs={4}>
 								<ItemPrice>₹ 7,561</ItemPrice>
 							</Col>
 						</Row>

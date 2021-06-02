@@ -13,7 +13,7 @@ import CompactCard from "./compact-card/Card";
 
 import MultiSelect from "./multi-select/multi-select";
 import Header from "./header/Header";
-import { Footer, Layout } from "./footer/Footer";
+import { Footer, Layout } from "./footer/footer";
 import Tile from "./tile/tile";
 import Textbox from "./inputs/TextInput/textInput";
 import Switch from "./switch/switch";
