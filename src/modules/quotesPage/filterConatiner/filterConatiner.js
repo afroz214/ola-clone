@@ -97,7 +97,7 @@ export const FilterContainer = (quotesPage) => {
 											<b>30-Apr-2021</b>
 										</span>
 									</div>
-									<div>
+									<div style={{ maxHeight: "20px" }}>
 										Registered on:{" "}
 										<span>
 											<b>{regisDate}</b>
