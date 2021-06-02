@@ -51,7 +51,7 @@ export const SubmitBtn = styled.button`
 	margin-top: -5px;
 	background-color: #dcdde0;
 	cursor: auto;
-
+	margin-bottom: 60px;
 	position: relative;
 	width: 274px;
 	height: 54px;
@@ -88,6 +88,11 @@ export const DivTag2 = styled.div`
 	}
 	@media screen (min-width: 300px) {
 		padding: 0;
+	}
+
+	@media (max-width: 960px) {
+		position: "relative";
+		top: 60px !important;
 	}
 `;
 
