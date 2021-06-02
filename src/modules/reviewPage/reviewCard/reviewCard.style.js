@@ -97,7 +97,7 @@ export const ReviewButtonTab = styled.div`
 
 	& label {
 		height: 42px;
-		width: 198px;
+		width: 100%;
 		background-color: #fff;
 		border: solid 1px #e3e4e8;
 		color: #333;
