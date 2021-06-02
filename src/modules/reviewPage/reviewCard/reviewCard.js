@@ -28,10 +28,10 @@ const ReviewCard = () => {
 			<FormRightMainCont>
 				<FormRightCont>
 					<Row>
-						<Col md={5}>
+						<Col md={4}>
 							<ReviewTabHead>Car Is Owned By</ReviewTabHead>
 						</Col>
-						<Col md={7}>
+						<Col md={8}>
 							<ReviewButtonTab>
 								<input
 									type="radio"
@@ -51,10 +51,10 @@ const ReviewCard = () => {
 						</Col>
 					</Row>
 					<Row>
-						<Col md={5}>
+						<Col md={4}>
 							<ReviewTabHead>Existing Policy Type</ReviewTabHead>
 						</Col>
-						<Col md={7}>
+						<Col md={8}>
 							<ReviewButtonTab>
 								<input
 									type="radio"
@@ -74,26 +74,18 @@ const ReviewCard = () => {
 						</Col>
 					</Row>
 					<Row>
-						<Col md={5}>
+						<Col md={4}>
 							<ReviewTabHead>
 								Registration and Manufacturing month
 							</ReviewTabHead>
 						</Col>
-						<Col md={7}>
+						<Col md={8}>
 							<Row>
-								<Col
-									xs={12}
-									sm={12}
-									md={12}
-									lg={5}
-									xl={4}
-									className=""
-									style={{
-										marginRight: "25px",
-										marginLeft: "10px",
-									}}
-								>
-									<div className="py-2 dateTimeOne">
+								<Col xs={12} sm={12} md={12} lg={6} xl={6} className="">
+									<div
+										className="py-2 dateTimeOne"
+										style={{ marginRight: "21px" }}
+									>
 										<Controller
 											control={control}
 											name="date1"
@@ -114,8 +106,11 @@ const ReviewCard = () => {
 										)}
 									</div>
 								</Col>
-								<Col xs={12} sm={12} md={12} lg={5} xl={4} className="">
-									<div className="py-2 dateTimeOne">
+								<Col xs={12} sm={12} md={12} lg={6} xl={6} className="">
+									<div
+										className="py-2 dateTimeOne"
+										style={{ marginRight: "21px" }}
+									>
 										<Controller
 											control={control}
 											name="date2"
@@ -141,17 +136,22 @@ const ReviewCard = () => {
 					</Row>
 					<ReviewAnyClaimWrap>
 						<ReviewAnyClaimLeft>
-							<ReviewTabHead>
-								<div
-									style={{
-										position: "relative",
-										top: "30px",
-									}}
-								>
-									Did car's ownership change in the last 12 months?
-								</div>
-							</ReviewTabHead>
-							<Switch toggle />
+							<Row>
+								<Col lg={5}>
+									<ReviewTabHead>
+										<div
+											style={{
+												position: "relative",
+											}}
+										>
+											Did car's ownership change in the last 12 months?
+										</div>
+									</ReviewTabHead>
+								</Col>
+								<Col lg={7}>
+									<Switch toggle />
+								</Col>
+							</Row>
 						</ReviewAnyClaimLeft>
 					</ReviewAnyClaimWrap>
 					<Row>

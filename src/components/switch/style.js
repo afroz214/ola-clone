@@ -21,7 +21,7 @@ export const CustomControl = styled.div`
 export const SwitchContainer = styled.div`
 	position: absolute;
 	top: 40%;
-	left: 50%;
+	left: 40%;
 	-webkit-transform: translate3d(-50%, -50%, 0);
 	transform: translate3d(-50%, -50%, 0);
 `;

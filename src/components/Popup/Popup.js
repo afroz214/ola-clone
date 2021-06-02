@@ -13,10 +13,12 @@ const Popup = ({
 	top,
 	left,
 	backGround,
+	outside,
 }) => {
 	const dropDownRef = useRef(null);
-	useOutsideClick(dropDownRef, () => onClose(false));
-	console.log(backGround);
+
+	useOutsideClick(dropDownRef, () => onClose(outside));
+
 	return (
 		show && (
 			<PopupC visible={show}>
@@ -53,6 +55,7 @@ Popup.propTypes = {
 	position: PropTypes.string,
 	left: PropTypes.string,
 	backGround: PropTypes.string,
+	outside: PropTypes.bool,
 };
 
 // DefaultTypes
@@ -63,6 +66,7 @@ Popup.defaultProps = {
 	height: "200px",
 	width: "640px",
 	position: "middle",
+	outside: false,
 };
 
 const moveDown = keyframes`

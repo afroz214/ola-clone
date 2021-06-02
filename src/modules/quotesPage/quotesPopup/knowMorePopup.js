@@ -526,6 +526,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 			onClose={onClose}
 			content={content}
 			position={"bottom"}
+			outside={true}
 		/>
 	);
 };

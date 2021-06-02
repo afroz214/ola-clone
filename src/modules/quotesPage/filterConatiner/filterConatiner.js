@@ -29,7 +29,7 @@ export const FilterContainer = (quotesPage) => {
 	const [dateEditor, setDateEditor] = useState(false);
 	const [regisDate, setRegisDate] = useState("01-Apr-2018");
 	const [prevNcb, setPrevNcb] = useState("10%");
-	console.log(regDate, dateEditor);
+
 	useEffect(() => {
 		if (regDate) {
 			setRegisDate(regDate);
@@ -70,6 +70,7 @@ export const FilterContainer = (quotesPage) => {
 									</FilterMenuOpenSub>
 								</FilterMenuOpenWrap>
 							</Col>
+
 							<Col lg={3} md={12}>
 								<FilterMenuOpenWrap>
 									<FilterMenuOpenSub onClick={() => setPolicyPopup(true)}>
@@ -90,63 +91,65 @@ export const FilterContainer = (quotesPage) => {
 							</Col>
 
 							<Col lg={3} md={12}>
-								<FilterMenuTopBoxWrap>
-									<div>
+								<FilterMenuOpenWrap>
+									<FilterMenuOpenSub>
 										Policy Expiry:{" "}
-										<span>
-											<b>30-Apr-2021</b>
-										</span>
-									</div>
-									<div style={{ maxHeight: "20px" }}>
-										Registered on:{" "}
-										<span>
-											<b>{regisDate}</b>
-											<img src={editImg} onClick={() => setDateEditor(true)} />
-										</span>
-										{dateEditor && (
-											<div
-												className="py-2 dateTimeOne"
-												style={{ position: "relative", bottom: "33px" }}
-											>
-												<Controller
-													control={control}
-													name="regDate"
-													render={({ onChange, onBlur, value, name }) => (
-														<DateInput
-															minDate={false}
-															value={value}
-															name={name}
-															onChange={onChange}
-															ref={register}
-														/>
-													)}
+										<FilterMenuOpenSubBold>30-Apr-2021</FilterMenuOpenSubBold>
+									</FilterMenuOpenSub>
+									<FilterMenuOpenEdit>
+										<FilterMenuOpenTitle>
+											Registered on:{" "}
+											<FilterMenuOpenSubBold>
+												<b>{regisDate}</b>
+												<img
+													src={editImg}
+													onClick={() => setDateEditor(true)}
 												/>
-												{!!errors.regDate && (
-													<ErrorMsg fontSize={"12px"}>
-														{errors.regDate.message}
-													</ErrorMsg>
+												{dateEditor && (
+													<div
+														className="py-2 dateTimeOne"
+														style={{ position: "relative", bottom: "33px" }}
+													>
+														<Controller
+															control={control}
+															name="regDate"
+															render={({ onChange, onBlur, value, name }) => (
+																<DateInput
+																	minDate={false}
+																	value={value}
+																	name={name}
+																	onChange={onChange}
+																	ref={register}
+																/>
+															)}
+														/>
+														{!!errors.regDate && (
+															<ErrorMsg fontSize={"12px"}>
+																{errors.regDate.message}
+															</ErrorMsg>
+														)}
+													</div>
 												)}
-											</div>
-										)}
-									</div>
-								</FilterMenuTopBoxWrap>
+											</FilterMenuOpenSubBold>
+										</FilterMenuOpenTitle>
+									</FilterMenuOpenEdit>
+								</FilterMenuOpenWrap>
 							</Col>
+
 							<Col lg={3} md={12}>
-								<FilterMenuTopBoxWrap onClick={() => setNcbPopup(true)}>
-									<div>
-										New NCB:{" "}
-										<span>
-											<b>10%</b>
-										</span>
-									</div>
-									<div>
-										Previous NCB:{" "}
-										<span>
-											<b>{prevNcb}</b>
-											<img src={editImg} onClick={() => setNcbPopup(true)} />
-										</span>
-									</div>
-								</FilterMenuTopBoxWrap>
+								<FilterMenuOpenWrap>
+									<FilterMenuOpenSub onClick={() => setPolicyPopup(true)}>
+										New NCB: <FilterMenuOpenSubBold>10%</FilterMenuOpenSubBold>
+									</FilterMenuOpenSub>
+									<FilterMenuOpenEdit>
+										<FilterMenuOpenTitle onClick={() => setNcbPopup(true)}>
+											Previous NCB:
+											<FilterMenuOpenSubBold>
+												<b>{prevNcb}</b> <img src={editImg} />
+											</FilterMenuOpenSubBold>
+										</FilterMenuOpenTitle>
+									</FilterMenuOpenEdit>
+								</FilterMenuOpenWrap>
 							</Col>
 						</Row>
 					</FilterMenuRow>
@@ -235,9 +238,6 @@ const FilterMenuRow = styled.div`
 `;
 
 const FilterMenuOpenWrap = styled.div`
-	&:first-child {
-		border-right: 1px solid #e3e4e8;
-	}
 	&:nth-child(2) {
 		width: 291px;
 		padding-left: 26px;
@@ -247,7 +247,7 @@ const FilterMenuOpenWrap = styled.div`
 
 	position: relative;
 	padding-bottom: 10px;
-	margin-left: -8px;
+	margin-top: 8px;
 	@media (max-width: 996px) {
 		display: flex !important;
 		min-height: 50px;
@@ -265,7 +265,7 @@ const FilterMenuOpenEdit = styled.div`
 	font-size: 12px;
 	line-height: 15px;
 	color: #000;
-	padding: 2px 6px;
+	padding: 2px 0px;
 	cursor: pointer;
 `;
 
@@ -278,7 +278,6 @@ const FilterMenuOpenTitle = styled.div`
 	padding-right: 7px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
 `;
 
 const FilterMenuOpenSub = styled.div`
