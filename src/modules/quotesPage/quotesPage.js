@@ -92,6 +92,7 @@ export const QuotesPage = () => {
 const MainContainer = styled.div`
 	width: 100%;
 	background: #fff;
+	overflow: hidden;
 `;
 const CardContainer = styled.div`
 	width: 100%;

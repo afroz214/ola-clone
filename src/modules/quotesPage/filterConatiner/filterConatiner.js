@@ -244,7 +244,6 @@ const FilterMenuOpenWrap = styled.div`
 		margin-right: 16px;
 	}
 	float: left;
-
 	position: relative;
 	padding-bottom: 10px;
 	margin-top: 8px;
@@ -254,6 +253,7 @@ const FilterMenuOpenWrap = styled.div`
 		width: 100%;
 		align-items: center;
 		justify-content: center;
+		flex-wrap: wrap !important;
 	}
 `;
 //
@@ -278,6 +278,9 @@ const FilterMenuOpenTitle = styled.div`
 	padding-right: 7px;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	@media (max-width: 996px) {
+		margin-bottom: 15px;
+	}
 `;
 
 const FilterMenuOpenSub = styled.div`
@@ -288,6 +291,9 @@ const FilterMenuOpenSub = styled.div`
 	font-size: 14px;
 	line-height: 17px;
 	color: #707070;
+	@media (max-width: 996px) {
+		margin-bottom: 15px;
+	}
 `;
 
 const FilterMenuOpenSubBold = styled.span`
