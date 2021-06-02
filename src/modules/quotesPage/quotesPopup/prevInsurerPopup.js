@@ -258,7 +258,7 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 			show={show}
 			onClose={onClose}
 			content={step === 1 ? Page1 : step === 2 ? Page2 : Page3}
-			position="middle"
+			position="bottom"
 			backGround="grey"
 		/>
 	);

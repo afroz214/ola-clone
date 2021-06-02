@@ -36,10 +36,10 @@ export const ReviewPage = () => {
 				</BackButton>
 			</div>
 			<RowTag className="row-dimension-design">
-				<DivTag1 className="col-12 col-lg-3 col-xs-12 col-sm-12 col-md-4">
+				<DivTag1 className="col-12 col-lg-3 col-xs-12 col-sm-12 col-md-12">
 					<InfoCard />
 				</DivTag1>
-				<DivTag2 className="col-12 col-lg-9 col-sm-12 col-xs-12 col-md-8">
+				<DivTag2 className="col-12 col-lg-9 col-sm-12 col-xs-12 col-md-12">
 					<ReviewCardHeader>Review Your Details</ReviewCardHeader>
 
 					<ReviewCard />
