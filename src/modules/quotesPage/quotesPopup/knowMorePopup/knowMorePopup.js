@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Row, Col, Table, Form } from "react-bootstrap";
-import demoLogo from "../../../assets/img/brand-digit.png";
-import Popup from "../../../components/Popup/Popup";
+import demoLogo from "../../../../assets/img/brand-digit.png";
+import Popup from "../../../../components/Popup/Popup";
 import InfoCardKnowMore from "./knowMoreInfo";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -12,8 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
 import "./knowMorePopup.css";
-const KnowMorePopup = ({ show, onClose }) => {
-	const [key, setKey] = useState("premiumBreakupPop");
+const KnowMorePopup = ({ show, onClose, selectedKnow }) => {
+	const [key, setKey] = useState(selectedKnow);
 	const { handleSubmit, register, errors, control, reset, watch, setValue } =
 		useForm({});
 	const DummyState = [

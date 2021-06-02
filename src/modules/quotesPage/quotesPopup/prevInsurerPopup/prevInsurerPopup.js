@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 
 import { useForm, Controller } from "react-hook-form";
-import backButton from "../../../assets/img/back-button.png";
+import backButton from "../../../../assets/img/back-button.png";
 import { Tile, ErrorMsg } from "components";
-import Popup from "../../../components/Popup/Popup";
+import Popup from "../../../../components/Popup/Popup";
 import "./preInsurerPopup.css";
-import DateInput from "../../proposal/DateInput";
+import DateInput from "../../../proposal/DateInput";
 const PrevInsurerPopup = ({ show, onClose }) => {
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		// resolver: yupResolver(yupValidate),

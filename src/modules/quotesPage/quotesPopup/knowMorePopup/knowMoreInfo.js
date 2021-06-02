@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CompactCard } from "components";
 import { Row } from "react-bootstrap";
-import demoLogo from "../../../assets/img/brand-digit.png";
+import demoLogo from "../../../../assets/img/brand-digit.png";
 import styled from "styled-components";
 
 export const InfoCardKnowMore = ({}) => {

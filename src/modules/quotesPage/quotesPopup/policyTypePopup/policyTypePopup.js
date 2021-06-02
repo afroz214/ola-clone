@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 
-import Popup from "../../../components/Popup/Popup";
+import Popup from "../../../../components/Popup/Popup";
 import { Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 

@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useForm, Controller } from "react-hook-form";
 import editImg from "../../../assets/img/edit.png";
-import PolicyTypePopup from "../quotesPopup/policyTypePopup";
-import IDVPopup from "../quotesPopup/IDVPopup";
-import NCBPopup from "../quotesPopup/NCBPopup";
+import PolicyTypePopup from "../quotesPopup/policyTypePopup/policyTypePopup";
+import IDVPopup from "../quotesPopup/idvPopup/IDVPopup";
+import NCBPopup from "../quotesPopup/ncbPopup/NCBPopup";
 import { useHistory } from "react-router-dom";
 import { ErrorMsg } from "components";
-import PrevInsurerPopup from "../quotesPopup/prevInsurerPopup";
+import PrevInsurerPopup from "../quotesPopup/prevInsurerPopup/prevInsurerPopup";
 import DateInput from "../../proposal/DateInput";
 import { Row, Col } from "react-bootstrap";
 import swal from "sweetalert";
@@ -138,7 +138,7 @@ export const FilterContainer = (quotesPage) => {
 
 							<Col lg={3} md={12}>
 								<FilterMenuOpenWrap>
-									<FilterMenuOpenSub onClick={() => setPolicyPopup(true)}>
+									<FilterMenuOpenSub>
 										New NCB: <FilterMenuOpenSubBold>10%</FilterMenuOpenSubBold>
 									</FilterMenuOpenSub>
 									<FilterMenuOpenEdit>
@@ -301,34 +301,6 @@ const FilterMenuOpenSubBold = styled.span`
 	font-weight: 600;
 `;
 
-const FilterMenuTopBoxWrap = styled.div`
-	margin-left: -11px;
-	margin-right: 0px;
-	border-radius: 12px 0 0px 12px;
-	float: left;
-	position: relative;
-	border-radius: 0 12px 12px 0;
-	padding: 5px 16px 7px;
-	margin-right: 4px;
-	position: relative;
-	bottom: 5px;
-	@media (max-width: 996px) {
-		display: flex !important;
-		min-height: 70px;
-		width: 100%;
-		align-items: center;
-		justify-content: center;
-	}
-`;
-
-const FilterTopBoxRs = styled.span`
-	margin-top: -11px;
-	float: left;
-	font-size: 14px;
-	line-height: 23px;
-	margin-right: 4px;
-`;
-
 const FilterMenuQuoteBoxWrap = styled.button`
 	width: 100%;
 	margin-top: 1px;
@@ -367,49 +339,4 @@ const FilterTopBoxTitle = styled.div`
 	margin-bottom: 6px;
 	padding-top: 6px;
 	float: initial;
-`;
-
-const FilterSubMenuCont = styled.div`
-	margin-bottom: 22px;
-	width: 100%;
-`;
-
-const FilterSubMenuWrap = styled.div`
-	width: 1240px;
-	margin: 10px auto;
-	position: relative;
-`;
-
-const InclusiveGstWrap = styled.div`
-	position: relative;
-	float: right;
-	margin-top: 5px;
-	text-align: right;
-	margin-bottom: 7px;
-`;
-
-const PremiumFilterWrap = styled.div`
-	width: 218px;
-	margin-bottom: 8px;
-	position: relative;
-	font-family: "Inter-Regular";
-	font-size: 12px;
-	line-height: 15px;
-	border: solid 1px #e3e4e8;
-	color: #808080;
-	margin-top: -6px;
-	margin-left: 610px;
-	padding: 17px 12px;
-	background-color: #ffffff;
-
-	border-radius: 8px;
-`;
-
-const PremiumFilterlabel = styled.div`
-	margin-bottom: 8px;
-	font-family: "Inter-Regular" !important;
-	font-size: 13px !important;
-	line-height: 15px !important;
-	color: #000000 !important;
-	text-align: left;
 `;

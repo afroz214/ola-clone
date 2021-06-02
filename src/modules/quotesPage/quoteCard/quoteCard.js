@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import demoLogo from "../../../assets/img/logo02.png";
-
+import KnowMorePopup from "../quotesPopup/knowMorePopup/knowMorePopup";
 import { useHistory } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 export const QuoteCard = ({ setKnow }) => {
 	const history = useHistory();
-
+	const [knowMore, setKnowMore] = useState(false);
+	const [selectedKnowMore, setSelectedKnowMore] = useState(false);
 	return (
 		<>
 			<Col lg={4} md={12} sm={12} style={{ marginTop: "30px" }}>
@@ -53,20 +54,35 @@ export const QuoteCard = ({ setKnow }) => {
 							</Col>
 						</Row>
 					</CardOtherItemNoBorder>
-					<Row
-						mb-10
-						style={{ marginBottom: "10px" }}
-						onClick={() => setKnow(true)}
-					>
-						<Col lg={6}>
+					<Row mb-10 style={{ marginBottom: "10px" }}>
+						<Col
+							lg={6}
+							onClick={() => {
+								setKnowMore(true);
+								setSelectedKnowMore("cashlessGaragesPop");
+							}}
+						>
 							<CardOtherItemBtn>Cashless Garages</CardOtherItemBtn>
 						</Col>
-						<Col lg={6}>
+						<Col
+							lg={6}
+							onClick={() => {
+								setKnowMore(true);
+								setSelectedKnowMore("premiumBreakupPop");
+							}}
+						>
 							<CardOtherItemBtn>Premium Breakup</CardOtherItemBtn>
 						</Col>
 					</Row>
 				</QuoteCardMain>
 			</Col>
+			{knowMore && (
+				<KnowMorePopup
+					show={knowMore}
+					onClose={setKnowMore}
+					selectedKnow={selectedKnowMore}
+				/>
+			)}
 		</>
 	);
 };
