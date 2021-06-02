@@ -3,10 +3,10 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import tooltip from "../../../assets/img/tooltip.svg";
-import CustomTooltip from "../../../components/tooltip/CustomTooltip";
-import Popup from "../../../components/Popup/Popup";
-import "./idvPopup.css";
+import tooltip from "../../../../assets/img/tooltip.svg";
+import CustomTooltip from "../../../../components/tooltip/CustomTooltip";
+import Popup from "../../../../components/Popup/Popup";
+import "../../quotesPopup/idvPopup/idvPopup.css";
 
 const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
