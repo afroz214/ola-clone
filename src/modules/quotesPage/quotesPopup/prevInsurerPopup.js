@@ -261,6 +261,7 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 			position="bottom"
 			backGround="grey"
 			outside={true}
+			overFlowDisable={true}
 		/>
 	);
 };
