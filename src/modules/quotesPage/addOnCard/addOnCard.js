@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import {
@@ -10,10 +10,12 @@ import {
 } from "components";
 import tooltip from "../../../assets/img/tooltip.svg";
 import CustomTooltip from "../../../components/tooltip/CustomTooltip";
-
+import { useDispatch, useSelector } from "react-redux";
 import Checkbox from "../../../components/inputs/checkbox/checkbox";
 import { Row, Col, Form } from "react-bootstrap";
+import { clear, AddOnList as getAddons } from "../quote.slice";
 export const AddOnsCard = () => {
+	const dispatch = useDispatch();
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		// resolver: yupResolver(),
 		// mode: "all",
@@ -21,6 +23,15 @@ export const AddOnsCard = () => {
 	});
 
 	// demo data
+
+	useEffect(() => {
+		const data = {
+			corpId: 65454,
+			productSubTypeId: 564456,
+		};
+		dispatch(getAddons(data));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const Addons = [
 		"Zero Depreciation",

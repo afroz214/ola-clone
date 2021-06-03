@@ -11,7 +11,10 @@ import PrevInsurerPopup from "../quotesPopup/prevInsurerPopup/prevInsurerPopup";
 import DateInput from "../../proposal/DateInput";
 import { Row, Col } from "react-bootstrap";
 import swal from "sweetalert";
+import { useDispatch, useSelector } from "react-redux";
+import { clear, NcbList as getNcb } from "./quoteFilter.slice";
 export const FilterContainer = (quotesPage) => {
+	const dispatch = useDispatch();
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		// resolver: yupResolver(yupValidate),
 		// mode: "all",
@@ -19,10 +22,8 @@ export const FilterContainer = (quotesPage) => {
 	});
 
 	const regDate = watch("regDate");
-
 	const history = useHistory();
 	const [policyPopup, setPolicyPopup] = useState(true);
-
 	const [prevPopup, setPrevPopup] = useState(false);
 	const [ncbPopup, setNcbPopup] = useState(false);
 	const [policyType, setPolicyType] = useState("Comprehensive");
@@ -38,6 +39,12 @@ export const FilterContainer = (quotesPage) => {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [regDate]);
+
+	useEffect(() => {
+		dispatch(getNcb());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	return (
 		<>
 			<FilterContainerMain>

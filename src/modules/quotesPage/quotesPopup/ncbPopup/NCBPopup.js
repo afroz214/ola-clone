@@ -3,6 +3,7 @@ import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
 import tooltip from "../../../../assets/img/tooltip.svg";
 import CustomTooltip from "../../../../components/tooltip/CustomTooltip";
 import Popup from "../../../../components/Popup/Popup";
@@ -14,7 +15,8 @@ const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 		// mode: "all",
 		// reValidateMode: "onBlur",
 	});
-
+	const { ncbList } = useSelector((state) => state.quoteFilter);
+	console.log(ncbList);
 	const expPloicy = watch("claimMade");
 	const ncbValue = watch("existinNcb");
 	console.log(expPloicy, ncbValue);
@@ -96,54 +98,18 @@ const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 								class="vehRadioWrap ncsPercentCheck"
 								style={{ display: "block" }}
 							>
-								<input
-									type="radio"
-									id="existinNcb0"
-									name="existinNcb"
-									value="0%"
-									ref={register}
-								/>
-								<label for="existinNcb0">0%</label>
-								<input
-									type="radio"
-									id="existinNcb20"
-									name="existinNcb"
-									value="20%"
-									ref={register}
-								/>
-								<label for="existinNcb20">20%</label>
-								<input
-									type="radio"
-									id="existinNcb25"
-									name="existinNcb"
-									value="25%"
-									ref={register}
-								/>
-								<label for="existinNcb25">25%</label>
-								<input
-									type="radio"
-									id="existinNcb35"
-									name="existinNcb"
-									value="35%"
-									ref={register}
-								/>
-								<label for="existinNcb35">35%</label>
-								<input
-									type="radio"
-									id="existinNcb45"
-									name="existinNcb"
-									value="45%"
-									ref={register}
-								/>
-								<label for="existinNcb45">45%</label>
-								<input
-									type="radio"
-									id="existinNcb50"
-									name="existinNcb"
-									value="50%"
-									ref={register}
-								/>
-								<label for="existinNcb50">50%</label>
+								{ncbList.map((item, index) => (
+									<>
+										<input
+											type="radio"
+											id={item?.ncbId}
+											name="existinNcb"
+											value={`${item?.discountRate}%`}
+											ref={register}
+										/>
+										<label for={item?.ncbId}>{item?.discountRate}%</label>
+									</>
+								))}
 							</div>
 
 							<EligText>
