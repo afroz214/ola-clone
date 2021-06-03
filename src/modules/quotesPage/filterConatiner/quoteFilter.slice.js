@@ -9,6 +9,7 @@ export const quoteFilterSlice = createSlice({
 		error: null,
 		success: null,
 		ncbList: [],
+		tempData: {},
 	},
 	reducers: {
 		loading: (state) => {
@@ -34,10 +35,14 @@ export const quoteFilterSlice = createSlice({
 		ncbList: (state, { payload }) => {
 			state.ncbList = payload;
 		},
+
+		setTempData: (state, { payload }) => {
+			state.tempData = { ...state.tempData, ...payload };
+		},
 	},
 });
 
-export const { loading, success, error, clear, ncbList } =
+export const { loading, success, error, clear, ncbList, setTempData } =
 	quoteFilterSlice.actions;
 
 export const NcbList = (data) => {

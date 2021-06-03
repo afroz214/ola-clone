@@ -63,7 +63,6 @@ export const AddOnsCard = () => {
 	const volDiscount = ["None", "₹2500", "₹5000", "₹7500", "₹10000"];
 
 	const other = watch("tools");
-	console.log(other);
 
 	return (
 		<CardOtherItem>

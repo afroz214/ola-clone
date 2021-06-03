@@ -8,20 +8,30 @@ import tooltip from "../../../../assets/img/tooltip.svg";
 import CustomTooltip from "../../../../components/tooltip/CustomTooltip";
 import Popup from "../../../../components/Popup/Popup";
 import "../../quotesPopup/idvPopup/idvPopup.css";
-
+import { setTempData } from "../../filterConatiner/quoteFilter.slice";
+import _ from "lodash";
 const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
+	const dispatch = useDispatch();
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		// resolver: yupResolver(),
 		// mode: "all",
 		// reValidateMode: "onBlur",
 	});
-	const { ncbList } = useSelector((state) => state.quoteFilter);
-	console.log(ncbList);
-	const expPloicy = watch("claimMade");
+	const { ncbList, tempData } = useSelector((state) => state.quoteFilter);
+	const [noClaim, setNoClaim] = useState(false);
+	const expPolicy = watch("claimMade");
 	const ncbValue = watch("existinNcb");
-	console.log(expPloicy, ncbValue);
+
+	const myOrderedNcbList = _.sortBy(ncbList, (o) => o.discountRate);
+
 	const onSubmit = (data) => {
-		if (expPloicy === "yes") {
+		dispatch(
+			setTempData({
+				expPolicy: expPolicy,
+				ncbValue: expPolicy === "yes" ? "0%" : ncbValue,
+			})
+		);
+		if (expPolicy === "yes") {
 			setNcb("0%");
 		} else {
 			if (ncbValue) {
@@ -31,6 +41,15 @@ const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 		onClose(false);
 	};
 
+	useEffect(() => {
+		if (expPolicy === "no" || tempData?.expPolicy === "no") {
+			setNoClaim(true);
+		} else {
+			setNoClaim(false);
+		}
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [expPolicy, tempData?.expPolicy]);
 	const content = (
 		<>
 			<Conatiner>
@@ -74,6 +93,7 @@ const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 							name="claimMade"
 							value="yes"
 							ref={register}
+							defaultChecked={tempData?.expPolicy === "yes"}
 						/>
 						<label for="claimMadeYes">Yes</label>
 						<input
@@ -82,11 +102,12 @@ const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 							name="claimMade"
 							value="no"
 							ref={register}
+							defaultChecked={tempData?.expPolicy === "no"}
 						/>
 						<label for="ownerNo">No</label>
 					</div>
 
-					{expPloicy === "no" ? (
+					{noClaim ? (
 						<>
 							<div
 								class="popupSubHead ncsSubHeadNo"
@@ -98,7 +119,7 @@ const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 								class="vehRadioWrap ncsPercentCheck"
 								style={{ display: "block" }}
 							>
-								{ncbList.map((item, index) => (
+								{myOrderedNcbList.map((item, index) => (
 									<>
 										<input
 											type="radio"
@@ -106,6 +127,9 @@ const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 											name="existinNcb"
 											value={`${item?.discountRate}%`}
 											ref={register}
+											defaultChecked={
+												tempData?.ncbValue === `${item?.discountRate}%`
+											}
 										/>
 										<label for={item?.ncbId}>{item?.discountRate}%</label>
 									</>
