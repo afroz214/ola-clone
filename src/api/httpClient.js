@@ -43,23 +43,24 @@ const httpClient = async (url = '', options = defaultOptions, noBaseUrl) => {
         method: options.method || 'GET',
         data: options.data
     })
-        .then(response => (
+        .then(response => {
+            return (
             {
                 data: response?.data || {},
-                errors: response?.data.errors,
-                error: response?.data.error,
-                message: response?.message,
-                // message: response?.data.message,
+                errors: response?.data.errors || response?.data.message,
+                error: response?.data.error || response?.data.message,
+                // message: response?.data?.msg,
+                message: response?.data.message || response?.data?.msg,
                 success: (response?.status === 200
                     || response?.status === 201)
                     && response?.data?.status
             }
-        ))
+        )})
         .catch(err => ({
             data: err,
             success: false,
             // message: err?.response?.data?.message,
-            message: err?.response?.message
+            message: err?.response?.msg || err?.response?.data?.message || err?.response?.data?.m 
         })
         );
 };

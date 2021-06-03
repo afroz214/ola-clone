@@ -20,7 +20,7 @@ const yupValidate = yup.object({
 export const Registration = () => {
 	/*---------------- back button---------------------*/
 	const back = () => {
-		history.push("/lead-page");
+		history.push("/journey-type");
 	};
 	/*----------x----- back button-------x-------------*/
 	const history = useHistory();

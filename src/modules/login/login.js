@@ -1,36 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { CompactCard, Error, Button } from "components";
 import { Row, Col, Form } from "react-bootstrap";
-import { FormGroup, FormTextInput, FormTextIcon, FormLabel } from "./style";
+import { FormTextInput, FormTextIcon } from "./style";
 import { useForm, Controller } from "react-hook-form";
-import styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
+import { useDispatch, useSelector } from "react-redux";
+import { clear, Login as LoginAction } from "./login.slice";
+import swal from "sweetalert";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { useHistory } from 'react-router';
 
-const TitleLabel = styled.label`
-	font-size: 15px;
-	font-weight: bold;
-`;
-const OutputLabel = styled.label`
-	font-size: 18px;
-	font-weight: bold;
-	color: #51516f;
-`;
-
-const RowTag = styled(Row)`
-	background-repeat: no-repeat;
-	background-position: top right;
-	background-size: 100% 100%;
-	background-image: url("/assets/images/landing-page/bg-2.png");
-`;
+/*----------------Validation Schema---------------------*/
+const yupValidate = yup.object({
+	userName: yup.string().required("Username is required"),
+	password: yup.string().required("Password is required"),
+});
+/*----------x------Validation Schema----------x-----------*/
 
 export const Login = () => {
+	const dispatch = useDispatch();
+	const history = useHistory();
+
+	const { login, error } = useSelector((state) => state.login);
+	const { errors, control, handleSubmit } = useForm({
+		resolver: yupResolver(yupValidate),
+		mode: "onBlur",
+		reValidateMode: "onBlur",
+	});
+
 	const [passwordShown, setPasswordShown] = useState(false);
 	const togglePasswordVisibility = () => {
 		setPasswordShown((prev) => !prev);
 	};
-	const { errors, control, handleSubmit } = useForm();
+
+	//onSuccess & onError
+	useEffect(() => {
+		if (login) {
+			history.replace('/lead-page')
+		}
+		if (error) {
+			swal(error, "", "error");
+		}
+		return () => {
+			dispatch(clear());
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [login, error]);
 
 	const onSubmit = (data) => {
-		console.log(data);
+		dispatch(LoginAction(data));
 	};
 
 	return (
@@ -67,17 +86,17 @@ export const Login = () => {
 									<Controller
 										as={
 											<FormTextInput
-												name="field"
+												name="userName"
 												type="input"
 												placeholder="Your Email Id/Mobile No."
-												error={errors && errors.field}
+												error={errors && errors.userName}
 											/>
 										}
-										name="field"
+										name="userName"
 										control={control}
 									/>
-									{!!errors?.field && (
-										<Error style={{ marginTop: "5px" }}>{errors?.field.message}</Error>
+									{!!errors?.userName && (
+										<Error style={{ marginTop: "5px" }}>{errors?.userName.message}</Error>
 									)}
 								</OutputLabel>
 							</Row>
@@ -133,3 +152,20 @@ export const Login = () => {
 		</Form>
 	);
 };
+
+const TitleLabel = styled.label`
+	font-size: 15px;
+	font-weight: bold;
+`;
+const OutputLabel = styled.label`
+	font-size: 18px;
+	font-weight: bold;
+	color: #51516f;
+`;
+
+const RowTag = styled(Row)`
+	background-repeat: no-repeat;
+	background-position: top right;
+	background-size: 100% 100%;
+	background-image: url("/assets/images/landing-page/bg-2.png");
+`;

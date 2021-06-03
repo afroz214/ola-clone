@@ -47,18 +47,20 @@ export const LeadPage = () => {
 
 	const onSubmit = (data) => {
 		console.log(data);
-        history.push('/registration');
+        history.push('/journey-type');
 	};
 
 	return (
-		<div className="ml-4 my-4 w-100">
-			<Row className="text-center w-100">
-				<div className="mt-4 d-flex flex-column justify-content-center w-100">
-					<h4 className="text-center w-100">Please Enter Your Details.</h4>
-				</div>
-			</Row>
+		<div className="ml-4 my-4 w-100 mx-auto">
+			<Row className="text-center w-100 mx-auto d-flex justify-content-center">
+					<div className="mt-4 d-flex justify-content-center w-100 mx-auto">
+						<h4 className="text-center w-100 mx-auto d-flex justify-content-center">
+							Please Enter Your Details
+						</h4>
+					</div>
+				</Row>
 			<Form onSubmit={handleSubmit(onSubmit)}>
-				<Row className="w-100 d-flex no-wrap mt-5">
+				<Row className="w-100 d-flex no-wrap mt-5 mx-auto">
 					<Col sm="12" md="6" lg="6" xl="6">
 						<div className="w-100">
 							<Textbox
