@@ -53,12 +53,12 @@ export const JourneyType = () => {
 					<text style={{ color: "black" }}>Back</text>
 				</BackButton>
 			</div>
-			<div className="my-4 h-100 d-flex flex-column align-content-center mx-auto">
-				<Row className="text-center w-100 d-flex justify-content-center mx-auto">
-					<div className="mt-4 d-flex justify-content-center w-100 mx-auto">
-						<h3 className="text-center w-100  d-flex justify-content-center mx-auto mb-2">
+			<div className="my-4 mx-auto">
+				<Row className="text-center w-100 mx-auto">
+					<div className="mt-0 d-flex flex-column justify-content-center w-100">
+						<h4 className="text-center w-100">
 							Choose the Journey Type
-						</h3>
+						</h4>
 					</div>
 				</Row>
 				<Row className="d-flex justify-content-center w-100 mt-5 mx-auto">
