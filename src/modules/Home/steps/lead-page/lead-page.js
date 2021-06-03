@@ -47,7 +47,7 @@ export const LeadPage = () => {
 
 	const onSubmit = (data) => {
 		console.log(data);
-        history.push('/registration');
+        history.push('/journey-type');
 	};
 
 	return (

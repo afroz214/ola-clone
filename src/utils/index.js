@@ -58,6 +58,7 @@ ${payload[property][0]}`;
 // common action creatre(single get & post)
 export const actionStructre = async (dispatch, onSuccess, onError, api, payload) => {
   const { data, message, errors, success } = await api(payload);
+  console.log(data, message, errors, success)
   if (data.data || success) {
     dispatch(onSuccess(data.data || message));
   }
