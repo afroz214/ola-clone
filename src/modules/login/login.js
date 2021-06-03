@@ -127,7 +127,7 @@ export const Login = () => {
 										)}
 									</FormTextIcon>
 									{!!errors?.password && (
-										<Error style={{}}>{errors?.password.message}</Error>
+										<Error style={{ marginTop: "5px" }}>{errors?.password.message}</Error>
 									)}
 								</OutputLabel>
 							</Row>
