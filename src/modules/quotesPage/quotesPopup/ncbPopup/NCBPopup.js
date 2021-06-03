@@ -47,6 +47,9 @@ const NCBPopup = ({ show, onClose, ncb, setNcb }) => {
 		} else {
 			setNoClaim(false);
 		}
+		if (expPolicy === "yes") {
+			setNoClaim(false);
+		}
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [expPolicy, tempData?.expPolicy]);
