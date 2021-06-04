@@ -12,7 +12,7 @@ export const CarDetails = () => {
 		history.push("/vehicle-type");
 	};
 	/*----------x----- back button-------x-------------*/
-	const [Step, setStep] = useState(5);
+	const [Step, setStep] = useState(1);
 	const history = useHistory();
 
 	//center auto scroll
