@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
 import { Tile, Button as Btn, TextInput, Label, Error } from "components";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 const Fuel = [
 	{
@@ -54,7 +54,7 @@ export const FuelType = ({ stepFn }) => {
 
 	useEffect(() => {
 		if (errors?.fuel?.message) {
-			swal(errors?.fuel?.message, "", 'error');
+			swal(errors?.fuel?.message, "", "error");
 		}
 	}, [errors]);
 
@@ -64,8 +64,8 @@ export const FuelType = ({ stepFn }) => {
 		<>
 			{
 				<>
-					<Form onSubmit={handleSubmit(onSubmit)}>
-						<Row className="mx-auto d-flex justify-content-center">
+					<Form onSubmit={handleSubmit(onSubmit)} className="w-100 mx-auto">
+						<Row className="mx-auto d-flex justify-content-center w-100 mx-auto">
 							{Fuel.map((item, index) => (
 								<Col
 									xs="6"
@@ -73,7 +73,7 @@ export const FuelType = ({ stepFn }) => {
 									md="4"
 									lg="3"
 									xl="3"
-									className="d-flex justify-content-center"
+									className="d-flex justify-content-center w-100 mx-auto"
 								>
 									<Tile
 										logo={item?.logo}
@@ -87,36 +87,44 @@ export const FuelType = ({ stepFn }) => {
 										imgMargin={"10px"}
 										setValue={setValue}
 										Selected={fuel}
-										Imgheight={'70px'}
+										Imgheight={"70px"}
 									/>
 								</Col>
 							))}
-							<Col sm="12" md="12" lg="12" xl="12" className="mt-4">
-								<TextInput
-									lg
-									type="text"
-									id="kit_val"
-									name="kit_val"
-									placeholder=" "
-									ref={register}
-									onChange={handleChange}
-									error={errors?.kit_val}
-								/>
-								<Label lg htmlFor="kit_val">
-									Enter kit value
-								</Label>
-								{!!errors?.kit_val && (
-									<Error className="mt-1">{errors?.kit_val?.message}</Error>
-								)}
-							</Col>
+							{Number(watch("fuel")) === 3 && (
+								<Col
+									sm="12"
+									md="12"
+									lg="12"
+									xl="12"
+									className="mt-4  d-flex flex-column align-content-center w-100 mx-auto"
+								>
+									<TextInput
+										lg
+										type="text"
+										id="kit_val"
+										name="kit_val"
+										placeholder=" "
+										ref={register}
+										onChange={handleChange}
+										error={errors?.kit_val}
+									/>
+									<Label lg htmlFor="kit_val">
+										Enter kit value
+									</Label>
+									{!!errors?.kit_val && (
+										<Error className="mt-1">{errors?.kit_val?.message}</Error>
+									)}
+								</Col>
+							)}
 						</Row>
-						<Row>
+						<Row className="d-flex justify-content-center w-100 mx-auto">
 							<Col
 								sm="12"
 								md="12"
 								lg="12"
 								xl="12"
-								className="d-flex justify-content-center mt-5"
+								className="d-flex justify-content-center mt-5 w-100 mx-auto"
 							>
 								<Btn
 									buttonStyle="outline-solid"
@@ -124,6 +132,7 @@ export const FuelType = ({ stepFn }) => {
 									hex2="#228B22"
 									borderRadius="5px"
 									type="submit"
+									className='mr-2'
 								>
 									Proceed
 								</Btn>
