@@ -8,7 +8,11 @@ export const homeSlice = createSlice({
 		loading: false,
 		error: null,
 		success: null,
-        type: [],
+		type: [],
+		vehicleType: [],
+		brandType: [],
+        modelType: [],
+		temp_data: {},
 	},
 	reducers: {
 		loading: (state) => {
@@ -34,15 +38,70 @@ export const homeSlice = createSlice({
 		type: (state, { payload }) => {
 			state.type = payload;
 		},
+		vehicleType: (state, { payload }) => {
+			state.vehicleType = payload;
+		},
+		brandType: (state, { payload }) => {
+			state.brandType = payload;
+		},
+		modelType: (state, { payload }) => {
+			state.modelType = payload;
+		},
+		set_temp_data: (state, { payload }) => {
+			state.temp_data = { ...state.temp_data, ...payload };
+		},
 	},
 });
 
-export const { loading, success, error, clear, type } = homeSlice.actions;
+export const {
+	loading,
+	success,
+	error,
+	clear,
+	type,
+	vehicleType,
+	brandType,
+    modelType,
+	set_temp_data,
+} = homeSlice.actions;
 
 export const Type = (data) => {
 	return async (dispatch) => {
 		try {
 			actionStructre(dispatch, type, error, service.type, data);
+		} catch (err) {
+			dispatch(error("Something went wrong"));
+			console.error("Error", err);
+		}
+	};
+};
+
+export const VehicleType = (data) => {
+	return async (dispatch) => {
+		try {
+			actionStructre(dispatch, vehicleType, error, service.vehicleType, data);
+		} catch (err) {
+			dispatch(error("Something went wrong"));
+			console.error("Error", err);
+		}
+	};
+};
+
+export const BrandType = (data) => {
+	return async (dispatch) => {
+		try {
+			actionStructre(dispatch, brandType, error, service.brandType, data);
+		} catch (err) {
+			dispatch(error("Something went wrong"));
+			console.error("Error", err);
+		}
+	};
+};
+
+export const ModelType = (data) => {
+	return async (dispatch) => {
+		try {
+			actionStructre(dispatch, modelType, error, service.modelType, data);
 		} catch (err) {
 			dispatch(error("Something went wrong"));
 			console.error("Error", err);

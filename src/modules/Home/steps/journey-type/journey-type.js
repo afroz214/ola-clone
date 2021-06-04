@@ -6,7 +6,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { Type } from "modules/Home/home.slice";
+import { Type, set_temp_data } from "modules/Home/home.slice";
+import _ from "lodash";
 
 // validation schema
 const yupValidate = yup.object({
@@ -15,7 +16,7 @@ const yupValidate = yup.object({
 
 export const JourneyType = () => {
 	const dispatch = useDispatch();
-	const { type } = useSelector((state) => state.home);
+	const { type, temp_data } = useSelector((state) => state.home);
 	const history = useHistory();
 	/*---------------- back button---------------------*/
 	const back = () => {
@@ -28,17 +29,18 @@ export const JourneyType = () => {
 		mode: "all",
 		reValidateMode: "onBlur",
 	});
-
-	const selected = watch("ownerTypeId");
-
+	console.log(temp_data)
+	let selected = watch("ownerTypeId") || temp_data?.ownerTypeId;
+	console.log()
 	//type load
 	useEffect(() => {
 		dispatch(Type());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
-	const onSubmit = (data) => {
-		console.log(data);
+	const onSubmit = (ownerTypeId) => {
+		console.log(ownerTypeId)
+		dispatch(set_temp_data({ ownerTypeId: ownerTypeId }));
 		history.push("/registration");
 	};
 
@@ -56,9 +58,7 @@ export const JourneyType = () => {
 			<div className="my-4 mx-auto">
 				<Row className="text-center w-100 mx-auto">
 					<div className="mt-0 d-flex flex-column justify-content-center w-100">
-						<h4 className="text-center w-100">
-							Choose the Journey Type
-						</h4>
+						<h4 className="text-center w-100">Choose the Journey Type</h4>
 					</div>
 				</Row>
 				<Row className="d-flex justify-content-center w-100 mt-5 mx-auto">

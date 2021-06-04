@@ -1,7 +1,20 @@
-import HttpClient from 'api/httpClient';
+import HttpClient from "api/httpClient";
 
-const type = (data) => HttpClient('/getOwnerTypes', { method: "POST", data });
+//journey-type
+const type = (data) => HttpClient("/getOwnerTypes", { method: "POST", data });
+
+//vehicle type
+const vehicleType = (data) => HttpClient("/getVehicleType", { method: "POST", data });
+
+//brand type
+const brandType = (data) => HttpClient("/getManufacturer", { method: "POST", data });
+
+//model type
+const modelType = (data) => HttpClient("/getModelVersion", { method: "POST", data });
 
 export default {
-    type
-}
+	type,
+	vehicleType,
+    brandType,
+    modelType
+};

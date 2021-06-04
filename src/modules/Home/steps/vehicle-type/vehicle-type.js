@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { TextInput, ErrorMsg, Label, BackButton } from "components";
 import { useForm } from "react-hook-form";
@@ -7,8 +7,13 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useHistory } from "react-router";
 import "./style.css";
+import { useDispatch, useSelector } from "react-redux";
+import { VehicleType as Type, set_temp_data } from "modules/Home/home.slice";
 
 export const VehicleType = () => {
+	const dispatch = useDispatch();
+	const { vehicleType, temp_data } = useSelector((state) => state.home);
+	console.log(vehicleType);
 	const history = useHistory();
 	/*---------------- back button---------------------*/
 	const back = () => {
@@ -16,13 +21,29 @@ export const VehicleType = () => {
 	};
 	/*----------x----- back button-------x-------------*/
 
+	//load vehicle data
+	useEffect(() => {
+		dispatch(Type());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
 	const [selected, setSelected] = useState(false);
 	const [carrierType, setCarrierType] = useState(false);
 
+	//prefill data
+	useEffect(() => {
+		if (temp_data?.comVehicleTypeId) {
+			setSelected(temp_data?.comVehicleTypeId);
+		}
+		if (temp_data?.carrierType) {
+			setCarrierType(temp_data?.carrierType);
+		}
+	}, [temp_data]);
+
 	// validation schema
-	const yupValidate = yup.object({
-		reg_no: yup.string().required("Registration No. is required"),
-	});
+	// const yupValidate = yup.object({
+	// 	reg_no: yup.string().required("Registration No. is required"),
+	// });
 
 	const { handleSubmit, register, errors } = useForm({
 		// resolver: yupResolver(yupValidate),
@@ -30,8 +51,18 @@ export const VehicleType = () => {
 		// reValidateMode: "onBlur",
 	});
 
-	const onSubmit = (VehicalType, subType) => {
-		console.log(VehicalType, subType);
+	const onSubmit = (VehicalType, cType) => {
+		let productSubTypeId = vehicleType?.filter(
+			({ comVehicleTypeId }) => Number(comVehicleTypeId) === Number(VehicalType)
+		);
+		dispatch(
+			set_temp_data({
+				productSubTypeId: Number(productSubTypeId[0]?.productSubTypeId),
+				comVehicleTypeId: Number(VehicalType),
+				comVehicleTypeName: productSubTypeId[0]?.comVehicleTypeName,
+				carrierType: Number(cType),
+			})
+		);
 		history.push("/vehicle-details");
 	};
 
@@ -53,54 +84,69 @@ export const VehicleType = () => {
 					</div>
 				</Row>
 				<Row className="d-flex justify-content-center w-100 mt-4">
-					{[...Array(8)].map((item, index) => (
-						<Col
-							xs="6"
-							sm="6"
-							md="4"
-							lg="3"
-							xl="3"
-							className="d-flex justify-content-center my-2"
-						>
-							<div className="m-1 d-flex justify-content-center h-100 w-100">
-								<Button
-									variant={selected === index ? "success" : "outline-success"}
-									className="btn-filter text-center h-100 w-100 d-flex flex-column align-content-between"
-									type="button"
-									onClick={() => (index === 2 ? setSelected(index) : onSubmit(index))}
-								>
-									<div
-										className="w-100 h-100 d-flex flex-column justify-content-center align-content-center mx-auto p-0"
-										// style={{ minWidth: "100px", maxWidth: "100px" }}
+					{vehicleType?.map(
+						(
+							{ comVehicleTypeId, comVehicleTypeName, productSubTypeId, img },
+							index
+						) => (
+							<Col
+								xs="6"
+								sm="6"
+								md="4"
+								lg="3"
+								xl="3"
+								className="d-flex justify-content-center my-2"
+							>
+								<div className="m-1 d-flex justify-content-center h-100 w-100">
+									<Button
+										variant={
+											selected === Number(comVehicleTypeId) ? "success" : "outline-success"
+										}
+										className="btn-filter text-center h-100 w-100 d-flex flex-column align-content-between"
+										type="button"
+										onClick={() =>
+											Number(comVehicleTypeId) === 2
+												? setSelected(Number(comVehicleTypeId))
+												: onSubmit(comVehicleTypeId)
+										}
 									>
 										<div
-											style={{ maxHeight: "40px", minHeight: "40px" }}
-											className="text-center w-100"
+											className="w-100 h-100 d-flex flex-column justify-content-center align-content-center mx-auto p-0"
+											// style={{ minWidth: "100px", maxWidth: "100px" }}
 										>
-											<img
-												src="/assets/images/truck.svg"
-												alt="img"
-												className={selected === index ? "filter-white" : "filter-green"}
-												height="65"
-												width="65"
-											/>
-										</div>
-										<div
-											style={{ maxHeight: "40px", minHeight: "40px" }}
-											className="text-center w-100 h-100 mt-4"
-										>
-											<label
-												style={{ fontSize: "14px", fontWeight:'800' }}
-												className="text-center h-100 w-100 overflow-auto label-text"
+											<div
+												style={{ maxHeight: "40px", minHeight: "40px" }}
+												className="text-center w-100"
 											>
-												{"Truck"}
-											</label>
+												<img
+													src={img}
+													alt="img"
+													className={
+														selected === Number(comVehicleTypeId)
+															? "filter-white"
+															: "filter-green"
+													}
+													height="65"
+													width="65"
+												/>
+											</div>
+											<div
+												style={{ maxHeight: "40px", minHeight: "40px" }}
+												className="text-center w-100 h-100 mt-4"
+											>
+												<label
+													style={{ fontSize: "14px", fontWeight: "800" }}
+													className="text-center h-100 w-100 overflow-auto label-text"
+												>
+													{comVehicleTypeName || "N/A"}
+												</label>
+											</div>
 										</div>
-									</div>
-								</Button>
-							</div>
-						</Col>
-					))}
+									</Button>
+								</div>
+							</Col>
+						)
+					)}
 				</Row>
 				{selected === 2 && (
 					<Row className="d-flex justify-content-center w-100 mt-5">
