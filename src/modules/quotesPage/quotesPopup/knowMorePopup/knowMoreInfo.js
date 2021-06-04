@@ -59,6 +59,9 @@ const FormLeftCont = styled.div`
 	box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.1),
 		0 10px 10px -5px rgba(0, 0, 0, 0.04);
 	border: solid 1px #e3e4e8;
+	@media (max-width: 996px) {
+		width: 100% !important;
+	}
 `;
 
 const FormLeftLogoNameWrap = styled.div`

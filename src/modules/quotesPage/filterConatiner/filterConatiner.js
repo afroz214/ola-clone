@@ -6,7 +6,8 @@ import PolicyTypePopup from "../quotesPopup/policyTypePopup/policyTypePopup";
 import IDVPopup from "../quotesPopup/idvPopup/IDVPopup";
 import NCBPopup from "../quotesPopup/ncbPopup/NCBPopup";
 import { useHistory } from "react-router-dom";
-import { ErrorMsg } from "components";
+
+import { MultiSelect, Error, ErrorMsg } from "components";
 import PrevInsurerPopup from "../quotesPopup/prevInsurerPopup/prevInsurerPopup";
 import DateInput from "../../proposal/DateInput";
 import { Row, Col } from "react-bootstrap";
@@ -16,12 +17,11 @@ import { clear, NcbList as getNcb } from "./quoteFilter.slice";
 export const FilterContainer = (quotesPage) => {
 	const dispatch = useDispatch();
 	const { tempData } = useSelector((state) => state.quoteFilter);
-	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
-		// resolver: yupResolver(yupValidate),
-		// mode: "all",
-		// reValidateMode: "onBlur",
-	});
 
+	const { handleSubmit, register, watch, control, errors, setValue } = useForm(
+		{}
+	);
+	const userData = useSelector((state) => state.home);
 	const regDate = watch("regDate");
 	const history = useHistory();
 
@@ -71,10 +71,25 @@ export const FilterContainer = (quotesPage) => {
 									}}
 								>
 									<FilterMenuOpenTitle>
-										Volkswagen Polo - Dreamline 1197 CC{" "}
+										{userData?.temp_data?.manfName ? (
+											<>
+												{userData?.temp_data?.manfName}-
+												{userData?.temp_data?.modelName}
+											</>
+										) : (
+											<>Volkswagen Polo - Dreamline 1197 CC </>
+										)}
 									</FilterMenuOpenTitle>
 									<FilterMenuOpenSub>
-										Private Car | Petrol | MH01 AR 7294
+										{userData?.temp_data?.manfName ? (
+											<>
+												{userData?.vehicleType[0]?.comVehicleTypeName} | Petrol
+												|{userData?.temp_data?.rtoNumber} AR 7294
+											</>
+										) : (
+											<> Private Car | Petrol | MH01 AR 7294 </>
+										)}
+
 										<img src={editImg} />
 									</FilterMenuOpenSub>
 								</FilterMenuOpenWrap>
@@ -185,6 +200,30 @@ export const FilterContainer = (quotesPage) => {
 
 export const Filters = ({}) => {
 	const [idvPopup, setIdvPopup] = useState(false);
+	const { handleSubmit, register, watch, control, errors, setValue } = useForm(
+		{}
+	);
+	const DummyState = [
+		{
+			name: "Relevance",
+			label: "Relevance",
+			value: "2",
+			id: "2",
+		},
+		{
+			name: "Price (low to high)",
+			label: "Price (low to high)",
+			value: "3",
+			id: "3",
+		},
+		{
+			name: "Price (high to low)",
+			label: "Price (high to low)",
+			value: "4",
+			id: "4",
+		},
+	];
+	const [editSort, setEditSort] = useState(false);
 	return (
 		<>
 			<Row>
@@ -199,14 +238,33 @@ export const Filters = ({}) => {
 					</FilterMenuQuoteBoxWrap>
 				</Col>
 				<Col lg={6} md={12}>
-					<FilterMenuQuoteBoxWrap>
-						<FilterTopBoxChange>
-							<img src={editImg} />
-						</FilterTopBoxChange>
-						<FilterTopBoxTitle>
-							Sort by:<b> Relevance</b>
-						</FilterTopBoxTitle>
-					</FilterMenuQuoteBoxWrap>
+					<SortContainer>
+						<Controller
+							control={control}
+							name="state_other"
+							defaultValue={""}
+							render={({ onChange, onBlur, value, name }) => (
+								<>
+									<MultiSelect
+										knowMore
+										quotes
+										name={name}
+										onChange={onChange}
+										ref={register}
+										value={value}
+										onBlur={onBlur}
+										isMulti={false}
+										options={DummyState}
+										placeholder={"Relevance"}
+										errors={errors.state}
+										Styled
+										closeOnSelect
+									/>
+									<SortConatinerText>Sort by:</SortConatinerText>
+								</>
+							)}
+						/>
+					</SortContainer>
 				</Col>
 			</Row>
 			{idvPopup && <IDVPopup show={idvPopup} onClose={setIdvPopup} />}
@@ -348,4 +406,22 @@ const FilterTopBoxTitle = styled.div`
 	margin-bottom: 6px;
 	padding-top: 6px;
 	float: initial;
+`;
+const SortConatinerText = styled.div`
+	position: relative;
+	bottom: 31px;
+	left: 52px;
+	width: 68px;
+	font-family: "Inter-SemiBold";
+	font-size: 14px;
+	line-height: 20px;
+`;
+const SortContainer = styled.div`
+	width: 100%;
+	float: left;
+	@media only screen and (max-width: 992px) {
+		width: 50%;
+		float: right;
+		margin: 10px 30px;
+	}
 `;
