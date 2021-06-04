@@ -1,59 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { Tile, MultiSelect, Button as Btn, Error } from "components";
-import { Row, Col, Button, Form } from "react-bootstrap";
+import React, { useEffect } from "react";
+import { Button as Btn, Error } from "components";
+import { Row, Col, Form } from "react-bootstrap";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
 import DateInput from "../DateInput";
+import { subYears } from "date-fns";
+import { set_temp_data } from "modules/Home/home.slice";
+import { useDispatch, useSelector } from "react-redux";
 
-const DummyOthers = [
-	{
-		name: "2019",
-		label: "2019",
-		value: "2019",
-		id: "2019",
-	},
-	{
-		name: "2020",
-		label: "2020",
-		value: "2020",
-		id: "2020",
-	},
-	{
-		name: "2021",
-		label: "2021",
-		value: "2021",
-		id: "2021",
-	},
-];
+/*---------------date config----------------*/
+const CarCheck = subYears(new Date(Date.now() - 86400000), 15);
+/*-----x---------date config-----x----------*/
+
+// validation schema
+const yupValidate = yup.object({
+	year: yup.string().required("year is required").nullable(),
+});
 
 export const YearCM = ({ stepFn }) => {
-	// validation schema
-	const yupValidate = yup.object({
-		year: yup.string().required("year is required").nullable(),
-	});
-
-	const { handleSubmit, register, watch, control, errors } = useForm({
+	const dispatch = useDispatch();
+	const { temp_data } = useSelector((state) => state.home);
+	const { handleSubmit, register, control, errors, setValue } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
 		reValidateMode: "onBlur",
 	});
 
-	// console.log(Val);
-
-	// useEffect(() => {
-	// 	if (!_.isEmpty(DummySub) && DummySub) {
-	// 		setVal(true);
-	// 	}
-	// 	else {
-	// 		setVal(false);
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [year]);
+	//prefill
+	useEffect(() => {
+		if (temp_data?.regDate) setValue("year", temp_data?.regDate);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const onSubmit = (data) => {
 		console.log(data);
+		dispatch(set_temp_data({ regDate: data?.year }));
 		stepFn(6, data, 7);
 	};
 
@@ -68,7 +51,7 @@ export const YearCM = ({ stepFn }) => {
 							defaultValue={""}
 							render={({ onChange, onBlur, value, name }) => (
 								<DateInput
-									minDate={false}
+									maxDate={CarCheck}
 									value={value}
 									name={name}
 									onChange={onChange}

@@ -19,7 +19,6 @@ const Tile = ({
 	Imgheight
 }) => {
 	// on change method
-	console.log(Selected, value)
 	const _renderInput = () => (
 		<>
 			<TileWrap className='m-2'>

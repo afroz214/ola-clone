@@ -18,20 +18,20 @@ export const Home = () => {
 	const { error } = useSelector((state) => state.home);
 	const location = useLocation();
 	const backgroundSplash = (url) => {
-		switch (url) {
-			case "/lead-page":
-				return "/assets/images/landing-page/bg-2.png";
-			case "/journey-type":
-				return "/assets/images/landing-page/bg-2.png";
-			case "/vehicle-type":
-				return "/assets/images/landing-page/bg-2.png";
-			case "/registration":
-				return "/assets/images/landing-page/bg-2.png";
-			case "/vehicle-details":
-				return "/assets/images/splashFT.png";
-			default:
-				return "";
-		}
+		// switch (url) {
+		// 	case "/lead-page":
+		// 		return "/assets/images/landing-page/bg-2.png";
+		// 	case "/journey-type":
+		// 		return "/assets/images/landing-page/bg-2.png";
+		// 	case "/vehicle-type":
+		// 		return "/assets/images/landing-page/bg-2.png";
+		// 	case "/registration":
+		// 		return "/assets/images/landing-page/bg-2.png";
+		// 	case "/vehicle-details":
+		// 		return "/assets/images/splashFT.png";
+		// 	default:
+		// 		return "";
+		// }
 	};
 
 	const SplashPos = (url) => {

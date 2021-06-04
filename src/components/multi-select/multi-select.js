@@ -132,6 +132,7 @@ export default function AnimatedMulti({
 			options={options || []}
 			value={value}
 			onChange={(e) => onChange(e)}
+			ignoreAccents={false}
 			name={name}
 			onBlur={onBlur}
 			avoidHighlightFirstOption
