@@ -11,7 +11,7 @@ export const homeSlice = createSlice({
 		type: [],
 		vehicleType: [],
 		brandType: [],
-        modelType: [],
+		modelType: [],
 		temp_data: {},
 		rto: [],
 	},
@@ -49,7 +49,7 @@ export const homeSlice = createSlice({
 			state.modelType = payload;
 		},
 		set_temp_data: (state, { payload }) => {
-			state.temp_data = { ...payload, ...state.temp_data, };
+			state.temp_data = { ...state.temp_data, ...payload };
 		},
 		rto: (state, { payload }) => {
 			state.rto = payload;
@@ -65,7 +65,7 @@ export const {
 	type,
 	vehicleType,
 	brandType,
-    modelType,
+	modelType,
 	set_temp_data,
 	rto,
 } = homeSlice.actions;

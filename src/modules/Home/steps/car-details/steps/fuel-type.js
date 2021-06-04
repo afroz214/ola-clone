@@ -6,6 +6,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
 import { Tile, Button as Btn, TextInput, Label, Error } from "components";
 import swal from "sweetalert";
+import { useDispatch, useSelector } from "react-redux";
+import { set_temp_data } from "modules/Home/home.slice";
 
 const Fuel = [
 	{
@@ -31,13 +33,17 @@ const Fuel = [
 	},
 ];
 
-// validation schema
-const yupValidate = yup.object({
-	fuel: yup.string().required("Fuel type is required").nullable(),
-	kit_val: yup.string().required("Kit value is required"),
-});
-
 export const FuelType = ({ stepFn }) => {
+	const dispatch = useDispatch();
+	const { temp_data } = useSelector((state) => state.home);
+	const [kit, setKit] = useState(true);
+
+	// validation schema
+	const yupValidate = yup.object({
+		fuel: yup.string().required("Fuel type is required").nullable(),
+		...(kit && { kit_val: yup.string().required("Kit value is required") }),
+	});
+
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
@@ -47,8 +53,35 @@ export const FuelType = ({ stepFn }) => {
 	const kit_val = watch("kit_val");
 	const fuel = watch("fuel");
 
+	useEffect(() => {
+		if (Number(fuel) !== 3) {
+			setKit(false);
+		}
+	}, [fuel]);
+
+	//prefill
+	useEffect(() => {
+		if (temp_data?.fuel) {
+			setValue("fuel", temp_data?.fuel);
+		}
+		if (temp_data?.kit) {
+			setKit(true);
+			setValue("kit_val", temp_data?.kit_val);
+		} else {
+			setKit(false);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [temp_data]);
+
 	const onSubmit = (data) => {
 		console.log(data);
+		dispatch(
+			set_temp_data({
+				fuel: data?.fuel,
+				kit: kit ? 1 : 0,
+				kit_val: data?.kit_val ? data?.kit_val : null,
+			})
+		);
 		stepFn(3, data, 4);
 	};
 
@@ -92,30 +125,73 @@ export const FuelType = ({ stepFn }) => {
 								</Col>
 							))}
 							{Number(watch("fuel")) === 3 && (
-								<Col
-									sm="12"
-									md="12"
-									lg="12"
-									xl="12"
-									className="mt-4  d-flex flex-column align-content-center w-100 mx-auto"
-								>
-									<TextInput
-										lg
-										type="text"
-										id="kit_val"
-										name="kit_val"
-										placeholder=" "
-										ref={register}
-										onChange={handleChange}
-										error={errors?.kit_val}
-									/>
-									<Label lg htmlFor="kit_val">
-										Enter kit value
-									</Label>
-									{!!errors?.kit_val && (
-										<Error className="mt-1">{errors?.kit_val?.message}</Error>
+								<>
+									<Row className="w-100 d-flex justify-content-center mt-4">
+										<h5 className="text-center w-100">
+											Does your vehicle have external CNG/LPG kit?
+										</h5>
+										<div
+											className="px-5 d-flex justify-content-center"
+											style={{ width: "70%" }}
+										>
+											<Col
+												sm="6"
+												md="6"
+												lg="6"
+												xl="6"
+												className="d-flex justify-content-center px-5 mt-2"
+											>
+												<Button
+													onClick={() => setKit(true)}
+													variant={kit ? "success" : "outline-success"}
+												>
+													Yes
+												</Button>
+											</Col>
+											<Col
+												sm="6"
+												md="6"
+												lg="6"
+												xl="6"
+												className="d-flex justify-content-center px-5 mt-2"
+											>
+												<Button
+													onClick={() => setKit(false)}
+													variant={!kit ? "success" : "outline-success"}
+												>
+													No
+												</Button>
+											</Col>
+										</div>
+									</Row>
+									{kit && (
+										<Col
+											sm="12"
+											md="12"
+											lg="12"
+											xl="12"
+											className="mt-4  d-flex flex-column align-content-center w-100 mx-auto"
+										>
+											<TextInput
+												lg
+												type="text"
+												id="kit_val"
+												name="kit_val"
+												placeholder=" "
+												ref={register}
+												onChange={handleChange}
+												error={errors?.kit_val}
+												defaultValue={temp_data?.kit_val}
+											/>
+											<Label lg htmlFor="kit_val">
+												Enter kit value
+											</Label>
+											{!!errors?.kit_val && (
+												<Error className="mt-1">{errors?.kit_val?.message}</Error>
+											)}
+										</Col>
 									)}
-								</Col>
+								</>
 							)}
 						</Row>
 						<Row className="d-flex justify-content-center w-100 mx-auto">
@@ -132,7 +208,7 @@ export const FuelType = ({ stepFn }) => {
 									hex2="#228B22"
 									borderRadius="5px"
 									type="submit"
-									className='mr-2'
+									className="mr-2"
 								>
 									Proceed
 								</Btn>
