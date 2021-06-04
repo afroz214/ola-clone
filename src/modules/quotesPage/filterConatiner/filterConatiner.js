@@ -21,7 +21,7 @@ export const FilterContainer = (quotesPage) => {
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm(
 		{}
 	);
-
+	const userData = useSelector((state) => state.home);
 	const regDate = watch("regDate");
 	const history = useHistory();
 
@@ -71,10 +71,25 @@ export const FilterContainer = (quotesPage) => {
 									}}
 								>
 									<FilterMenuOpenTitle>
-										Volkswagen Polo - Dreamline 1197 CC{" "}
+										{userData?.temp_data?.manfName ? (
+											<>
+												{userData?.temp_data?.manfName}-
+												{userData?.temp_data?.modelName}
+											</>
+										) : (
+											<>Volkswagen Polo - Dreamline 1197 CC </>
+										)}
 									</FilterMenuOpenTitle>
 									<FilterMenuOpenSub>
-										Private Car | Petrol | MH01 AR 7294
+										{userData?.temp_data?.manfName ? (
+											<>
+												{userData?.vehicleType[0]?.comVehicleTypeName} | Petrol
+												|{userData?.temp_data?.rtoNumber} AR 7294
+											</>
+										) : (
+											<> Private Car | Petrol | MH01 AR 7294 </>
+										)}
+
 										<img src={editImg} />
 									</FilterMenuOpenSub>
 								</FilterMenuOpenWrap>
