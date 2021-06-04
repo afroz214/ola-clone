@@ -5,27 +5,8 @@ import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
-
-const DummyOthers = [
-	{
-		name: "Mumbai",
-		label: "Mumbai",
-		value: "1",
-		id: "1",
-	},
-	{
-		name: "Chennai",
-		label: "Chennai",
-		value: "2",
-		id: "2",
-	},
-	{
-		name: "Kolkata",
-		label: "Kolkata",
-		value: "3",
-		id: "3",
-	},
-];
+import { useDispatch, useSelector } from "react-redux";
+import { Rto, set_temp_data } from "modules/Home/home.slice";
 
 const DummySub = [
 	{
@@ -48,34 +29,26 @@ const DummySub = [
 	},
 ];
 
-export const City = ({ stepFn }) => {
-	const [Val, setVal] = useState(false);
-	// validation schema
-	const yupValidate = yup.object({
-		city: yup.string().required("City is required").nullable(),
-		...(Val && { sub_no: yup.string().required("Sub No. is required") }),
-	});
+// validation schema
+const yupValidate = yup.object({
+	sub_no: yup.string().required("RTO is required"),
+});
 
+export const City = ({ stepFn }) => {
+	const dispatch = useDispatch();
+	const { rto, temp_data } = useSelector((state) => state.home);
+	console.log(rto)
 	const { handleSubmit, register, watch, control, errors } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
 		reValidateMode: "onBlur",
 	});
 
-	const sub_no = watch("sub_no");
-	console.log(sub_no);
-	const city = watch("city");
-	// console.log(Val);
-
+	//get rto
 	useEffect(() => {
-		if (!_.isEmpty(DummySub) && DummySub) {
-			setVal(true);
-		}
-		else {
-			setVal(false);
-		}
+		dispatch(Rto());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [city]);
+	}, []);
 
 	const onSubmit = (data) => {
 		console.log(data);
@@ -86,10 +59,10 @@ export const City = ({ stepFn }) => {
 		<Row className="mx-auto d-flex no-wrap mt-4 w-100">
 			<Form onSubmit={handleSubmit(onSubmit)} className="w-100">
 				<Col xs="12" sm="12" md="12" lg="12" xl="12" className="w-100">
+					<h2 className="w-100 text-center mb-4">RTO</h2>
 					<Controller
 						control={control}
-						name="city"
-						defaultValue={""}
+						name="sub_no"
 						render={({ onChange, onBlur, value, name }) => (
 							<MultiSelect
 								name={name}
@@ -98,41 +71,18 @@ export const City = ({ stepFn }) => {
 								value={value}
 								onBlur={onBlur}
 								isMulti={false}
-								options={DummyOthers}
-								placeholder={"Select City"}
-								errors={errors.city}
+								options={DummySub}
+								errors={errors.sub_no}
+								placeholder={"Select"}
 								Styled
 								closeOnSelect={true}
 							/>
 						)}
 					/>
-					{!!errors?.city && <Error className='mt-1'>{errors?.city?.message}</Error>}
+					{!!errors?.sub_no && (
+						<Error className="mt-1">{errors?.sub_no?.message}</Error>
+					)}
 				</Col>
-				{city && (
-					<Col xs="12" sm="12" md="12" lg="12" xl="12" className="mt-4 w-100">
-						<h2 className="w-100 text-center mb-4">RTO</h2>
-						<Controller
-							control={control}
-							name="sub_no"
-							render={({ onChange, onBlur, value, name }) => (
-								<MultiSelect
-									name={name}
-									onChange={onChange}
-									ref={register}
-									value={value}
-									onBlur={onBlur}
-									isMulti={false}
-									options={DummySub}
-									errors={errors.sub_no}
-									placeholder={"Select"}
-									Styled
-									closeOnSelect={true}
-								/>
-							)}
-						/>
-						{!!errors?.sub_no && <Error className='mt-1'>{errors?.sub_no?.message}</Error>}
-					</Col>
-				)}
 				<Col
 					sm="12"
 					md="12"

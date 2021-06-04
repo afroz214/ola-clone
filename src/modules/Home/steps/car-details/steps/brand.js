@@ -101,9 +101,10 @@ export const Brand = ({ stepFn }) => {
 				set_temp_data({
 					manfId: BrandData[0]?.manfId,
 					manfName: BrandData[0]?.manfName,
+					modelId: null
 				})
 			);
-			stepFn(1, brand, 2);
+			(stepFn(1, brand, 2))
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [brand]);
@@ -117,6 +118,7 @@ export const Brand = ({ stepFn }) => {
 				set_temp_data({
 					manfId: BrandData[0]?.manfId,
 					manfName: BrandData[0]?.manfName,
+					modelId: null
 				})
 			);
 			stepFn(1, other?.value, 2);

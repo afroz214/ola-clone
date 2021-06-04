@@ -12,9 +12,13 @@ const brandType = (data) => HttpClient("/getManufacturer", { method: "POST", dat
 //model type
 const modelType = (data) => HttpClient("/getModelVersion", { method: "POST", data });
 
+//RTO
+const rto = (data) => HttpClient("/getRto", { method: "POST", data });
+
 export default {
 	type,
 	vehicleType,
     brandType,
-    modelType
+    modelType,
+    rto
 };
