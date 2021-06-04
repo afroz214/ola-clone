@@ -33,13 +33,13 @@ export const Brand = ({ stepFn }) => {
 		  }))
 		: [];
 
-	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
+	const { handleSubmit, register, watch, control, errors, setValue, reset } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
 		reValidateMode: "onBlur",
 	});
 	const [show, setShow] = useState(false);
-	console.log(show);
+	
 	//load Brand Data
 	useEffect(() => {
 		if (temp_data?.productSubTypeId) {
@@ -49,47 +49,52 @@ export const Brand = ({ stepFn }) => {
 	}, [temp_data.productSubTypeId]);
 
 	//switch screens
+	// useEffect(() => {
+	// 	if (!_.isEmpty(TileBrands) && temp_data?.manfId) {
+	// 		let check = TileBrands?.filter(
+	// 			({ manfId }) => Number(manfId) === Number(temp_data?.manfId)
+	// 		);
+	// 		if (check?.length) {
+	// 			setShow(false);
+	// 		}
+	// 	}
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [TileBrands]);
+
+	// useEffect(() => {
+	// 	if (!_.isEmpty(OtherBrands) && temp_data?.manfId) {
+	// 		let check = OtherBrands?.filter(
+	// 			({ manfId }) => Number(manfId) === Number(temp_data?.manfId)
+	// 		);
+	// 		if (check?.length) {
+	// 			setShow(true);
+	// 		}
+	// 	}
+	// 	else {
+	// 		setShow(false)
+	// 	}
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [OtherBrands]);
+
 	useEffect(() => {
-		if (!_.isEmpty(TileBrands) && temp_data?.manfId) {
-			let check = TileBrands?.filter(
-				({ manfId }) => Number(manfId) === Number(temp_data?.manfId)
-			);
-			if (check?.length) {
-				setShow(false);
-			}
-			else {
-				setShow(true);
-			}
-		}
-		else if (!_.isEmpty(OtherBrands) && temp_data?.manfId) {
+		if (show && temp_data?.manfId && !_.isEmpty(OtherBrands)) {
 			let check = OtherBrands?.filter(
 				({ manfId }) => Number(manfId) === Number(temp_data?.manfId)
 			);
-			if (check?.length) {
-				setValue("brand_other", {
-					id: check[0]?.manfId,
-					name: check[0]?.manfName,
-					value: check[0]?.manfId,
-					label: check[0]?.manfName,
-				});
-				setShow(true);
-			}
-			else {
-				setShow(false);
-			}
-		}
-		else {
-			setShow(false)
+			let selected_option = check?.map(({ manfId, manfName }) => {
+				return { id: manfId, value: manfId, label: manfName, name: manfName };
+			});
+			!_.isEmpty(selected_option) && setValue('brand_other', selected_option);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [temp_data.manfId]);
+	}, [show]);
 
 	const brand = watch("brand");
 	const other = watch("brand_other");
 
 	useEffect(() => {
-		if (brand) {
-			let BrandData = brandType?.filter(
+		if (brand && !_.isEmpty(TileBrands)) {
+			let BrandData = TileBrands?.filter(
 				({ manfId }) => Number(manfId) === Number(brand)
 			);
 			dispatch(
@@ -104,8 +109,8 @@ export const Brand = ({ stepFn }) => {
 	}, [brand]);
 
 	const onSubmit = (data) => {
-		if (!_.isEmpty(other)) {
-			let BrandData = brandType?.filter(
+		if (!_.isEmpty(other) && !_.isEmpty(OtherBrands)) {
+			let BrandData = OtherBrands?.filter(
 				({ manfId }) => Number(manfId) === Number(other?.value)
 			);
 			dispatch(
@@ -162,10 +167,10 @@ export const Brand = ({ stepFn }) => {
 							<Controller
 								control={control}
 								name="brand_other"
-								defaultValue={""}
 								render={({ onChange, onBlur, value, name }) => (
 									<MultiSelect
 										name={name}
+										value={value}
 										onChange={onChange}
 										ref={register}
 										onBlur={onBlur}

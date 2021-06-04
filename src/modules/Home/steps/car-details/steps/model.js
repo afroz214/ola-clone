@@ -54,40 +54,53 @@ export const Model = ({ stepFn }) => {
 	}, [temp_data]);
 
 	//switch screens
+	// useEffect(() => {
+	// 	if (!_.isEmpty(TileModels) && temp_data?.modelId) {
+	// 		let check = TileModels?.filter(
+	// 			({ modelId }) => Number(modelId) === Number(temp_data?.modelId)
+	// 		);
+	// 		if (check?.length) {
+	// 			setShow(false);
+	// 		}
+	// 		else {
+	// 			setShow(true)
+	// 		}
+	// 	}
+	// 	else if (!_.isEmpty(OtherModels) && temp_data?.modelId) {
+	// 		let check = OtherModels?.filter(
+	// 			({ modelId }) => Number(modelId) === Number(temp_data?.modelId)
+	// 		);
+	// 		if (check?.length) {
+	// 			setValue("model_other", {
+	// 				id: check[0]?.modelId,
+	// 				name: check[0]?.modelName,
+	// 				value: check[0]?.modelId,
+	// 				label: check[0]?.modelName,
+	// 			});
+	// 			setShow(true);
+	// 		}
+	// 		else {
+	// 			setShow(false);
+	// 		}
+	// 	}
+	// 	else {
+	// 		setShow(false);
+	// 	}
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [temp_data.modelId]);
+
 	useEffect(() => {
-		if (!_.isEmpty(TileModels) && temp_data?.modelId) {
-			let check = TileModels?.filter(
-				({ modelId }) => Number(modelId) === Number(temp_data?.modelId)
-			);
-			if (check?.length) {
-				setShow(false);
-			}
-			else {
-				setShow(true)
-			}
-		} 
-		else if (!_.isEmpty(OtherModels) && temp_data?.modelId) {
+		if (show && temp_data?.manfId && !_.isEmpty(OtherModels)) {
 			let check = OtherModels?.filter(
 				({ modelId }) => Number(modelId) === Number(temp_data?.modelId)
 			);
-			if (check?.length) {
-				setValue("model_other", {
-					id: check[0]?.modelId,
-					name: check[0]?.modelName,
-					value: check[0]?.modelId,
-					label: check[0]?.modelName,
-				});
-				setShow(true);
-			}
-			else {
-				setShow(false);
-			}
+			let selected_option = check?.map(({ modelId, modelName }) => {
+				return { id: modelId, value: modelId, label: modelName, name: modelName };
+			});
+			!_.isEmpty(selected_option) && setValue("model_other", selected_option);
 		}
-		else {
-			setShow(false);
-		} 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [temp_data.modelId]);
+	}, [show]);
 
 	const other = watch("model_other");
 	const model = watch("model");
@@ -109,7 +122,6 @@ export const Model = ({ stepFn }) => {
 	}, [model]);
 
 	const onSubmit = (data) => {
-		console.log(other);
 		if (!_.isEmpty(other)) {
 			let ModelData = modelType?.filter(
 				({ modelId }) => Number(modelId) === Number(other?.value)
@@ -168,7 +180,6 @@ export const Model = ({ stepFn }) => {
 							<Controller
 								control={control}
 								name="model_other"
-								defaultValue={""}
 								render={({ onChange, onBlur, value, name }) => (
 									<MultiSelect
 										name={name}
