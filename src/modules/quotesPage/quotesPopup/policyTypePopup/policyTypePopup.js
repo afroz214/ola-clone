@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
-
+import { setTempData } from "../../filterConatiner/quoteFilter.slice";
 import "./policyTypePopup.css";
 const PolicyTypePopup = ({ show, onClose, setPolicy, policyType }) => {
 	const { register, handleSubmit, errors, setValue, watch } = useForm({
@@ -25,7 +25,11 @@ const PolicyTypePopup = ({ show, onClose, setPolicy, policyType }) => {
 
 	const onSubmit = (data) => {
 		setPolicy(data);
-
+		dispatch(
+			setTempData({
+				policyType: data,
+			})
+		);
 		onClose(false);
 	};
 
