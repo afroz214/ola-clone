@@ -1,7 +1,4 @@
-import HttpClient from 'api/httpClient';
+import HttpClient from "api/httpClient";
 
-const login = (data) => HttpClient('/userLogin', { method: "POST", data });
-
-export default {
-    login
-}
+export const loginApi = (data) =>
+	HttpClient("/userLogin", { method: "POST", data });

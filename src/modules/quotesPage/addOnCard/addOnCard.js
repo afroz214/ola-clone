@@ -15,6 +15,8 @@ import Checkbox from "../../../components/inputs/checkbox/checkbox";
 import { Row, Col, Form } from "react-bootstrap";
 import { clear, AddOnList as getAddons } from "../quote.slice";
 export const AddOnsCard = () => {
+	const userData = useSelector((state) => state.home);
+	const loginData = useSelector((state) => state.login);
 	const dispatch = useDispatch();
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
 		// resolver: yupResolver(),
@@ -26,12 +28,33 @@ export const AddOnsCard = () => {
 
 	useEffect(() => {
 		const data = {
-			corpId: 65454,
-			productSubTypeId: 564456,
+			corpId: loginData?.corpId || 209,
+			productSubTypeId: userData?.temp_data?.productSubTypeId || 6,
 		};
 		dispatch(getAddons(data));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
+
+	const Addondata = [
+		{
+			corpClientId: 318,
+			productSubTypeId: 0,
+			addonName: "Zero Depreciation",
+			addonId: 1,
+			coverName: 1,
+			addonTitle:
+				"Also called Nil Depreciation cover or Bumper-to-Bumper cover. An add-on which gives you complete cover on any body parts of the car excluding tyres and batteries. Insurer will pay entire cost of body parts, ignoring the year-on-year depreciation in value of these parts",
+		},
+		{
+			corpClientId: 317,
+			productSubTypeId: 0,
+			addonName: "Compulsory PA Cover",
+			addonId: 2,
+			coverName: 2,
+			addonTitle:
+				"Also called Nil Depreciation cover or Bumper-to-Bumper cover. An add-on which gives you complete cover on any body parts of the car excluding tyres and batteries. Insurer will pay entire cost of body parts, ignoring the year-on-year depreciation in value of these parts",
+		},
+	];
 
 	const Addons = [
 		"Zero Depreciation",
@@ -62,7 +85,8 @@ export const AddOnsCard = () => {
 
 	const volDiscount = ["None", "₹2500", "₹5000", "₹7500", "₹10000"];
 
-	const other = watch("tools");
+	const addonsSelected = watch("addons");
+	const selectedAddons = addonsSelected?.filter(Boolean);
 
 	return (
 		<CardOtherItem>
@@ -93,13 +117,14 @@ export const AddOnsCard = () => {
 							<AccordionHeader>Addons</AccordionHeader>
 							<AccordionContent>
 								<CardBlock>
-									{Addons.map((item, index) => (
+									{Addondata.map((item, index) => (
 										<Checkbox
-											id={item}
+											id={item?.addonId}
 											name="addons"
-											fieldName={item}
+											fieldName={item?.addonName}
 											register={register}
 											index={index}
+											tooltipData={item?.addonTitle}
 										/>
 									))}
 								</CardBlock>

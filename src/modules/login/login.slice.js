@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import service from "./serviceApi";
+import { loginApi } from "./serviceApi";
 import { actionStructre, serializeError } from "../../utils";
 
 export const loginSlice = createSlice({
@@ -9,6 +9,7 @@ export const loginSlice = createSlice({
 		error: null,
 		success: null,
 		login: null,
+		corpId: null,
 	},
 	reducers: {
 		loading: (state) => {
@@ -34,15 +35,23 @@ export const loginSlice = createSlice({
 		login: (state, { payload }) => {
 			state.login = payload;
 		},
+		setCorpId: (state, { payload }) => {
+			state.corpId = payload;
+		},
 	},
 });
 
-export const { loading, success, error, clear, login } = loginSlice.actions;
+export const { loading, success, error, clear, login, setCorpId } =
+	loginSlice.actions;
 
 export const Login = (data) => {
 	return async (dispatch) => {
 		try {
-			actionStructre(dispatch, login, error, service.login, data);
+			const response = await loginApi(data);
+			if (response?.data) {
+				dispatch(login(response.data?.msg));
+				dispatch(setCorpId(response.data?.corpId));
+			}
 		} catch (err) {
 			dispatch(error("Something went wrong"));
 			console.error("Error", err);
