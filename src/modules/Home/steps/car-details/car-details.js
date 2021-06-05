@@ -5,7 +5,7 @@ import { Brand, Model, FuelType, Variant, City, YearCM } from "./steps";
 import { scrollToTargetAdjusted } from "utils";
 import { useHistory } from "react-router";
 import { BackButton } from "components";
-import { useSelector } from "modules/Home/home.slice";
+import { useSelector } from "react-redux";
 
 export const CarDetails = ({ enquiry_id }) => {
 	/*---------------- back button---------------------*/
