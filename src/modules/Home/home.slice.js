@@ -15,6 +15,7 @@ export const homeSlice = createSlice({
 		modelType: [],
 		temp_data: {},
 		rto: [],
+		variant: [],
 	},
 	reducers: {
 		loading: (state) => {
@@ -65,6 +66,9 @@ export const homeSlice = createSlice({
 		rto: (state, { payload }) => {
 			state.rto = payload;
 		},
+		variant: (state, { payload }) => {
+			state.variant = payload;
+		},
 	},
 });
 
@@ -80,6 +84,7 @@ export const {
 	set_temp_data,
 	rto,
 	enquiry_id,
+	variant,
 } = homeSlice.actions;
 
 export const Enquiry = (data) => {
@@ -141,6 +146,17 @@ export const Rto = (data) => {
 	return async (dispatch) => {
 		try {
 			actionStructre(dispatch, rto, error, service.rto, data);
+		} catch (err) {
+			dispatch(error("Something went wrong"));
+			console.error("Error", err);
+		}
+	};
+};
+
+export const Variant = (data) => {
+	return async (dispatch) => {
+		try {
+			actionStructre(dispatch, variant, error, service.variantType, data);
 		} catch (err) {
 			dispatch(error("Something went wrong"));
 			console.error("Error", err);
