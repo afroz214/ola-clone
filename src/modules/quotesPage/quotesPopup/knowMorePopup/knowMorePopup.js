@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Row, Col, Table, Form } from "react-bootstrap";
-import demoLogo from "../../../assets/img/brand-digit.png";
-import Popup from "../../../components/Popup/Popup";
+import demoLogo from "../../../../assets/img/brand-digit.png";
+import Popup from "../../../../components/Popup/Popup";
 import InfoCardKnowMore from "./knowMoreInfo";
 import { Controller } from "react-hook-form";
 import { useForm } from "react-hook-form";
@@ -12,8 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 
 import "./knowMorePopup.css";
-const KnowMorePopup = ({ show, onClose }) => {
-	const [key, setKey] = useState("premiumBreakupPop");
+const KnowMorePopup = ({ show, onClose, selectedKnow }) => {
+	const [key, setKey] = useState(selectedKnow);
 	const { handleSubmit, register, errors, control, reset, watch, setValue } =
 		useForm({});
 	const DummyState = [
@@ -56,11 +56,21 @@ const KnowMorePopup = ({ show, onClose }) => {
 			id: "4",
 		},
 	];
+	const [width, setWidth] = useState(window.innerWidth);
+	console.log(width);
+	const updateWidth = () => {
+		setWidth(window.innerWidth);
+	};
+
+	useEffect(() => {
+		window.addEventListener("resize", updateWidth);
+		return () => window.removeEventListener("resize", updateWidth);
+	});
 	const content = (
 		<>
 			<ContentWrap>
 				<Row>
-					<Col lg={4} md={4}>
+					<Col lg={4} md={12}>
 						<DetailsPopHeadWrap>
 							<InfoCardKnowMore />
 							<CardTopRightCenter>
@@ -72,7 +82,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 							</CardTopRightCenter>
 						</DetailsPopHeadWrap>
 					</Col>
-					<Col lg={8} md={8}>
+					<Col lg={8} md={12}>
 						<DetailPopTabs>
 							<ul className="nav nav-tabs">
 								<li className={key === "premiumBreakupPop" ? "active" : ""}>
@@ -521,7 +531,7 @@ const KnowMorePopup = ({ show, onClose }) => {
 	return (
 		<Popup
 			height={"600px"}
-			width="max-content"
+			width={width < 996 ? "100%" : "max-content"}
 			show={show}
 			onClose={onClose}
 			content={content}
@@ -555,6 +565,9 @@ const DetailsPopHeadWrap = styled.div`
 	float: left;
 	width: 294px;
 	padding: 0 18px;
+	@media (max-width: 996px) {
+		width: 100% !important;
+	}
 `;
 const CardTopRightCenter = styled.div`
 	margin: 0 auto;
@@ -596,6 +609,11 @@ const DetailPopTabs = styled.div`
 	margin-top: -14px;
 	border-left: 1px solid #e3e4e8;
 	/*	width: 777px;*/
+	@media (max-width: 996px) {
+		margin-top: 0px;
+		float: right;
+		border-left: 0px solid #e3e4e8;
+	}
 `;
 
 const TabContet = styled.div`

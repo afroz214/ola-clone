@@ -66,7 +66,7 @@ export const CarDetails = () => {
 			case 5:
 				return "Enter City Details";
 			case 6:
-				return "Enter the Vehicle registration year";
+				return "Enter the Vehicle registration Date";
 			default:
 				break;
 		}
@@ -99,8 +99,8 @@ export const CarDetails = () => {
 							<li className={Step > 1 ? "active" : ""}>Model</li>
 							<li className={Step > 2 ? "active" : ""}>Fuel Type</li>
 							<li className={Step > 3 ? "active" : ""}>Variant</li>
-							<li className={Step > 4 ? "active" : ""}>City</li>
-							<li className={Step > 5 ? "active" : ""}>Reg. Year</li>
+							<li className={Step > 4 ? "active" : ""}>RTO</li>
+							<li className={Step > 5 ? "active" : ""}>Reg. Date</li>
 						</ul>
 					</div>
 				</Col>

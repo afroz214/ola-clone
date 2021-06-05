@@ -18,7 +18,8 @@ const Router = (props) => {
 				<Layout>
 					<Header />
 					<Switch>
-						<Route exact path="/lead-page" component={Home} />
+						<Route exact path="/lead-page" component={Home} />				
+						<Route exact path="/journey-type" component={Home} />
 						<Route exact path="/registration" component={Home} />
 						<Route exact path="/vehicle-type" component={Home} />
 						<Route exact path="/vehicle-details" component={Home} />

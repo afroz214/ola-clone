@@ -4075,7 +4075,7 @@ i.flag.zw:before {
 .toggleRadio .switch {
   width: 31px;
   height: 18px;
-  top: 3px;
+  top: 6.5px;
 }
 .floating-label label {
   font-weight: normal !important;

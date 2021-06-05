@@ -17,6 +17,7 @@ export default function AnimatedMulti({
 	Styled,
 	required,
 	knowMore,
+	quotes,
 }) {
 	const lessthan480 = useMediaPredicate("(max-width: 480px)");
 
@@ -45,10 +46,10 @@ export default function AnimatedMulti({
 						  )
 						? "2px"
 						: "1px",
-				minHeight: knowMore ? "48px" : "60px",
-				maxHeight: knowMore ? "48px" : "",
+				minHeight: knowMore ? (quotes ? "45px !important" : "48px") : "60px",
+				maxHeight: knowMore ? (quotes ? "45px !important" : "48px") : "",
 				boxShadow: "0",
-				borderRadius: knowMore ? "50px" : "2.5px",
+				borderRadius: knowMore ? (quotes ? "8px" : "50px") : "2.5px",
 				fontSize: knowMore ? "14px" : "18px",
 				cursor: "text",
 				"&:hover": {
@@ -119,6 +120,10 @@ export default function AnimatedMulti({
 			valueContainer: (provided) => ({
 				...provided,
 				padding: "2px 10px 2px 17px",
+				position: quotes ? "relative" : "",
+				left: quotes ? "90px" : "",
+				fontfamily: quotes ? "Inter-SemiBold" : "",
+				fontsize: quotes ? "14px" : "",
 			}),
 		}),
 		[value, errors, lessthan480]
@@ -132,6 +137,7 @@ export default function AnimatedMulti({
 			options={options || []}
 			value={value}
 			onChange={(e) => onChange(e)}
+			ignoreAccents={false}
 			name={name}
 			onBlur={onBlur}
 			avoidHighlightFirstOption
