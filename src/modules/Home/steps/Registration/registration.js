@@ -72,7 +72,7 @@ export const Registration = () => {
 					<text style={{ color: "black" }}>Back</text>
 				</BackButton>
 			</div>
-			<div className="ml-4 my-4">
+			<div className="ml-4 my-4 w-100 mx-auto">
 				<Row className="text-center w-100">
 					<div className="mt-4 d-flex flex-column justify-content-center w-100">
 						<h4 className="text-center w-100">
@@ -83,7 +83,7 @@ export const Registration = () => {
 						</h3>
 					</div>
 				</Row>
-				<Row className="w-100 d-flex no-wrap mt-5">
+				<Row className="w-100 d-flex no-wrap mt-5 mx-auto">
 					<StyledCol sm="12" md="12" lg="9" xl="9" className="p-0 my-2 mx-2">
 						<div className="w-100">
 							<TextInput
@@ -108,7 +108,7 @@ export const Registration = () => {
 							)}
 						</div>
 					</StyledCol>
-					<StyledCol sm="12" md="12" lg="2" xl="2" className="p-0 my-2 mx-2 d-flex">
+					<StyledCol sm="12" md="12" lg="2" xl="2" className="p-0 my-2 mx-2 d-flex justify-content-center">
 						<Button
 							buttonStyle="outline-solid"
 							hex1="#bdd400"
@@ -130,7 +130,7 @@ export const Registration = () => {
 						xl="12"
 						className="text-center mx-auto d-flex justify-content-center"
 					>
-						<h4 className="font-weight-bolder">OR</h4>
+						<h4 className="font-weight-bolder text-center">OR</h4>
 					</Col>
 					<Col
 						sm="12"
