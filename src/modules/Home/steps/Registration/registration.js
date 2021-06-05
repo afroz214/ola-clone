@@ -27,7 +27,7 @@ export const Registration = () => {
 
 	// validation schema
 	const yupValidate = yup.object({
-		// ...(val && { reg_no: yup.string().required("Registration No. is required") }),
+		// ...(val && { regNo: yup.string().required("Registration No. is required") }),
 	});
 
 	const { handleSubmit, register, errors, setValue, watch } = useForm({
@@ -38,23 +38,24 @@ export const Registration = () => {
 
 	//prefill
 	useEffect(() => {
-		if (temp_data?.reg_no) {
-			setValue("reg_no", temp_data?.reg_no);
+		if (temp_data?.regNo) {
+			setValue("regNo", temp_data?.regNo);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [temp_data]);
 
 	const handleChange = () => {};
-	const onSubmit = ({ reg_no, journey_type }) => {
-		console.log(reg_no, journey_type);
+	const regNo = watch('regNo')
+	const onSubmit = (journeyType) => {
+		console.log(regNo, journeyType)
 		if (
-			(Number(journey_type) === 1 && reg_no) ||
-			Number(journey_type) === 2 ||
-			Number(journey_type) === 3
+			(Number(journeyType) === 1 && regNo) ||
+			Number(journeyType) === 2 ||
+			Number(journeyType) === 3
 		) {
-			Number(journey_type) !== 1
-				? dispatch(set_temp_data({ journey_type, reg_no: null }))
-				: dispatch(set_temp_data({ journey_type, reg_no }));
+			Number(journeyType) !== 1
+				? dispatch(set_temp_data({ journeyType, regNo: null }))
+				: dispatch(set_temp_data({ journeyType, regNo }));
 			history.push("/vehicle-type");
 		} else {
 			swal("Please fill all the details", "", "error");
@@ -62,7 +63,7 @@ export const Registration = () => {
 	};
 
 	return (
-		<Form onSubmit={handleSubmit(onSubmit)}>
+		<>
 			<div className="backBtn" style={{ paddingBottom: "30px" }}>
 				<BackButton type="button" onClick={back} style={{ marginTop: "-20px" }}>
 					<svg xmlns="http://www.w3.org/2000/svg" className="" viewBox="0 0 24 24">
@@ -89,18 +90,18 @@ export const Registration = () => {
 							<TextInput
 								lg
 								type="text"
-								id="reg_no"
-								name="reg_no"
+								id="regNo"
+								name="regNo"
 								placeholder=" "
 								ref={register}
 								onChange={handleChange}
-								error={errors?.reg_no}
+								error={errors?.regNo}
 							/>
-							<Label lg htmlFor="reg_no">
+							<Label lg htmlFor="regNo">
 								Enter your Vehicle Number
 							</Label>
-							{!!errors.reg_no ? (
-								<ErrorMsg>{errors.reg_no.message}</ErrorMsg>
+							{!!errors.regNo ? (
+								<ErrorMsg>{errors.regNo.message}</ErrorMsg>
 							) : (
 								<Form.Text className="text-muted">
 									<text style={{ color: "#bdbdbd" }}>e.g MH-01-AR-7294</text>
@@ -114,8 +115,9 @@ export const Registration = () => {
 							hex1="#bdd400"
 							hex2="#bdd400"
 							borderRadius="5px"
-							onClick={() => setValue("journey_type", 1)}
+							onClick={() => onSubmit(1)}
 							height="60px"
+							type='submit'
 						>
 							Proceed
 						</Button>
@@ -143,8 +145,9 @@ export const Registration = () => {
 							buttonStyle="outline-solid"
 							hex1="#006400"
 							hex2="#228B22"
-							onClick={() => setValue("journey_type", 2)}
+							onClick={() => onSubmit(2)}
 							borderRadius="5px"
+							type='submit'
 						>
 							<label style={{ cursor: "pointer" }} className="p-0 m-0">
 								Proceed without no.
@@ -156,17 +159,17 @@ export const Registration = () => {
 							hex1="#006400"
 							hex2="#228B22"
 							borderRadius="5px"
-							onClick={() => setValue("journey_type", 3)}
+							onClick={() => onSubmit(3)}
+							type='submit'
 						>
 							<label style={{ cursor: "pointer" }} className="p-0 m-0">
 								New Car? Click Here
 							</label>
 						</Button>
-						<input type="hidden" name="journey_type" ref={register} />
 					</Col>
 				</Row>
 			</div>
-		</Form>
+		</>
 	);
 };
 
