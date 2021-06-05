@@ -82,7 +82,6 @@ export const City = ({ stepFn }) => {
 		<Row className="mx-auto d-flex no-wrap mt-4 w-100">
 			<Form onSubmit={handleSubmit(onSubmit)} className="w-100 mx-auto">
 				<Col xs="12" sm="12" md="12" lg="12" xl="12" className="w-100 mx-auto">
-					<h2 className="w-100 text-center mb-4">RTO</h2>
 					<Controller
 						control={control}
 						name="sub_no"

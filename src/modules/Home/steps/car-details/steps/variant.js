@@ -125,7 +125,7 @@ export const Variant = ({ stepFn, enquiry_id }) => {
 									value={versionId}
 									height={"80px"}
 									setValue={setValue}
-									Selected={variant}
+									Selected={variant || temp_data?.versionId}
 								/>
 							</Col>
 						))}
