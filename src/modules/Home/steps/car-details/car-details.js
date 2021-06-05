@@ -68,7 +68,7 @@ export const CarDetails = ({ enquiry_id }) => {
 			case 4:
 				return "Select the Variant of your Vehicle";
 			case 5:
-				return "Enter City Details";
+				return "Enter RTO Details";
 			case 6:
 				return "Enter the Vehicle registration Date";
 			default:
