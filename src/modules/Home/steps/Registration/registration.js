@@ -85,7 +85,7 @@ export const Registration = () => {
 				</Row>
 				<StyledRow className="w-100 d-flex no-wrap mt-5 mx-auto justify-content-center">
 					<StyledCol sm="12" md="12" lg="9" xl="9" className="p-0 my-2 mx-auto">
-						<div className="w-100 mx-auto">
+						<div className="w-100 mx-auto d-flex flex-column align-content-center">
 							<TextInput
 								lg
 								type="text"
