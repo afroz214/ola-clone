@@ -31,12 +31,13 @@ const policyMax = addDays(new Date(Date.now() - 86400000), 45);
 
 // validation schema
 const yupValidate = yup.object({
-	year: yup.string().required("year is required").nullable(),
+	expiry: yup.string().required("Expiry is required field").nullable(),
+	//ncb: yup.string().required("Ncb is required field").nullable(),
 });
 
 const PrevInsurerPopup = ({ show, onClose }) => {
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
-		//	resolver: yupResolver(yupValidate),
+		resolver: yupResolver(yupValidate),
 		mode: "all",
 		reValidateMode: "onBlur",
 	});
@@ -99,6 +100,7 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 				ncb: noClaimMade ? data?.ncb : "0%",
 				expiry: data?.expiry,
 				noClaimMade: noClaimMade,
+				policyExpired: diffDays > 0 ? true : false,
 			})
 		);
 		onClose(false);
@@ -109,6 +111,7 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 			set_temp_data({
 				ncb: "0%",
 				expiry: "Not Sure",
+				policyExpired: false,
 			})
 		);
 		onClose(false);
@@ -198,12 +201,12 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 												name={name}
 												onChange={onChange}
 												ref={register}
-												error={errors && errors?.year}
+												error={errors && errors?.expiry}
 											/>
 										)}
 									/>
-									{!!errors?.year && (
-										<Error className="mt-1">{errors?.year?.message}</Error>
+									{!!errors?.expiry && (
+										<Error className="mt-1">{errors?.expiry?.message}</Error>
 									)}
 								</div>
 								<input ref={register} name="ncb" type="hidden" />
@@ -270,7 +273,10 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 																	value={`${item?.discountRate}%`}
 																	ref={register}
 																	defaultChecked={
-																		temp_data?.ncb === `${item?.discountRate}%`
+																		temp_data?.ncb
+																			? temp_data?.ncb ===
+																			  `${item?.discountRate}%`
+																			: `${item?.discountRate}%` === `0%`
 																	}
 																/>
 																<label for={item?.ncbId}>
