@@ -10,10 +10,9 @@ import AccordionContent from "./accordion/accordion-content";
 import { Head, Text, Typography, Marker, Error } from "./view/view";
 import { Loader } from "./loader/loader";
 import CompactCard from "./compact-card/Card";
-
 import MultiSelect from "./multi-select/multi-select";
 import Header from "./header/Header";
-import { Footer, Layout } from "./footer/Footer";
+import { Footer, Layout } from "./footer/Footer"
 import Tile from "./tile/tile";
 import Textbox from "./inputs/TextInput/textInput";
 import Switch from "./switch/switch";
