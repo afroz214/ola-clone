@@ -15,10 +15,10 @@ import swal from "sweetalert";
 // 	"Invalid Registration Number"
 // )
 
-export const Registration = () => {
+export const Registration = ({ enquiry_id }) => {
 	/*---------------- back button---------------------*/
 	const back = () => {
-		history.push("/journey-type");
+		history.push(`/journey-type?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`);
 	};
 	/*----------x----- back button-------x-------------*/
 	const history = useHistory();
@@ -45,7 +45,7 @@ export const Registration = () => {
 	}, [temp_data]);
 
 	const handleChange = () => {};
-	const regNo = watch('regNo')
+	const regNo = watch("regNo");
 	const onSubmit = (journeyType) => {
 		if (
 			(Number(journeyType) === 1 && regNo) ||
@@ -55,7 +55,9 @@ export const Registration = () => {
 			Number(journeyType) !== 1
 				? dispatch(set_temp_data({ journeyType, regNo: null }))
 				: dispatch(set_temp_data({ journeyType, regNo }));
-			history.push("/vehicle-type");
+			history.push(
+				`/vehicle-type?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`
+			);
 		} else {
 			swal("Please fill all the details", "", "error");
 		}
@@ -108,7 +110,13 @@ export const Registration = () => {
 							)}
 						</div>
 					</StyledCol>
-					<StyledCol sm="12" md="12" lg="2" xl="2" className="p-0 my-2 mx-auto d-flex justify-content-center">
+					<StyledCol
+						sm="12"
+						md="12"
+						lg="2"
+						xl="2"
+						className="p-0 my-2 mx-auto d-flex justify-content-center"
+					>
 						<Button
 							buttonStyle="outline-solid"
 							hex1="#bdd400"
@@ -116,7 +124,7 @@ export const Registration = () => {
 							borderRadius="5px"
 							onClick={() => onSubmit(1)}
 							height="60px"
-							type='submit'
+							type="submit"
 						>
 							Proceed
 						</Button>
@@ -146,7 +154,7 @@ export const Registration = () => {
 							hex2="#228B22"
 							onClick={() => onSubmit(2)}
 							borderRadius="5px"
-							type='submit'
+							type="submit"
 						>
 							<label style={{ cursor: "pointer" }} className="p-0 m-0">
 								Proceed without no.
@@ -159,7 +167,7 @@ export const Registration = () => {
 							hex2="#228B22"
 							borderRadius="5px"
 							onClick={() => onSubmit(3)}
-							type='submit'
+							type="submit"
 						>
 							<label style={{ cursor: "pointer" }} className="p-0 m-0">
 								New Car? Click Here

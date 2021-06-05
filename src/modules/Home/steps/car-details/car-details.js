@@ -5,15 +5,19 @@ import { Brand, Model, FuelType, Variant, City, YearCM } from "./steps";
 import { scrollToTargetAdjusted } from "utils";
 import { useHistory } from "react-router";
 import { BackButton } from "components";
+import { useSelector } from "react-redux";
 
-export const CarDetails = () => {
+export const CarDetails = ({ enquiry_id }) => {
 	/*---------------- back button---------------------*/
 	const back = () => {
-		history.push("/vehicle-type");
+		history.push(
+			`/vehicle-type?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`
+		);
 	};
 	/*----------x----- back button-------x-------------*/
 	const [Step, setStep] = useState(1);
 	const history = useHistory();
+	const { temp_data } = useSelector((state) => state.home);
 
 	//center auto scroll
 	useEffect(() => {
@@ -75,7 +79,7 @@ export const CarDetails = () => {
 	//After Completion
 	useEffect(() => {
 		if (Step > 6) {
-			history.push("/quotes");
+			history.push(`/quotes?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [Step]);
@@ -92,8 +96,8 @@ export const CarDetails = () => {
 				</BackButton>
 			</div>
 			<Row className="w-100 mx-auto my-4" style={{ zIndex: "999" }} id="stepper">
-				<Col sm="12" md="12" lg="12" xl="12" className="p-0 my-0 m-0 w-100" >
-					<div className="wrapper-progressBar" >
+				<Col sm="12" md="12" lg="12" xl="12" className="p-0 my-0 m-0 w-100">
+					<div className="wrapper-progressBar">
 						<ul className="progressBar">
 							<li className={Step > 0 ? "active" : ""}>Brand</li>
 							<li className={Step > 1 ? "active" : ""}>Model</li>
@@ -119,12 +123,30 @@ export const CarDetails = () => {
 					</Button>
 					<h3 className="text-center w-100 mb-4">{TitleFn(Step)}</h3>
 				</Row>
-				{Step === 1 && <Brand stepFn={stepFn} />}
-				{Step === 2 && <Model stepFn={stepFn} />}
-				{Step === 3 && <FuelType stepFn={stepFn} />}
-				{Step === 4 && <Variant stepFn={stepFn} />}
-				{Step === 5 && <City stepFn={stepFn} />}
-				{Step === 6 && <YearCM stepFn={stepFn} />}
+				{Step === 1 && (
+					<Brand stepFn={stepFn} enquiry_id={temp_data?.enquiry_id || enquiry_id} />
+				)}
+				{Step === 2 && (
+					<Model stepFn={stepFn} enquiry_id={temp_data?.enquiry_id || enquiry_id} />
+				)}
+				{Step === 3 && (
+					<FuelType
+						stepFn={stepFn}
+						enquiry_id={temp_data?.enquiry_id || enquiry_id}
+					/>
+				)}
+				{Step === 4 && (
+					<Variant
+						stepFn={stepFn}
+						enquiry_id={temp_data?.enquiry_id || enquiry_id}
+					/>
+				)}
+				{Step === 5 && (
+					<City stepFn={stepFn} enquiry_id={temp_data?.enquiry_id || enquiry_id} />
+				)}
+				{Step === 6 && (
+					<YearCM stepFn={stepFn} enquiry_id={temp_data?.enquiry_id || enquiry_id} />
+				)}
 			</Row>
 		</>
 	);

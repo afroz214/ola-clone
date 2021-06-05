@@ -5,19 +5,20 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { VehicleType as Type, set_temp_data } from "modules/Home/home.slice";
 
-export const VehicleType = () => {
+export const VehicleType = ({ enquiry_id }) => {
 	const dispatch = useDispatch();
 	const { vehicleType, temp_data } = useSelector((state) => state.home);
-	console.log(vehicleType);
 	const history = useHistory();
 	/*---------------- back button---------------------*/
 	const back = () => {
-		history.push("/registration");
+		history.push(
+			`/registration?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`
+		);
 	};
 	/*----------x----- back button-------x-------------*/
 
@@ -30,20 +31,15 @@ export const VehicleType = () => {
 	const [selected, setSelected] = useState(false);
 	const [carrierType, setCarrierType] = useState(false);
 
-	//prefill data
+	// prefill data
 	useEffect(() => {
-		if (temp_data?.comVehicleTypeId) {
-			setSelected(temp_data?.comVehicleTypeId);
+		if (temp_data?.productSubTypeId) {
+			setSelected(temp_data?.productSubTypeId);
 		}
 		if (temp_data?.carrierType) {
 			setCarrierType(temp_data?.carrierType);
 		}
 	}, [temp_data]);
-
-	// validation schema
-	// const yupValidate = yup.object({
-	// 	reg_no: yup.string().required("Registration No. is required"),
-	// });
 
 	const { handleSubmit, register, errors } = useForm({
 		// resolver: yupResolver(yupValidate),
@@ -53,17 +49,20 @@ export const VehicleType = () => {
 
 	const onSubmit = (VehicalType, cType) => {
 		let productSubTypeId = vehicleType?.filter(
-			({ comVehicleTypeId }) => Number(comVehicleTypeId) === Number(VehicalType)
+			({ productSubTypeId }) => Number(productSubTypeId) === Number(VehicalType)
 		);
 		dispatch(
 			set_temp_data({
-				productSubTypeId: Number(productSubTypeId[0]?.productSubTypeId),
-				comVehicleTypeId: Number(VehicalType),
-				comVehicleTypeName: productSubTypeId[0]?.comVehicleTypeName,
+				productSubTypeId:
+					Number(VehicalType) || Number(productSubTypeId[0]?.productSubTypeId),
+				productSubTypeCode: productSubTypeId[0]?.productSubTypeCode,
+				productCategoryName: productSubTypeId[0]?.productCategoryName,
 				carrierType: Number(cType),
 			})
 		);
-		history.push("/vehicle-details");
+		history.push(
+			`/vehicle-details?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`
+		);
 	};
 
 	return (
@@ -85,10 +84,7 @@ export const VehicleType = () => {
 				</Row>
 				<Row className="d-flex justify-content-center w-100 mt-4">
 					{vehicleType?.map(
-						(
-							{ comVehicleTypeId, comVehicleTypeName, productSubTypeId, img },
-							index
-						) => (
+						({ productSubTypeId, productSubTypeCode, img }, index) => (
 							<Col
 								xs="6"
 								sm="6"
@@ -100,14 +96,14 @@ export const VehicleType = () => {
 								<div className="m-1 d-flex justify-content-center h-100 w-100">
 									<Button
 										variant={
-											selected === Number(comVehicleTypeId) ? "success" : "outline-success"
+											selected === Number(productSubTypeId) ? "success" : "outline-success"
 										}
 										className="btn-filter text-center h-100 w-100 d-flex flex-column align-content-between"
 										type="button"
 										onClick={() =>
-											Number(comVehicleTypeId) === 2
-												? setSelected(Number(comVehicleTypeId))
-												: onSubmit(comVehicleTypeId)
+											Number(productSubTypeId) === 2
+												? setSelected(Number(productSubTypeId))
+												: onSubmit(productSubTypeId)
 										}
 									>
 										<div
@@ -122,7 +118,7 @@ export const VehicleType = () => {
 													src={img}
 													alt="img"
 													className={
-														selected === Number(comVehicleTypeId)
+														selected === Number(productSubTypeId)
 															? "filter-white"
 															: "filter-green"
 													}
@@ -135,10 +131,10 @@ export const VehicleType = () => {
 												className="text-center w-100 h-100 mt-4"
 											>
 												<label
-													style={{ fontSize: "14px", fontWeight: "800" }}
+													style={{ fontSize: "12.5px", fontWeight: "800" }}
 													className="text-center h-100 w-100 overflow-auto label-text"
 												>
-													{comVehicleTypeName || "N/A"}
+													{productSubTypeCode || "N/A"}
 												</label>
 											</div>
 										</div>
