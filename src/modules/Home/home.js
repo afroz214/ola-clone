@@ -63,7 +63,7 @@ export const Home = () => {
 				
 			}
 			else {
-				swal("Enquiry Id not found, redirecting to homepage", "", "info").then(() =>
+				swal("Enquiry id not found, redirecting to homepage", "", "info").then(() =>
 					history.replace("/lead-page")
 				);
 			}
