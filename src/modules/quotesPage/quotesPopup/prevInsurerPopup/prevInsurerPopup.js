@@ -1,22 +1,48 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
-import { Row, Col } from "react-bootstrap";
-
+import {
+	Row,
+	Col,
+	Form,
+	Button,
+	ToggleButtonGroup,
+	ToggleButton,
+} from "react-bootstrap";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
 import backButton from "../../../../assets/img/back-button.png";
-import { Tile, ErrorMsg } from "components";
+import { Tile, ErrorMsg, Button as Btn, Error } from "components";
 import Popup from "../../../../components/Popup/Popup";
-import "./preInsurerPopup.css";
+import { set_temp_data } from "modules/Home/home.slice";
 import DateInput from "../../../proposal/DateInput";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+import { toDate } from "utils";
+import { subYears, addDays, differenceInDays } from "date-fns";
+import _ from "lodash";
+import "./preInsurerPopup.scss";
+/*---------------date config----------------*/
+const CarCheck = subYears(new Date(Date.now() - 86400000), 15);
+const policyMin = subYears(new Date(Date.now() - 86400000), 1);
+const policyMax = addDays(new Date(Date.now() - 86400000), 45);
+/*-----x---------date config-----x----------*/
+
+// validation schema
+const yupValidate = yup.object({
+	year: yup.string().required("year is required").nullable(),
+});
+
 const PrevInsurerPopup = ({ show, onClose }) => {
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm({
-		// resolver: yupResolver(yupValidate),
-		// mode: "all",
-		// reValidateMode: "onBlur",
+		//	resolver: yupResolver(yupValidate),
+		mode: "all",
+		reValidateMode: "onBlur",
 	});
 	const [step, setStep] = useState(1);
-	const model = watch("expiry");
+	const prevIns = watch("prevInsu");
+	console.log(prevIns);
 	const DummyData = {
 		name: "Bajaj Allianz",
 		id: "1",
@@ -33,13 +59,64 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 		},
 	];
 
-	useEffect(() => {
-		if (model) {
-			onClose(false);
-		}
+	// page 2 logic
 
+	const dispatch = useDispatch();
+	const { temp_data } = useSelector((state) => state.home);
+	const [noClaimMade, setNoClaimMade] = useState(
+		temp_data?.noClaimMade || false
+	);
+
+	//prefill
+
+	//NCB logic
+	const ncb = watch("ncb");
+	const expiry = watch("expiry");
+
+	let a = expiry;
+	let b = moment().format("DD-MM-YYYY");
+
+	let diffDays = a && b && differenceInDays(toDate(b), toDate(a));
+
+	useEffect(() => {
+		if (diffDays > 90) {
+			setValue("ncb", 0);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [model]);
+	}, []);
+
+	// useEffect(() => {
+	// 	if(temp_data?.noClaimMade){
+
+	// 	}
+	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [temp_data?.noClaimMade]);
+
+	const onSubmit = (data) => {
+		console.log(data);
+		dispatch(
+			set_temp_data({
+				ncb: noClaimMade ? data?.ncb : "0%",
+				expiry: data?.expiry,
+				noClaimMade: noClaimMade,
+			})
+		);
+		onClose(false);
+	};
+
+	const handleNoPrev = () => {
+		dispatch(
+			set_temp_data({
+				ncb: "0%",
+				expiry: "Not Sure",
+			})
+		);
+		onClose(false);
+	};
+
+	const { ncbList, tempData } = useSelector((state) => state.quoteFilter);
+	const myOrderedNcbList = _.sortBy(ncbList, (o) => o.discountRate);
+
 	const Page1 = (
 		<>
 			<Body>
@@ -64,20 +141,20 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 											text={DummyData?.name}
 											id={index}
 											register={register}
-											name={"model"}
+											name={"prevInsu"}
 											value={index}
 											height={"50px"}
 											width={"90px"}
 											setValue={setValue}
-											Selected={model}
+											Selected={prevIns}
 										/>
 									</Col>
 								))}
 							</Row>
 						</TileConatiner>
 						<TabContinueWrap>
-							<div onclick="withoutExpiryDate()">
-								I know the Policy expiry details
+							<div onClick={() => handleNoPrev()}>
+								I dont know the Policy details
 							</div>
 						</TabContinueWrap>
 					</ModelWrap>
@@ -98,153 +175,134 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 						<img src={backButton} />
 					</BackBtn>
 					<ModelWrap>
-						<RegiHeading>
-							Is there any claim made in your previous policy term?
-						</RegiHeading>
-						<TileConatiner>
-							<Row
-								className="YesNoToggle"
-								style={{
-									justifyContent: "Center",
-									marginRight: "50px",
-								}}
+						<Form onSubmit={handleSubmit(onSubmit)} className="w-100 ncbForm">
+							<RegiHeading> Enter Policy Expiration Date</RegiHeading>
+							<Col
+								xs="12"
+								sm="12"
+								md="12"
+								lg="12"
+								xl="12"
+								className="w-100 mt-4"
 							>
-								{BooleanData.map((item, index) => (
-									<Col
-										xs="6"
-										sm="6"
-										md="4"
-										lg="3"
-										xl="3"
-										className="d-flex justify-content-center"
-										onClick={() => {
-											setStep(step + 1);
-										}}
-									>
-										<Tile
-											text={item?.name}
-											id={index}
-											register={register}
-											name={"model"}
-											value={index}
-											height={"50px"}
-											width={"130px"}
-											setValue={setValue}
-											Selected={model}
-										/>
-									</Col>
-								))}
-							</Row>
-						</TileConatiner>
-						<div class="col-md-12 text-center">
-							<div
-								class="popupSubHead ncsSubHeadNo"
-								style={{
-									display: "block",
-									marginTop: "30px",
-									marginBottom: "30px",
-								}}
-							>
-								Please select your existing NCB
-							</div>
-							<div
-								class="vehRadioWrap ncsPercentCheck"
-								style={{ display: "block" }}
-							>
-								<input
-									type="radio"
-									id="existinNcb0"
-									name="existinNcb"
-									value="0%"
-								/>
-								<label for="existinNcb0">0%</label>
-								<input
-									type="radio"
-									id="existinNcb20"
-									name="existinNcb"
-									value="20%"
-								/>
-								<label for="existinNcb20">20%</label>
-								<input
-									type="radio"
-									id="existinNcb25"
-									name="existinNcb"
-									value="25%"
-								/>
-								<label for="existinNcb25">25%</label>
-								<input
-									type="radio"
-									id="existinNcb35"
-									name="existinNcb"
-									value="35%"
-								/>
-								<label for="existinNcb35">35%</label>
-								<input
-									type="radio"
-									id="existinNcb45"
-									name="existinNcb"
-									value="45%"
-								/>
-								<label for="existinNcb45">45%</label>
-								<input
-									type="radio"
-									id="existinNcb50"
-									name="existinNcb"
-									value="50%"
-								/>
-								<label for="existinNcb50">50%</label>
-							</div>
-						</div>
-					</ModelWrap>
-				</Row>
-			</Body>
-		</>
-	);
-
-	const Page3 = (
-		<>
-			<Body>
-				<BackBtn
-					onClick={() => {
-						setStep(step - 1);
-					}}
-				>
-					<img src={backButton} />
-				</BackBtn>
-				<Row>
-					<ModelWrap>
-						<RegiHeading>When is your previous policy expiring?</RegiHeading>
-						<TileConatiner>
-							<Row
-								style={{
-									justifyContent: "Center",
-									marginRight: "50px",
-								}}
-							>
-								<Col xs={12} sm={12} md={12} lg={6} xl={4} className="">
-									<div className="py-2 dateTimeOne">
-										<Controller
-											control={control}
-											name="expiry"
-											render={({ onChange, onBlur, value, name }) => (
-												<DateInput
-													minDate={false}
-													value={value}
-													name={name}
-													onChange={onChange}
-													ref={register}
-												/>
-											)}
-										/>
-										{!!errors.expiry && (
-											<ErrorMsg fontSize={"12px"}>
-												{errors.expiry.message}
-											</ErrorMsg>
+								<div className="py-2 dateTimeThree">
+									<Controller
+										control={control}
+										name="expiry"
+										defaultValue={temp_data?.expiry}
+										render={({ onChange, onBlur, value, name }) => (
+											<DateInput
+												maxDate={policyMax}
+												minDate={policyMin}
+												value={value}
+												name={name}
+												onChange={onChange}
+												ref={register}
+												error={errors && errors?.year}
+											/>
 										)}
-									</div>
-								</Col>
-							</Row>
-						</TileConatiner>
+									/>
+									{!!errors?.year && (
+										<Error className="mt-1">{errors?.year?.message}</Error>
+									)}
+								</div>
+								<input ref={register} name="ncb" type="hidden" />
+							</Col>
+							{watch("expiry") && diffDays < 91 && (
+								<>
+									<Row className="w-100 d-flex justify-content-center mt-4 mx-auto">
+										<RegiHeading>
+											{" "}
+											Did you make a claim in your existing policy?
+										</RegiHeading>
+										<div
+											className="px-5 d-flex justify-content-center mx-auto "
+											style={{ width: "50%" }}
+										>
+											<Col
+												sm="6"
+												md="6"
+												lg="6"
+												xl="6"
+												className="d-flex justify-content-center px-5 mt-2"
+											>
+												<Button
+													onClick={() => setNoClaimMade(true)}
+													variant={noClaimMade ? "success" : "outline-success"}
+												>
+													No
+												</Button>
+											</Col>
+											<Col
+												sm="6"
+												md="6"
+												lg="6"
+												xl="6"
+												className="d-flex justify-content-center px-5 mt-2"
+											>
+												<Button
+													onClick={() => setNoClaimMade(false)}
+													variant={!noClaimMade ? "success" : "outline-success"}
+												>
+													Yes
+												</Button>
+											</Col>
+										</div>
+									</Row>
+									{noClaimMade && (
+										<Row className="w-100 d-flex justify-content-center mt-4 mx-auto">
+											<div className="px-5 d-flex flex-column align-content-center mx-auto mt-4">
+												<RegiHeading>
+													{"Enter your NCB (No Claim Bonus)"}
+												</RegiHeading>
+
+												<>
+													<div
+														class="vehRadioWrap ncsPercentCheck"
+														style={{ display: "block" }}
+													>
+														{myOrderedNcbList.map((item, index) => (
+															<>
+																<input
+																	type="radio"
+																	id={item?.ncbId}
+																	name="ncb"
+																	value={`${item?.discountRate}%`}
+																	ref={register}
+																	defaultChecked={
+																		temp_data?.ncb === `${item?.discountRate}%`
+																	}
+																/>
+																<label for={item?.ncbId}>
+																	{item?.discountRate}%
+																</label>
+															</>
+														))}
+													</div>
+												</>
+											</div>
+										</Row>
+									)}
+								</>
+							)}
+							<Col
+								sm="12"
+								md="12"
+								lg="12"
+								xl="12"
+								className="d-flex justify-content-center mt-5"
+							>
+								<Btn
+									buttonStyle="outline-solid"
+									hex1="#bdd400"
+									hex2="#bdd400"
+									borderRadius="10px"
+									type="submit"
+								>
+									Proceed
+								</Btn>
+							</Col>
+						</Form>
 					</ModelWrap>
 				</Row>
 			</Body>
@@ -257,7 +315,7 @@ const PrevInsurerPopup = ({ show, onClose }) => {
 			width="900px"
 			show={show}
 			onClose={onClose}
-			content={step === 1 ? Page1 : step === 2 ? Page2 : Page3}
+			content={step === 1 ? Page1 : Page2}
 			position="bottom"
 			backGround="grey"
 			outside={true}

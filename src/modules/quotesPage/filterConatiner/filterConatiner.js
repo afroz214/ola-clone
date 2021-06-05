@@ -118,7 +118,12 @@ export const FilterContainer = (quotesPage) => {
 								<FilterMenuOpenWrap>
 									<FilterMenuOpenSub>
 										Policy Expiry:{" "}
-										<FilterMenuOpenSubBold>30-Apr-2021</FilterMenuOpenSubBold>
+										<FilterMenuOpenSubBold>
+											{" "}
+											{userData.temp_data?.expiry
+												? userData?.temp_data?.expiry
+												: "30 - Apr - 2021"}
+										</FilterMenuOpenSubBold>
 									</FilterMenuOpenSub>
 									<FilterMenuOpenEdit>
 										<FilterMenuOpenTitle>
@@ -163,7 +168,13 @@ export const FilterContainer = (quotesPage) => {
 							<Col lg={3} md={12}>
 								<FilterMenuOpenWrap>
 									<FilterMenuOpenSub>
-										New NCB: <FilterMenuOpenSubBold>10%</FilterMenuOpenSubBold>
+										New NCB:{" "}
+										<FilterMenuOpenSubBold>
+											{" "}
+											{userData.temp_data?.ncb
+												? userData?.temp_data?.ncb
+												: "10%"}
+										</FilterMenuOpenSubBold>
 									</FilterMenuOpenSub>
 									<FilterMenuOpenEdit>
 										<FilterMenuOpenTitle onClick={() => setNcbPopup(true)}>
@@ -358,8 +369,10 @@ const FilterMenuOpenSub = styled.div`
 	font-size: 14px;
 	line-height: 17px;
 	color: #707070;
+	min-width: 150px;
 	@media (max-width: 996px) {
 		margin-bottom: 15px;
+		min-width: "none";
 	}
 `;
 

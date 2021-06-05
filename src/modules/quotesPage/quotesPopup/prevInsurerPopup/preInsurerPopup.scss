@@ -98,3 +98,37 @@ input {
 	border: 0;
 	overflow: hidden;
 }
+
+.ncbForm {
+	.btn-success:hover {
+		color: #fff;
+		background-color: #bdd400;
+		border-color: #bdd400;
+	}
+	.btn-outline-success {
+		color: #bdd400;
+		border-color: #bdd400;
+	}
+	.btn-success:not(:disabled):not(.disabled).active,
+	.btn-success:not(:disabled):not(.disabled):active,
+	.show > .btn-success.dropdown-toggle {
+		color: #fff;
+		background-color: #bdd400;
+		border-color: #bdd400;
+	}
+	.btn-success:not(:disabled):not(.disabled).active:focus,
+	.btn-success:not(:disabled):not(.disabled):active:focus,
+	.show > .btn-success.dropdown-toggle:focus {
+		box-shadow: 0 0 0 0.2rem #bdd400;
+	}
+	.btn-success {
+		color: #fff;
+		background-color: #bdd400;
+		border-color: #bdd400;
+	}
+	.btn-outline-success:hover {
+		color: #fff;
+		background-color: #bdd400;
+		border-color: #bdd400;
+	}
+}
