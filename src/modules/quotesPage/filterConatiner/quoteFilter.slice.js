@@ -10,6 +10,7 @@ export const quoteFilterSlice = createSlice({
 		success: null,
 		ncbList: [],
 		tempData: {},
+		saveQuote: null,
 	},
 	reducers: {
 		loading: (state) => {
@@ -39,16 +40,38 @@ export const quoteFilterSlice = createSlice({
 		setTempData: (state, { payload }) => {
 			state.tempData = { ...state.tempData, ...payload };
 		},
+
+		saveQuoteData: (state, { payload }) => {
+			state.saveQuote = payload;
+		},
 	},
 });
 
-export const { loading, success, error, clear, ncbList, setTempData } =
-	quoteFilterSlice.actions;
+export const {
+	loading,
+	success,
+	error,
+	clear,
+	ncbList,
+	setTempData,
+	saveQuoteData,
+} = quoteFilterSlice.actions;
 
 export const NcbList = (data) => {
 	return async (dispatch) => {
 		try {
 			actionStructre(dispatch, ncbList, error, service.ncbList, data);
+		} catch (err) {
+			dispatch(error("Something went wrong"));
+			console.error("Error", err);
+		}
+	};
+};
+
+export const SaveQuoteData = (data) => {
+	return async (dispatch) => {
+		try {
+			actionStructre(dispatch, saveQuoteData, error, service.saveQuote, data);
 		} catch (err) {
 			dispatch(error("Something went wrong"));
 			console.error("Error", err);
