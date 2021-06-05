@@ -1,10 +1,13 @@
 import HttpClient from "api/httpClient";
 
+//lead-page
+const enquiry = (data) => HttpClient("/createEnquiryId", { method: "POST", data });
+
 //journey-type
 const type = (data) => HttpClient("/getOwnerTypes", { method: "POST", data });
 
 //vehicle type
-const vehicleType = (data) => HttpClient("/getVehicleType", { method: "POST", data });
+const vehicleType = (data) => HttpClient("/getVehicleCategory", { method: "POST", data });
 
 //brand type
 const brandType = (data) => HttpClient("/getManufacturer", { method: "POST", data });
@@ -16,6 +19,7 @@ const modelType = (data) => HttpClient("/getModelVersion", { method: "POST", dat
 const rto = (data) => HttpClient("/getRto", { method: "POST", data });
 
 export default {
+    enquiry,
 	type,
 	vehicleType,
     brandType,

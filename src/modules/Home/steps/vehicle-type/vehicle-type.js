@@ -30,20 +30,15 @@ export const VehicleType = () => {
 	const [selected, setSelected] = useState(false);
 	const [carrierType, setCarrierType] = useState(false);
 
-	//prefill data
+	// prefill data
 	useEffect(() => {
-		if (temp_data?.comVehicleTypeId) {
-			setSelected(temp_data?.comVehicleTypeId);
+		if (temp_data?.productCategoryId) {
+			setSelected(temp_data?.productCategoryId);
 		}
 		if (temp_data?.carrierType) {
 			setCarrierType(temp_data?.carrierType);
 		}
 	}, [temp_data]);
-
-	// validation schema
-	// const yupValidate = yup.object({
-	// 	reg_no: yup.string().required("Registration No. is required"),
-	// });
 
 	const { handleSubmit, register, errors } = useForm({
 		// resolver: yupResolver(yupValidate),
@@ -53,13 +48,14 @@ export const VehicleType = () => {
 
 	const onSubmit = (VehicalType, cType) => {
 		let productSubTypeId = vehicleType?.filter(
-			({ comVehicleTypeId }) => Number(comVehicleTypeId) === Number(VehicalType)
+			({ productCategoryId }) => Number(productCategoryId) === Number(VehicalType)
 		);
 		dispatch(
 			set_temp_data({
 				productSubTypeId: Number(productSubTypeId[0]?.productSubTypeId),
-				comVehicleTypeId: Number(VehicalType),
-				comVehicleTypeName: productSubTypeId[0]?.comVehicleTypeName,
+				productCategoryId: Number(VehicalType),
+				productSubTypeCode: productSubTypeId[0]?.productSubTypeCode,
+				productCategoryName: productSubTypeId[0]?.productCategoryName,
 				carrierType: Number(cType),
 			})
 		);
@@ -86,7 +82,7 @@ export const VehicleType = () => {
 				<Row className="d-flex justify-content-center w-100 mt-4">
 					{vehicleType?.map(
 						(
-							{ comVehicleTypeId, comVehicleTypeName, productSubTypeId, img },
+							{ productCategoryId, productSubTypeCode, productSubTypeId, img },
 							index
 						) => (
 							<Col
@@ -100,14 +96,14 @@ export const VehicleType = () => {
 								<div className="m-1 d-flex justify-content-center h-100 w-100">
 									<Button
 										variant={
-											selected === Number(comVehicleTypeId) ? "success" : "outline-success"
+											selected === Number(productCategoryId) ? "success" : "outline-success"
 										}
 										className="btn-filter text-center h-100 w-100 d-flex flex-column align-content-between"
 										type="button"
 										onClick={() =>
-											Number(comVehicleTypeId) === 2
-												? setSelected(Number(comVehicleTypeId))
-												: onSubmit(comVehicleTypeId)
+											Number(productCategoryId) === 2
+												? setSelected(Number(productCategoryId))
+												: onSubmit(productCategoryId)
 										}
 									>
 										<div
@@ -122,7 +118,7 @@ export const VehicleType = () => {
 													src={img}
 													alt="img"
 													className={
-														selected === Number(comVehicleTypeId)
+														selected === Number(productCategoryId)
 															? "filter-white"
 															: "filter-green"
 													}
@@ -138,7 +134,7 @@ export const VehicleType = () => {
 													style={{ fontSize: "14px", fontWeight: "800" }}
 													className="text-center h-100 w-100 overflow-auto label-text"
 												>
-													{comVehicleTypeName || "N/A"}
+													{productSubTypeCode || "N/A"}
 												</label>
 											</div>
 										</div>
