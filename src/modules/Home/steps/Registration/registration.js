@@ -72,9 +72,9 @@ export const Registration = () => {
 					<text style={{ color: "black" }}>Back</text>
 				</BackButton>
 			</div>
-			<div className="ml-4 my-4 w-100 mx-auto">
-				<Row className="text-center w-100">
-					<div className="mt-4 d-flex flex-column justify-content-center w-100">
+			<div className="my-4 w-100 mx-auto d-flex flex-column align-content-center">
+				<Row className="text-center w-100 mx-auto">
+					<div className="mt-4 d-flex flex-column align-content-center w-100 mx-auto">
 						<h4 className="text-center w-100">
 							Smart choice, We'll make it quick and easy for you.
 						</h4>
@@ -83,9 +83,9 @@ export const Registration = () => {
 						</h3>
 					</div>
 				</Row>
-				<Row className="w-100 d-flex no-wrap mt-5 mx-auto">
-					<StyledCol sm="12" md="12" lg="9" xl="9" className="p-0 my-2 mx-2">
-						<div className="w-100">
+				<StyledRow className="w-100 d-flex no-wrap mt-5 mx-auto justify-content-center">
+					<StyledCol sm="12" md="12" lg="9" xl="9" className="p-0 my-2 mx-auto">
+						<div className="w-100 mx-auto">
 							<TextInput
 								lg
 								type="text"
@@ -108,7 +108,7 @@ export const Registration = () => {
 							)}
 						</div>
 					</StyledCol>
-					<StyledCol sm="12" md="12" lg="2" xl="2" className="p-0 my-2 mx-2 d-flex justify-content-center">
+					<StyledCol sm="12" md="12" lg="2" xl="2" className="p-0 my-2 mx-auto d-flex justify-content-center">
 						<Button
 							buttonStyle="outline-solid"
 							hex1="#bdd400"
@@ -121,8 +121,8 @@ export const Registration = () => {
 							Proceed
 						</Button>
 					</StyledCol>
-				</Row>
-				<Row className="w-100 d-flex no-wrap mt-4">
+				</StyledRow>
+				<Row className="w-100 d-flex no-wrap mt-2 justify-content-center mx-auto">
 					<Col
 						sm="12"
 						md="12"
@@ -153,7 +153,7 @@ export const Registration = () => {
 							</label>
 						</Button>
 						<Button
-							className="mx-2 m-2"
+							className="mx-2 my-2"
 							buttonStyle="outline-solid"
 							hex1="#006400"
 							hex2="#228B22"
@@ -176,5 +176,17 @@ const StyledCol = styled(Col)`
 	@media (max-width: 992px) {
 		display: flex;
 		justify-content: center;
+	}
+`;
+
+const StyledRow = styled(Row)`
+	@media (max-width: 992px) {
+		display: flex !important;
+		flex-direction: column !important;
+		align-content: center !important;
+		width: 100% !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		flex-wrap: no-wrap !important;
 	}
 `;
