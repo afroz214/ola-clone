@@ -118,8 +118,8 @@ export const FilterContainer = (quotesPage) => {
 									<FilterMenuOpenSub>
 										{userData?.temp_data?.manfName ? (
 											<>
-												{userData?.vehicleType[0]?.comVehicleTypeName} | Petrol
-												|{userData?.temp_data?.rtoNumber} AR 7294
+												{userData?.temp_data?.productSubTypeCode} | Petrol |
+												{userData?.temp_data?.rtoNumber} AR 7294
 											</>
 										) : (
 											<> Private Car | Petrol | MH01 AR 7294 </>
