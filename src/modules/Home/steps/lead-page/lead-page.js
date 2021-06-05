@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { Textbox, Button, Error, Label } from "components";
 import { useForm } from "react-hook-form";
@@ -6,29 +6,31 @@ import styled from "styled-components";
 import * as yup from "yup";
 import { numOnly } from "utils";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from 'react-router';
+import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { set_temp_data, Enquiry, clear } from "modules/Home/home.slice";
 
 // validation schema
 const yupValidate = yup.object({
-	email: yup
+	emailId: yup
 		.string()
 		.email("Please enter valid email id")
 		.min(2, "Minimum 2 chars required")
 		.max(50, "Must be less than 50 chars")
 		.required("Email id is required"),
-	mobile_no: yup
+	mobileNo: yup
 		.string()
 		.required("Mobile No. is required")
 		.matches(/^[7-9][0-9]{9}$/, "Must be only digits")
 		.min(10, "Mobile No. should be 10 digits")
 		.max(10, "Mobile No. should be 10 digits"),
-	last_name: yup
+	lastName: yup
 		.string()
 		.required("Last Name is required")
 		.min(2, "Minimum 2 chars required")
 		.max(50, "Must be less than 50 chars")
 		.matches(/^([A-Za-z\s])+$/, "Must contain only alphabets"),
-	first_name: yup
+	firstName: yup
 		.string()
 		.required("First Name is required")
 		.matches(/^([A-Za-z\s])+$/, "Must contain only alphabets")
@@ -37,28 +39,58 @@ const yupValidate = yup.object({
 });
 
 export const LeadPage = () => {
-    const history = useHistory();
-	const { handleSubmit, register, errors } = useForm({
+	const history = useHistory();
+	const dispatch = useDispatch();
+	const { temp_data, enquiry_id } = useSelector((state) => state.home);
+	console.log(enquiry_id?.enquiryId);
+
+	const { handleSubmit, register, errors, reset } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
 		reValidateMode: "onBlur",
 	});
 	const handleChange = () => {};
 
+	//prefill
+	useEffect(() => {
+		if (temp_data?.firstName) {
+			reset({
+				firstName: temp_data?.firstName,
+				lastName: temp_data?.lastName,
+				mobileNo: temp_data?.mobileNo,
+				emailId: temp_data?.emailId,
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [temp_data]);
+
+	//onSuccess
+	useEffect(() => {
+		if (enquiry_id?.enquiryId) {
+			history.push(`/journey-type?enquiry_id=${enquiry_id?.enquiryId}`);
+			dispatch(set_temp_data({ enquiry_id: enquiry_id?.enquiryId }));
+		}
+
+		return () => {
+			dispatch(clear("enquiry_id"));
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [enquiry_id]);
+
 	const onSubmit = (data) => {
-		console.log(data);
-        history.push('/journey-type');
+		dispatch(set_temp_data(data));
+		dispatch(Enquiry(data));
 	};
 
 	return (
 		<div className="ml-4 my-4 w-100 mx-auto">
 			<Row className="text-center w-100 mx-auto d-flex justify-content-center">
-					<div className="mt-4 d-flex justify-content-center w-100 mx-auto">
-						<h4 className="text-center w-100 mx-auto d-flex justify-content-center">
-							Please Enter Your Details
-						</h4>
-					</div>
-				</Row>
+				<div className="mt-4 d-flex justify-content-center w-100 mx-auto">
+					<h4 className="text-center w-100 mx-auto d-flex justify-content-center">
+						Please Enter Your Details
+					</h4>
+				</div>
+			</Row>
 			<Form onSubmit={handleSubmit(onSubmit)}>
 				<Row className="w-100 d-flex no-wrap mt-5 mx-auto">
 					<Col sm="12" md="6" lg="6" xl="6">
@@ -66,15 +98,17 @@ export const LeadPage = () => {
 							<Textbox
 								lg
 								type="text"
-								id="first_name"
+								id="firstName"
 								fieldName="First Name"
-								name="first_name"
+								name="firstName"
 								placeholder=" "
 								register={register}
 								onChange={handleChange}
-								error={errors?.first_name}
+								error={errors?.firstName}
 							/>
-							{!!errors.first_name && <Error style={{marginTop:'-20px'}}>{errors.first_name.message}</Error>}
+							{!!errors.firstName && (
+								<Error style={{ marginTop: "-20px" }}>{errors.firstName.message}</Error>
+							)}
 						</div>
 					</Col>
 					<Col sm="12" md="6" lg="6" xl="6">
@@ -82,15 +116,17 @@ export const LeadPage = () => {
 							<Textbox
 								lg
 								type="text"
-								id="last_name"
+								id="lastName"
 								fieldName="Last Name"
-								name="last_name"
+								name="lastName"
 								placeholder=" "
 								register={register}
 								onChange={handleChange}
-								error={errors?.last_name}
+								error={errors?.lastName}
 							/>
-							{!!errors.last_name && <Error style={{marginTop:'-20px'}}>{errors.last_name.message}</Error>}
+							{!!errors.lastName && (
+								<Error style={{ marginTop: "-20px" }}>{errors.lastName.message}</Error>
+							)}
 						</div>
 					</Col>
 					<Col sm="12" md="12" lg="12" xl="12">
@@ -98,17 +134,19 @@ export const LeadPage = () => {
 							<Textbox
 								lg
 								type="tel"
-								id="mobile_no"
+								id="mobileNo"
 								fieldName="Mobile No."
-								name="mobile_no"
+								name="mobileNo"
 								placeholder=" "
 								register={register}
 								onChange={handleChange}
-								error={errors?.mobile_no}
+								error={errors?.mobileNo}
 								maxLength="10"
 								onKeyDown={numOnly}
 							/>
-							{!!errors.mobile_no && <Error style={{marginTop:'-20px'}}>{errors.mobile_no.message}</Error>}
+							{!!errors.mobileNo && (
+								<Error style={{ marginTop: "-20px" }}>{errors.mobileNo.message}</Error>
+							)}
 						</div>
 					</Col>
 					<Col sm="12" md="12" lg="12" xl="12">
@@ -116,15 +154,17 @@ export const LeadPage = () => {
 							<Textbox
 								lg
 								type="text"
-								id="email"
+								id="emailId"
 								fieldName="Email"
-								name="email"
+								name="emailId"
 								placeholder=" "
 								register={register}
 								onChange={handleChange}
-								error={errors?.email}
+								error={errors?.emailId}
 							/>
-							{!!errors.email && <Error style={{marginTop:'-20px'}}>{errors.email.message}</Error>}
+							{!!errors.emailId && (
+								<Error style={{ marginTop: "-20px" }}>{errors.emailId.message}</Error>
+							)}
 						</div>
 					</Col>
 					<Col

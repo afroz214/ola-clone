@@ -8,6 +8,7 @@ export const homeSlice = createSlice({
 		loading: false,
 		error: null,
 		success: null,
+		enquiry_id: null,
 		type: [],
 		vehicleType: [],
 		brandType: [],
@@ -35,6 +36,16 @@ export const homeSlice = createSlice({
 			state.loading = null;
 			state.error = null;
 			state.success = null;
+			switch (payload) {
+				case "enquiry_id":
+					state.enquiry_id = null;
+					break;
+				default:
+					break;
+			}
+		},
+		enquiry_id: (state, { payload }) => {
+			state.enquiry_id = payload;
 		},
 		type: (state, { payload }) => {
 			state.type = payload;
@@ -68,7 +79,19 @@ export const {
 	modelType,
 	set_temp_data,
 	rto,
+	enquiry_id,
 } = homeSlice.actions;
+
+export const Enquiry = (data) => {
+	return async (dispatch) => {
+		try {
+			actionStructre(dispatch, enquiry_id, error, service.enquiry, data);
+		} catch (err) {
+			dispatch(error("Something went wrong"));
+			console.error("Error", err);
+		}
+	};
+};
 
 export const Type = (data) => {
 	return async (dispatch) => {
