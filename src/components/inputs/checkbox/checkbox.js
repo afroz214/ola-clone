@@ -33,25 +33,25 @@ const Checkbox = ({
 					name={`${name}[${index}]`}
 				/>
 				<label className="form-check-label" htmlFor={id}>
-					{fieldName}
+					{fieldName}{" "}
+					<span style={{ marginLeft: "3px" }}>
+						<CustomTooltip
+							rider="true"
+							id={`${name}[${index}]tooltip`}
+							place={"bottom"}
+							customClassName="mt-3 riderPageTooltip "
+						>
+							<img
+								data-tip={`<h3 >${fieldName}</h3> <div>${tooltipData}</div>`}
+								data-html={true}
+								data-for={`${name}[${index}]tooltip`}
+								src={tooltip}
+								alt="tooltip"
+								className="toolTipRiderChild"
+							/>
+						</CustomTooltip>
+					</span>
 				</label>
-				<span style={{ marginLeft: "3px" }}>
-					<CustomTooltip
-						rider="true"
-						id={`${name}[${index}]tooltip`}
-						place={"bottom"}
-						customClassName="mt-3 riderPageTooltip "
-					>
-						<img
-							data-tip={`<h3 >${fieldName}</h3> <div>${tooltipData}</div>`}
-							data-html={true}
-							data-for={`${name}[${index}]tooltip`}
-							src={tooltip}
-							alt="tooltip"
-							className="toolTipRiderChild"
-						/>
-					</CustomTooltip>
-				</span>
 			</div>
 		</>
 	);
