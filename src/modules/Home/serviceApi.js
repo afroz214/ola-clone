@@ -9,6 +9,9 @@ const type = (data) => HttpClient("/getOwnerTypes", { method: "POST", data });
 //vehicle type
 const vehicleType = (data) => HttpClient("/getVehicleCategory", { method: "POST", data });
 
+//variant type
+const variantType = (data) => HttpClient("/getModelVersion", { method: "POST", data });
+
 //brand type
 const brandType = (data) => HttpClient("/getManufacturer", { method: "POST", data });
 
@@ -24,5 +27,6 @@ export default {
 	vehicleType,
     brandType,
     modelType,
-    rto
+    rto,
+    variantType,
 };

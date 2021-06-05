@@ -129,7 +129,7 @@ export const Brand = ({ stepFn }) => {
 		<>
 			{!show ? (
 				<>
-					<Row className="mx-auto">
+					<Row className="d-flex justify-content-center mx-auto">
 						{TileBrands?.map(({ img, manfId, manfName }, index) => (
 							<Col
 								xs="6"
@@ -137,7 +137,7 @@ export const Brand = ({ stepFn }) => {
 								md="4"
 								lg="3"
 								xl="3"
-								className="d-flex justify-content-center"
+								className="d-flex justify-content-center mx-auto"
 							>
 								<Tile
 									logo={img}
