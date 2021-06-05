@@ -41,7 +41,7 @@ export const JourneyType = ({ enquiry_id }) => {
 
 	const onSubmit = (ownerTypeId) => {
 		dispatch(set_temp_data({ ownerTypeId: ownerTypeId }));
-		history.push(`/registration?${temp_data?.enquiry_id || enquiry_id}`);
+		history.push(`/registration?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`);
 	};
 
 	return (
