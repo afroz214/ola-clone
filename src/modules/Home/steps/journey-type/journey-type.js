@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button, Form } from "react-bootstrap";
 import { Button as Btn, BackButton } from "components";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Type, set_temp_data } from "modules/Home/home.slice";
 import _ from "lodash";
+
 
 // validation schema
 const yupValidate = yup.object({
@@ -18,6 +19,8 @@ export const JourneyType = () => {
 	const dispatch = useDispatch();
 	const { type, temp_data } = useSelector((state) => state.home);
 	const history = useHistory();
+	const location = useLocation();
+	const query = new URLSearchParams(location.search);
 	/*---------------- back button---------------------*/
 	const back = () => {
 		history.push("/lead-page");
@@ -29,9 +32,9 @@ export const JourneyType = () => {
 		mode: "all",
 		reValidateMode: "onBlur",
 	});
-	console.log(temp_data)
+
 	let selected = watch("ownerTypeId") || temp_data?.ownerTypeId;
-	console.log()
+
 	//type load
 	useEffect(() => {
 		dispatch(Type());
@@ -39,9 +42,8 @@ export const JourneyType = () => {
 	}, []);
 
 	const onSubmit = (ownerTypeId) => {
-		console.log(ownerTypeId)
 		dispatch(set_temp_data({ ownerTypeId: ownerTypeId }));
-		history.push("/registration");
+		history.push(`/registration?${temp_data?.enquiry_id}`);
 	};
 
 	return (

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { VehicleType as Type, set_temp_data } from "modules/Home/home.slice";
@@ -13,7 +13,6 @@ import { VehicleType as Type, set_temp_data } from "modules/Home/home.slice";
 export const VehicleType = () => {
 	const dispatch = useDispatch();
 	const { vehicleType, temp_data } = useSelector((state) => state.home);
-	console.log(vehicleType);
 	const history = useHistory();
 	/*---------------- back button---------------------*/
 	const back = () => {
@@ -32,8 +31,8 @@ export const VehicleType = () => {
 
 	// prefill data
 	useEffect(() => {
-		if (temp_data?.productCategoryId) {
-			setSelected(temp_data?.productCategoryId);
+		if (temp_data?.productSubTypeId) {
+			setSelected(temp_data?.productSubTypeId);
 		}
 		if (temp_data?.carrierType) {
 			setCarrierType(temp_data?.carrierType);
@@ -48,12 +47,12 @@ export const VehicleType = () => {
 
 	const onSubmit = (VehicalType, cType) => {
 		let productSubTypeId = vehicleType?.filter(
-			({ productCategoryId }) => Number(productCategoryId) === Number(VehicalType)
+			({ productSubTypeId }) => Number(productSubTypeId) === Number(VehicalType)
 		);
 		dispatch(
 			set_temp_data({
-				productSubTypeId: Number(productSubTypeId[0]?.productSubTypeId),
-				productCategoryId: Number(VehicalType),
+				productSubTypeId:
+					Number(VehicalType) || Number(productSubTypeId[0]?.productSubTypeId),
 				productSubTypeCode: productSubTypeId[0]?.productSubTypeCode,
 				productCategoryName: productSubTypeId[0]?.productCategoryName,
 				carrierType: Number(cType),
@@ -81,10 +80,7 @@ export const VehicleType = () => {
 				</Row>
 				<Row className="d-flex justify-content-center w-100 mt-4">
 					{vehicleType?.map(
-						(
-							{ productCategoryId, productSubTypeCode, productSubTypeId, img },
-							index
-						) => (
+						({ productSubTypeId, productSubTypeCode, img }, index) => (
 							<Col
 								xs="6"
 								sm="6"
@@ -96,14 +92,14 @@ export const VehicleType = () => {
 								<div className="m-1 d-flex justify-content-center h-100 w-100">
 									<Button
 										variant={
-											selected === Number(productCategoryId) ? "success" : "outline-success"
+											selected === Number(productSubTypeId) ? "success" : "outline-success"
 										}
 										className="btn-filter text-center h-100 w-100 d-flex flex-column align-content-between"
 										type="button"
 										onClick={() =>
-											Number(productCategoryId) === 2
-												? setSelected(Number(productCategoryId))
-												: onSubmit(productCategoryId)
+											Number(productSubTypeId) === 2
+												? setSelected(Number(productSubTypeId))
+												: onSubmit(productSubTypeId)
 										}
 									>
 										<div
@@ -118,7 +114,7 @@ export const VehicleType = () => {
 													src={img}
 													alt="img"
 													className={
-														selected === Number(productCategoryId)
+														selected === Number(productSubTypeId)
 															? "filter-white"
 															: "filter-green"
 													}
@@ -131,7 +127,7 @@ export const VehicleType = () => {
 												className="text-center w-100 h-100 mt-4"
 											>
 												<label
-													style={{ fontSize: "14px", fontWeight: "800" }}
+													style={{ fontSize: "12.5px", fontWeight: "800" }}
 													className="text-center h-100 w-100 overflow-auto label-text"
 												>
 													{productSubTypeCode || "N/A"}

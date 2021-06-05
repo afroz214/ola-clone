@@ -12,10 +12,11 @@ import {
 	VehicleType,
 	JourneyType,
 } from "./steps";
+import _ from "lodash";
 
 export const Home = () => {
 	const dispatch = useDispatch();
-	const { error } = useSelector((state) => state.home);
+	const { error, temp_data } = useSelector((state) => state.home);
 	const location = useLocation();
 	const backgroundSplash = (url) => {
 		// switch (url) {
@@ -50,6 +51,16 @@ export const Home = () => {
 				return "";
 		}
 	};
+
+	//check enquiry
+	useEffect(() => {
+		if (!_.isEmpty(temp_data) && location.pathname !== "/lead-page") {
+			if (!temp_data?.enquiry_id) {
+				swal("Enquiry Id not found, redirecting to homepage", "", "info");
+			}
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [temp_data]);
 
 	//onError
 	useEffect(() => {

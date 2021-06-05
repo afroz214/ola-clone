@@ -44,18 +44,31 @@ export const LeadPage = () => {
 	const { temp_data, enquiry_id } = useSelector((state) => state.home);
 	console.log(enquiry_id?.enquiryId);
 
-	const { handleSubmit, register, errors } = useForm({
+	const { handleSubmit, register, errors, reset } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
 		reValidateMode: "onBlur",
 	});
 	const handleChange = () => {};
 
+	//prefill
+	useEffect(() => {
+		if (temp_data?.firstName) {
+			reset({
+				firstName: temp_data?.firstName,
+				lastName: temp_data?.lastName,
+				mobileNo: temp_data?.mobileNo,
+				emailId: temp_data?.emailId,
+			});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [temp_data]);
+
 	//onSuccess
 	useEffect(() => {
 		if (enquiry_id?.enquiryId) {
 			history.push(`/journey-type?enquiry_id=${enquiry_id?.enquiryId}`);
-			dispatch(set_temp_data({enquiry_id: enquiry_id?.enquiryId}))
+			dispatch(set_temp_data({ enquiry_id: enquiry_id?.enquiryId }));
 		}
 
 		return () => {
@@ -65,7 +78,6 @@ export const LeadPage = () => {
 	}, [enquiry_id]);
 
 	const onSubmit = (data) => {
-		console.log(data);
 		dispatch(set_temp_data(data));
 		dispatch(Enquiry(data));
 	};

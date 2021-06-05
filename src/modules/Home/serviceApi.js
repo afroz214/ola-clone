@@ -13,7 +13,7 @@ const vehicleType = (data) => HttpClient("/getVehicleCategory", { method: "POST"
 const brandType = (data) => HttpClient("/getManufacturer", { method: "POST", data });
 
 //model type
-const modelType = (data) => HttpClient("/getModelVersion", { method: "POST", data });
+const modelType = (data) => HttpClient("/getModel", { method: "POST", data });
 
 //RTO
 const rto = (data) => HttpClient("/getRto", { method: "POST", data });
