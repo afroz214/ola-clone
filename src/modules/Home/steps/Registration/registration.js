@@ -47,7 +47,6 @@ export const Registration = () => {
 	const handleChange = () => {};
 	const regNo = watch('regNo')
 	const onSubmit = (journeyType) => {
-		console.log(regNo, journeyType)
 		if (
 			(Number(journeyType) === 1 && regNo) ||
 			Number(journeyType) === 2 ||
