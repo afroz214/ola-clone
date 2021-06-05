@@ -406,10 +406,10 @@ const FilterMenuOpenSub = styled.div`
 	font-size: 14px;
 	line-height: 17px;
 	color: #707070;
-	min-width: 220px;
+	min-width: 250px;
 	@media (max-width: 996px) {
 		margin-bottom: 15px;
-		min-width: "none";
+		min-width: auto;
 	}
 `;
 
