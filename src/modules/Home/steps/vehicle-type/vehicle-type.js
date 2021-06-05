@@ -10,13 +10,15 @@ import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
 import { VehicleType as Type, set_temp_data } from "modules/Home/home.slice";
 
-export const VehicleType = () => {
+export const VehicleType = ({ enquiry_id }) => {
 	const dispatch = useDispatch();
 	const { vehicleType, temp_data } = useSelector((state) => state.home);
 	const history = useHistory();
 	/*---------------- back button---------------------*/
 	const back = () => {
-		history.push("/registration");
+		history.push(
+			`/registration?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`
+		);
 	};
 	/*----------x----- back button-------x-------------*/
 
@@ -58,7 +60,9 @@ export const VehicleType = () => {
 				carrierType: Number(cType),
 			})
 		);
-		history.push("/vehicle-details");
+		history.push(
+			`/vehicle-details?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`
+		);
 	};
 
 	return (

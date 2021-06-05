@@ -9,18 +9,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Type, set_temp_data } from "modules/Home/home.slice";
 import _ from "lodash";
 
-
 // validation schema
 const yupValidate = yup.object({
 	ownerTypeId: yup.string().required("Type is required"),
 });
 
-export const JourneyType = () => {
+export const JourneyType = ({ enquiry_id }) => {
 	const dispatch = useDispatch();
 	const { type, temp_data } = useSelector((state) => state.home);
 	const history = useHistory();
-	const location = useLocation();
-	const query = new URLSearchParams(location.search);
+
 	/*---------------- back button---------------------*/
 	const back = () => {
 		history.push("/lead-page");
@@ -43,7 +41,7 @@ export const JourneyType = () => {
 
 	const onSubmit = (ownerTypeId) => {
 		dispatch(set_temp_data({ ownerTypeId: ownerTypeId }));
-		history.push(`/registration?${temp_data?.enquiry_id}`);
+		history.push(`/registration?${temp_data?.enquiry_id || enquiry_id}`);
 	};
 
 	return (
