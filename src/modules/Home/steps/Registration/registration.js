@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { TextInput, Button, ErrorMsg, Label, BackButton } from "components";
 import { useForm } from "react-hook-form";
@@ -6,11 +6,9 @@ import styled from "styled-components";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useHistory } from "react-router";
-
-// validation schema
-const yupValidate = yup.object({
-	reg_no: yup.string().required("Registration No. is required"),
-});
+import { useDispatch, useSelector } from "react-redux";
+import { set_temp_data } from "modules/Home/home.slice";
+import swal from "sweetalert";
 
 // .matches(
 // 	/^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}$/,
@@ -24,15 +22,43 @@ export const Registration = () => {
 	};
 	/*----------x----- back button-------x-------------*/
 	const history = useHistory();
-	const { handleSubmit, register, errors } = useForm({
+	const dispatch = useDispatch();
+	const { temp_data } = useSelector((state) => state.home);
+
+	// validation schema
+	const yupValidate = yup.object({
+		// ...(val && { regNo: yup.string().required("Registration No. is required") }),
+	});
+
+	const { handleSubmit, register, errors, setValue, watch } = useForm({
 		resolver: yupResolver(yupValidate),
 		mode: "all",
 		reValidateMode: "onBlur",
 	});
+
+	//prefill
+	useEffect(() => {
+		if (temp_data?.regNo) {
+			setValue("regNo", temp_data?.regNo);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [temp_data]);
+
 	const handleChange = () => {};
-	const onSubmit = (data) => {
-		console.log(data);
-		history.push("/vehicle-type");
+	const regNo = watch('regNo')
+	const onSubmit = (journeyType) => {
+		if (
+			(Number(journeyType) === 1 && regNo) ||
+			Number(journeyType) === 2 ||
+			Number(journeyType) === 3
+		) {
+			Number(journeyType) !== 1
+				? dispatch(set_temp_data({ journeyType, regNo: null }))
+				: dispatch(set_temp_data({ journeyType, regNo }));
+			history.push("/vehicle-type");
+		} else {
+			swal("Please fill all the details", "", "error");
+		}
 	};
 
 	return (
@@ -46,9 +72,9 @@ export const Registration = () => {
 					<text style={{ color: "black" }}>Back</text>
 				</BackButton>
 			</div>
-			<div className="ml-4 my-4">
-				<Row className="text-center w-100">
-					<div className="mt-4 d-flex flex-column justify-content-center w-100">
+			<div className="my-4 w-100 mx-auto d-flex flex-column align-content-center">
+				<Row className="text-center w-100 mx-auto">
+					<div className="mt-4 d-flex flex-column align-content-center w-100 mx-auto">
 						<h4 className="text-center w-100">
 							Smart choice, We'll make it quick and easy for you.
 						</h4>
@@ -57,48 +83,54 @@ export const Registration = () => {
 						</h3>
 					</div>
 				</Row>
-				<Form onSubmit={handleSubmit(onSubmit)}>
-					<Row className="w-100 d-flex no-wrap mt-5">
-						<StyledCol sm="12" md="12" lg="9" xl="9" className="p-0 my-2 mx-2">
-							<div className="w-100">
-								<TextInput
-									lg
-									type="text"
-									id="reg_no"
-									name="reg_no"
-									placeholder=" "
-									ref={register}
-									onChange={handleChange}
-									error={errors?.reg_no}
-								/>
-								<Label lg htmlFor="reg_no">
-									Enter your Vehicle Number
-								</Label>
-								{!!errors.reg_no ? (
-									<ErrorMsg>{errors.reg_no.message}</ErrorMsg>
-								) : (
-									<Form.Text className="text-muted">
-										<text style={{ color: "#bdbdbd" }}>e.g MH-01-AR-7294</text>
-									</Form.Text>
-								)}
-							</div>
-						</StyledCol>
-						<StyledCol sm="12" md="12" lg="2" xl="2" className="p-0 my-2 mx-2 d-flex">
-							<Button
-								buttonStyle="outline-solid"
-								hex1="#bdd400"
-								hex2="#bdd400"
-								borderRadius="5px"
-								height="60px"
-							>
-								Proceed
-							</Button>
-						</StyledCol>
-					</Row>
-				</Form>
-				<Row className="w-100 d-flex no-wrap mt-4">
-					<Col sm="12" md="12" lg="12" xl="12" className="text-center mx-auto d-flex justify-content-center">
-						<h4 className="font-weight-bolder">OR</h4>
+				<StyledRow className="w-100 d-flex no-wrap mt-5 mx-auto justify-content-center">
+					<StyledCol sm="12" md="12" lg="9" xl="9" className="p-0 my-2 mx-auto">
+						<div className="w-100 mx-auto d-flex flex-column align-content-center">
+							<TextInput
+								lg
+								type="text"
+								id="regNo"
+								name="regNo"
+								placeholder=" "
+								ref={register}
+								onChange={handleChange}
+								error={errors?.regNo}
+							/>
+							<Label lg htmlFor="regNo">
+								Enter your Vehicle Number
+							</Label>
+							{!!errors.regNo ? (
+								<ErrorMsg>{errors.regNo.message}</ErrorMsg>
+							) : (
+								<Form.Text className="text-muted">
+									<text style={{ color: "#bdbdbd" }}>e.g MH-01-AR-7294</text>
+								</Form.Text>
+							)}
+						</div>
+					</StyledCol>
+					<StyledCol sm="12" md="12" lg="2" xl="2" className="p-0 my-2 mx-auto d-flex justify-content-center">
+						<Button
+							buttonStyle="outline-solid"
+							hex1="#bdd400"
+							hex2="#bdd400"
+							borderRadius="5px"
+							onClick={() => onSubmit(1)}
+							height="60px"
+							type='submit'
+						>
+							Proceed
+						</Button>
+					</StyledCol>
+				</StyledRow>
+				<Row className="w-100 d-flex no-wrap mt-2 justify-content-center mx-auto">
+					<Col
+						sm="12"
+						md="12"
+						lg="12"
+						xl="12"
+						className="text-center mx-auto d-flex justify-content-center"
+					>
+						<h4 className="font-weight-bolder text-center">OR</h4>
 					</Col>
 					<Col
 						sm="12"
@@ -112,20 +144,22 @@ export const Registration = () => {
 							buttonStyle="outline-solid"
 							hex1="#006400"
 							hex2="#228B22"
+							onClick={() => onSubmit(2)}
 							borderRadius="5px"
-							onClick={() => history.push("/vehicle-details")}
+							type='submit'
 						>
 							<label style={{ cursor: "pointer" }} className="p-0 m-0">
 								Proceed without no.
 							</label>
 						</Button>
 						<Button
-							className="mx-2 m-2"
+							className="mx-2 my-2"
 							buttonStyle="outline-solid"
 							hex1="#006400"
 							hex2="#228B22"
 							borderRadius="5px"
-							onClick={() => history.push("/vehicle-details")}
+							onClick={() => onSubmit(3)}
+							type='submit'
 						>
 							<label style={{ cursor: "pointer" }} className="p-0 m-0">
 								New Car? Click Here
@@ -142,5 +176,17 @@ const StyledCol = styled(Col)`
 	@media (max-width: 992px) {
 		display: flex;
 		justify-content: center;
+	}
+`;
+
+const StyledRow = styled(Row)`
+	@media (max-width: 992px) {
+		display: flex !important;
+		flex-direction: column !important;
+		align-content: center !important;
+		width: 100% !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+		flex-wrap: no-wrap !important;
 	}
 `;
