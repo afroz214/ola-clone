@@ -59,7 +59,7 @@ export const JourneyType = ({ enquiry_id }) => {
 							<text style={{ color: "black" }}>Back</text>
 						</BackButton>
 					</div>
-					<div className="my-4 mx-auto">
+					<div className="my-4 mx-auto ElemFade">
 						<Row className="text-center w-100 mx-auto">
 							<div className="mt-0 d-flex flex-column justify-content-center w-100">
 								<h4 className="text-center w-100">Choose the Journey Type</h4>

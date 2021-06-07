@@ -79,7 +79,7 @@ export const VehicleType = ({ enquiry_id }) => {
 							<text style={{ color: "black" }}>Back</text>
 						</BackButton>
 					</div>
-					<div className="ml-4 my-4">
+					<div className="ml-4 my-4 ElemFade">
 						<Row className="text-center w-100">
 							<div className="mt-4 d-flex flex-column justify-content-center w-100">
 								<h3 className="text-center w-100">Choose the type of your vehicle</h3>

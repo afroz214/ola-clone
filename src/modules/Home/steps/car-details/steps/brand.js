@@ -132,7 +132,7 @@ export const Brand = ({ stepFn }) => {
 				<>
 					{!show ? (
 						<>
-							<Row className="d-flex justify-content-center mx-auto">
+							<Row className="d-flex justify-content-center mx-auto ElemFade">
 								{TileBrands?.map(({ img, manfId, manfName }, index) => (
 									<Col
 										xs="6"
@@ -156,8 +156,8 @@ export const Brand = ({ stepFn }) => {
 								))}
 							</Row>
 							{!_.isEmpty(OtherBrands) && (
-								<Row className="mx-auto d-flex no-wrap mt-4">
-									<Col xs="12" sm="12" md="12" lg="12" xl="12" className="linkLine">
+								<Row className="mx-auto d-flex no-wrap mt-4 ElemFade">
+									<Col xs="12" sm="12" md="12" lg="12" xl="12" className="linkLine ElemFade">
 										<Button variant="link" className="" onClick={() => setShow(true)}>
 											Don't See your Vehicle's Brand? Click Here
 										</Button>
@@ -166,7 +166,7 @@ export const Brand = ({ stepFn }) => {
 							)}
 						</>
 					) : (
-						<Form onSubmit={handleSubmit(onSubmit)} className="w-100 mx-auto">
+						<Form onSubmit={handleSubmit(onSubmit)} className="w-100 mx-auto ElemFade">
 							<Row className="mx-auto d-flex no-wrap mt-4 w-100">
 								<Col xs="12" sm="12" md="12" lg="12" xl="12">
 									<Controller

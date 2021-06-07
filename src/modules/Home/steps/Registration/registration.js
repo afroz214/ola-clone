@@ -74,7 +74,7 @@ export const Registration = ({ enquiry_id }) => {
 					<text style={{ color: "black" }}>Back</text>
 				</BackButton>
 			</div>
-			<div className="my-4 w-100 mx-auto d-flex flex-column align-content-center">
+			<div className="my-4 w-100 mx-auto d-flex flex-column align-content-center ElemFade">
 				<Row className="text-center w-100 mx-auto">
 					<div className="mt-4 d-flex flex-column align-content-center w-100 mx-auto">
 						<h4 className="text-center w-100">
