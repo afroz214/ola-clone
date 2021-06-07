@@ -14,13 +14,13 @@ export const QuotesPage = () => {
 	const history = useHistory();
 
 	const back = () => {
-		history.push(`/journey-type`);
+		history.push(`/journey-type?enquiry_id=${'abc'}&&dropout=yes`);
 	};
 	return (
 		<>
 			<MainContainer>
 				<Row>
-					<FilterContainer></FilterContainer>
+					<FilterContainer />
 				</Row>
 				<Row>
 					<Col lg={3}>
@@ -82,7 +82,7 @@ export const QuotesPage = () => {
 					<Col lg={3} md={12}>
 						<AddOnsCard />
 					</Col>
-					<Col lg={9} lg={9} md={12}>
+					<Col lg={9} md={12}>
 						<Row>
 							{tab === "tab1" && (
 								<>

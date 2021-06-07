@@ -17,12 +17,12 @@ export const CarDetails = ({ enquiry_id }) => {
 	/*----------x----- back button-------x-------------*/
 	const [Step, setStep] = useState(1);
 	const history = useHistory();
-	const { temp_data } = useSelector((state) => state.home);
+	const { temp_data, loading } = useSelector((state) => state.home);
 
 	//center auto scroll
 	useEffect(() => {
-		scrollToTargetAdjusted("stepper", 45);
-	}, []);
+		if (!loading) scrollToTargetAdjusted("stepper", 45);
+	}, [loading]);
 
 	//formData's
 	const [brandData, setBrandData] = useState({});
@@ -79,7 +79,9 @@ export const CarDetails = ({ enquiry_id }) => {
 	//After Completion
 	useEffect(() => {
 		if (Step > 6) {
-			history.push(`/journey-type?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`);
+			history.push(
+				`/journey-type?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`
+			);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [Step]);
