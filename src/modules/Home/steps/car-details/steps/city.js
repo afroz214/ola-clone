@@ -45,7 +45,7 @@ export const City = ({ stepFn }) => {
 
 	//prefill
 	useEffect(() => {
-		if (temp_data?.rtoNumber) {
+		if (temp_data?.rtoNumber && (!loading)) {
 			const { rtoNumber, rtoId, stateName, rtoName } = temp_data;
 			let selected_option = [
 				{
@@ -62,7 +62,7 @@ export const City = ({ stepFn }) => {
 			!_.isEmpty(selected_option) && setValue("sub_no", selected_option);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [temp_data]);
+	}, [temp_data, loading]);
 
 	const sub_no = watch("sub_no");
 
