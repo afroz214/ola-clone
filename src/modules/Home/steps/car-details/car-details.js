@@ -6,6 +6,7 @@ import { scrollToTargetAdjusted } from "utils";
 import { useHistory } from "react-router";
 import { BackButton } from "components";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 
 export const CarDetails = ({ enquiry_id }) => {
 	/*---------------- back button---------------------*/
@@ -87,7 +88,7 @@ export const CarDetails = ({ enquiry_id }) => {
 	}, [Step]);
 
 	return (
-		<>
+		<StyledDiv>
 			<div className="backBtn" style={{ paddingBottom: "30px" }}>
 				<BackButton type="button" onClick={back} style={{ marginTop: "-20px" }}>
 					<svg xmlns="http://www.w3.org/2000/svg" className="" viewBox="0 0 24 24">
@@ -97,10 +98,14 @@ export const CarDetails = ({ enquiry_id }) => {
 					<text style={{ color: "black" }}>Back</text>
 				</BackButton>
 			</div>
-			<Row className="w-100 mx-auto my-4" style={{ zIndex: "999" }} id="stepper">
-				<Col sm="12" md="12" lg="12" xl="12" className="p-0 my-0 m-0 w-100">
-					<div className="wrapper-progressBar">
-						<ul className="progressBar">
+			<Row
+				className="w-100 mx-auto my-4 d-flex justify-content-center"
+				style={{ zIndex: "999", position: "relative" }}
+				id="stepper"
+			>
+				<Col sm="12" md="12" lg="12" xl="12" className="p-0 my-0 m-0 w-100 mx-auto">
+					<div className="wrapper-progressBar w-100 mx-auto">
+						<ul className="progressBar w-100 mx-auto">
 							<li className={Step > 0 ? "active" : ""}>Brand</li>
 							<li className={Step > 1 ? "active" : ""}>Model</li>
 							<li className={Step > 2 ? "active" : ""}>Fuel Type</li>
@@ -150,6 +155,19 @@ export const CarDetails = ({ enquiry_id }) => {
 					<YearCM stepFn={stepFn} enquiry_id={temp_data?.enquiry_id || enquiry_id} />
 				)}
 			</Row>
-		</>
+		</StyledDiv>
 	);
 };
+
+const StyledDiv = styled.div`
+	height: 650px;
+	@media (max-width: 767px) {
+		height: 900px;
+	}
+	@media (max-width: 600px) {
+		height: 900px;
+	}
+	@media (max-width: 400px) {
+		height: 950px;
+	}
+`;
