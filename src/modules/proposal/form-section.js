@@ -235,6 +235,34 @@ const FormSection = (props) => {
 		setFormPrepolicy
 	);
 
+	/*--------------- Handle-page-scroll -------------*/
+	//using html to scroll instead of refs
+	useEffect(() => {
+		if (formOwner === "form") {
+			scrollToTargetAdjusted("owner", 45);
+		}
+		if (formNominee === "form") {
+			scrollToTargetAdjusted("nominee", 45);
+		}
+		if (formVehicle === "form") {
+			scrollToTargetAdjusted("vehicle", 45);
+		}
+		if (formPrepolicy === "form") {
+			scrollToTargetAdjusted("prepolicy", 45);
+		}
+		//scroll to t&c checkbox
+		if (
+			[formOwner, formNominee, formVehicle, formPrepolicy].every(
+				(elem) => elem === "summary"
+			)
+		) {
+			scrollToTargetAdjusted("review-submit");
+		}
+
+		//eslint-disable-next-line
+	}, [formOwner, formNominee, formVehicle, formPrepolicy]);
+	/*-------x------- Handle-page-scroll ------x------*/
+
 	return (
 		<div>
 			{/*--------------------Proposal Form-----------------------------------*/}
@@ -258,7 +286,7 @@ const FormSection = (props) => {
 					borderRadius: "50%",
 					border: "1px solid #495057",
 				}}
-				id="proposer"
+				id="owner"
 			>
 				{formOwner === "form" ? (
 					<div className="ElemFade m-0 p-1">
@@ -383,7 +411,7 @@ const FormSection = (props) => {
 				}
 				removeBottomHeader={true}
 				marginTop={formPrepolicy === "hidden" ? "5px" : ""}
-				id="nominee"
+				id="prepolicy"
 			>
 				<div
 					style={
