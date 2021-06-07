@@ -83,7 +83,7 @@ export const LeadPage = () => {
 	};
 
 	return (
-		<div className="ml-4 my-4 w-100 mx-auto">
+		<div className="ml-4 my-4 w-100 mx-auto ElemFade">
 			<Row className="text-center w-100 mx-auto d-flex justify-content-center">
 				<div className="mt-4 d-flex justify-content-center w-100 mx-auto">
 					<h4 className="text-center w-100 mx-auto d-flex justify-content-center">
