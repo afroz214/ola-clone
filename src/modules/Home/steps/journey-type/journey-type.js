@@ -21,7 +21,7 @@ export const JourneyType = ({ enquiry_id }) => {
 
 	/*---------------- back button---------------------*/
 	const back = () => {
-		history.push("/lead-page");
+		history.push(`/vehicle-details?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`);
 	};
 	/*----------x----- back button-------x-------------*/
 
@@ -41,7 +41,7 @@ export const JourneyType = ({ enquiry_id }) => {
 
 	const onSubmit = (ownerTypeId) => {
 		dispatch(set_temp_data({ ownerTypeId: ownerTypeId }));
-		history.push(`/registration?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`);
+		history.push(`/quotes?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`);
 	};
 
 	return (
