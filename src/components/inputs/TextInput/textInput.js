@@ -18,6 +18,7 @@ const Textbox = ({
 	isRequired,
 	onKeyDown,
 	register,
+	maxLength,
 	...otherProps
 }) => {
 	const _renderInput = () => (
@@ -34,6 +35,7 @@ const Textbox = ({
 					onChange={onChange}
 					error={error}
 					ref={register}
+					maxLength={maxLength}
 				/>
 				<Label md htmlFor={id}>
 					{fieldName}

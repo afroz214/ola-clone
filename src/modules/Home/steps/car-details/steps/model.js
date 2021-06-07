@@ -143,31 +143,62 @@ export const Model = ({ stepFn }) => {
 					{!show ? (
 						<>
 							<Row className="d-flex justify-content-center mx-auto ElemFade">
-								{TileModels?.map(({ modelId, modelName }, index) => (
+								{!_.isEmpty(modelType) ? (
+									TileModels?.map(({ modelId, modelName }, index) => (
+										<Col
+											xs="6"
+											sm="6"
+											md="4"
+											lg="3"
+											xl="3"
+											className="d-flex justify-content-center mx-auto"
+										>
+											<Tile
+												text={modelName || "N/A"}
+												id={modelId}
+												register={register}
+												name={"model"}
+												value={modelId}
+												height={"50px"}
+												setValue={setValue}
+												Selected={model || temp_data?.modelId}
+											/>
+										</Col>
+									))
+								) : (
 									<Col
-										xs="6"
-										sm="6"
-										md="4"
-										lg="3"
-										xl="3"
-										className="d-flex justify-content-center mx-auto"
+										sm="12"
+										md="12"
+										lg="12"
+										xl="12"
+										className="d-flex flex-column justify-content-center align-content-center"
 									>
-										<Tile
-											text={modelName || "N/A"}
-											id={modelId}
-											register={register}
-											name={"model"}
-											value={modelId}
-											height={"50px"}
-											setValue={setValue}
-											Selected={model || temp_data?.modelId}
+										<img
+											src="/assets/images/nodata3.png"
+											alt="nodata"
+											height="200"
+											width="200"
+											className="mx-auto"
 										/>
+										<label
+											className="text-secondary text-center mt-1"
+											style={{ fontSize: "16px" }}
+										>
+											No Data Found
+										</label>
 									</Col>
-								))}
+								)}
 							</Row>
 							{!_.isEmpty(OtherModels) && (
 								<Row className="mx-auto d-flex no-wrap mt-4 ElemFade">
-									<Col xs="12" sm="12" md="12" lg="12" xl="12" className="linkLine ElemFade">
+									<Col
+										xs="12"
+										sm="12"
+										md="12"
+										lg="12"
+										xl="12"
+										className="linkLine ElemFade"
+									>
 										<Button variant="link" className="" onClick={() => setShow(true)}>
 											Don't See your Vehicle's Model? Click Here
 										</Button>
@@ -176,7 +207,10 @@ export const Model = ({ stepFn }) => {
 							)}
 						</>
 					) : (
-						<Form onSubmit={handleSubmit(onSubmit)} className="w-100 mx-auto ElemFade">
+						<Form
+							onSubmit={handleSubmit(onSubmit)}
+							className="w-100 mx-auto ElemFade"
+						>
 							<Row className="mx-auto d-flex no-wrap mt-4 w-100">
 								<Col xs="12" sm="12" md="12" lg="12" xl="12">
 									<Controller
