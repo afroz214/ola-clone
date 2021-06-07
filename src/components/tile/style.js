@@ -15,7 +15,7 @@ export const Label = styled.div`
 	vertical-align: middle;
 	background-color: #fff;
 	color: #333;
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: ;
 	letter-spacing: 0.5px;
 	line-height: 17px;
