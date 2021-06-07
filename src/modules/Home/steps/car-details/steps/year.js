@@ -67,7 +67,7 @@ export const YearCM = ({ stepFn }) => {
 						)}
 					</div>
 				</Col>
-				<h3 className='text-center w-100 mx-auto mt-2'>{'Enter Manufacture Date'}</h3>
+				<h3 className='text-center w-100 mx-auto mt-3'>{'Enter Manufacture Date'}</h3>
 				<Col xs="12" sm="12" md="12" lg="12" xl="12" className="w-100 mt-4">
 					<div className="py-2 dateTimeThree">
 						<Controller
@@ -95,7 +95,7 @@ export const YearCM = ({ stepFn }) => {
 					md="12"
 					lg="12"
 					xl="12"
-					className="d-flex justify-content-center mt-5"
+					className="d-flex justify-content-center mt-4"
 				>
 					<Btn
 						buttonStyle="outline-solid"

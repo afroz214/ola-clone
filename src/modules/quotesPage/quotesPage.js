@@ -14,7 +14,7 @@ export const QuotesPage = () => {
 	const history = useHistory();
 
 	const back = () => {
-		history.push(`/journey-type`);
+		history.push(`/journey-type?enquiry_id=${'abc'}&&dropout=yes`);
 	};
 	return (
 		<>

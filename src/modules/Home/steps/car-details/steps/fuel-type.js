@@ -4,7 +4,7 @@ import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
-import { Tile, Button as Btn, TextInput, Label, Error } from "components";
+import { Tile, Button as Btn, TextInput, Label, Error, Loader } from "components";
 import swal from "sweetalert";
 import { useDispatch, useSelector } from "react-redux";
 import { set_temp_data } from "modules/Home/home.slice";
@@ -35,7 +35,7 @@ const Fuel = [
 
 export const FuelType = ({ stepFn }) => {
 	const dispatch = useDispatch();
-	const { temp_data } = useSelector((state) => state.home);
+	const { temp_data, loading } = useSelector((state) => state.home);
 	const [kit, setKit] = useState(true);
 
 	// validation schema
@@ -95,7 +95,7 @@ export const FuelType = ({ stepFn }) => {
 
 	return (
 		<>
-			{
+			{!loading ? (
 				<>
 					<Form onSubmit={handleSubmit(onSubmit)} className="w-100 mx-auto">
 						<Row className="mx-auto d-flex justify-content-center w-100 mx-auto">
@@ -216,7 +216,9 @@ export const FuelType = ({ stepFn }) => {
 						</Row>
 					</Form>
 				</>
-			}
+			) : (
+				<Loader />
+			)}
 		</>
 	);
 };
