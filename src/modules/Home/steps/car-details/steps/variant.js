@@ -113,31 +113,62 @@ export const Variant = ({ stepFn, enquiry_id }) => {
 					{!show ? (
 						<>
 							<Row className="d-flex justify-content-center mx-auto ElemFade">
-								{TileVariants?.map(({ versionId, versionName }, index) => (
+								{!_.isEmpty(varnt) ? (
+									TileVariants?.map(({ versionId, versionName }, index) => (
+										<Col
+											xs="6"
+											sm="6"
+											md="4"
+											lg="3"
+											xl="3"
+											className="d-flex justify-content-center mx-auto"
+										>
+											<Tile
+												text={versionName}
+												id={versionId}
+												register={register}
+												name={"variant"}
+												value={versionId}
+												height={"80px"}
+												setValue={setValue}
+												Selected={variant || temp_data?.versionId}
+											/>
+										</Col>
+									))
+								) : (
 									<Col
-										xs="6"
-										sm="6"
-										md="4"
-										lg="3"
-										xl="3"
-										className="d-flex justify-content-center mx-auto"
+										sm="12"
+										md="12"
+										lg="12"
+										xl="12"
+										className="d-flex flex-column justify-content-center align-content-center"
 									>
-										<Tile
-											text={versionName}
-											id={versionId}
-											register={register}
-											name={"variant"}
-											value={versionId}
-											height={"80px"}
-											setValue={setValue}
-											Selected={variant || temp_data?.versionId}
+										<img
+											src="/assets/images/nodata3.png"
+											alt="nodata"
+											height="200"
+											width="200"
+											className="mx-auto"
 										/>
+										<label
+											className="text-secondary text-center mt-1"
+											style={{ fontSize: "16px" }}
+										>
+											No Data Found
+										</label>
 									</Col>
-								))}
+								)}
 							</Row>
 							{!_.isEmpty(OtherVariants) && (
 								<Row className="mx-auto d-flex no-wrap mt-4 ElemFade">
-									<Col xs="12" sm="12" md="12" lg="12" xl="12" className="linkLine ElemFade">
+									<Col
+										xs="12"
+										sm="12"
+										md="12"
+										lg="12"
+										xl="12"
+										className="linkLine ElemFade"
+									>
 										<Button variant="link" className="" onClick={() => setShow(true)}>
 											Don't See your Car's variant? Click Here
 										</Button>
@@ -146,7 +177,10 @@ export const Variant = ({ stepFn, enquiry_id }) => {
 							)}
 						</>
 					) : (
-						<Form onSubmit={handleSubmit(onSubmit)} className="w-100 mx-auto ElemFade">
+						<Form
+							onSubmit={handleSubmit(onSubmit)}
+							className="w-100 mx-auto ElemFade"
+						>
 							<Row className="mx-auto d-flex no-wrap mt-4 w-100">
 								<Col xs="12" sm="12" md="12" lg="12" xl="12">
 									<Controller

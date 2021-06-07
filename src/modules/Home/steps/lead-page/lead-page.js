@@ -21,9 +21,9 @@ const yupValidate = yup.object({
 	mobileNo: yup
 		.string()
 		.required("Mobile No. is required")
-		.matches(/^[7-9][0-9]{9}$/, "Must be only digits")
 		.min(10, "Mobile No. should be 10 digits")
-		.max(10, "Mobile No. should be 10 digits"),
+		.max(10, "Mobile No. should be 10 digits")
+		.matches(/^[7-9][0-9]{9}$/, "Must be only digits"),
 	lastName: yup
 		.string()
 		.required("Last Name is required")
