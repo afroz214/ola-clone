@@ -117,7 +117,7 @@ export const CarDetails = ({ enquiry_id }) => {
 				</Col>
 			</Row>
 			<Row className="w-100 mt-4 mx-auto">
-				<Row className="mx-auto d-flex w-100">
+				<Row className="mx-auto d-flex w-100 ">
 					<Button
 						className="my-2"
 						size="sm"

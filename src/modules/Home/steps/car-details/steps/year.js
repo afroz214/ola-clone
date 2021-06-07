@@ -43,7 +43,7 @@ export const YearCM = ({ stepFn }) => {
 	};
 
 	return (
-		<Row className="mx-auto d-flex no-wrap mt-2 w-100">
+		<Row className="mx-auto d-flex no-wrap mt-2 w-100 ElemFade">
 			<Form onSubmit={handleSubmit(onSubmit)} className="w-100">
 				<Col xs="12" sm="12" md="12" lg="12" xl="12" className="w-100">
 					<div className="py-2 dateTimeThree">

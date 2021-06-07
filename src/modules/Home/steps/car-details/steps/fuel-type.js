@@ -97,7 +97,7 @@ export const FuelType = ({ stepFn }) => {
 		<>
 			{!loading ? (
 				<>
-					<Form onSubmit={handleSubmit(onSubmit)} className="w-100 mx-auto">
+					<Form onSubmit={handleSubmit(onSubmit)} className="w-100 mx-auto ElemFade">
 						<Row className="mx-auto d-flex justify-content-center w-100 mx-auto">
 							{Fuel.map((item, index) => (
 								<Col
@@ -126,7 +126,7 @@ export const FuelType = ({ stepFn }) => {
 							))}
 							{Number(watch("fuel")) === 3 && (
 								<>
-									<Row className="w-100 d-flex justify-content-center mt-4">
+									<Row className="w-100 d-flex justify-content-center mt-4 ElemFade">
 										<h5 className="text-center w-100">
 											Does your vehicle have external CNG/LPG kit?
 										</h5>
@@ -170,7 +170,7 @@ export const FuelType = ({ stepFn }) => {
 											md="12"
 											lg="12"
 											xl="12"
-											className="mt-4  d-flex flex-column align-content-center w-100 mx-auto"
+											className="mt-4  d-flex flex-column align-content-center w-100 mx-auto ElemFade"
 										>
 											<TextInput
 												lg
