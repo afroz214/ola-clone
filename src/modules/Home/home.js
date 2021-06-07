@@ -60,7 +60,7 @@ export const Home = () => {
 	useEffect(() => {
 		console.log(temp_data?.enquiry_id , enquiry_id)
 		if (location.pathname !== "/lead-page") {
-			if (temp_data?.enquiry_id || enquiry_id) {
+			if (temp_data?.enquiry_id || (enquiry_id && enquiry_id !=="null")) {
 				
 			}
 			else {
