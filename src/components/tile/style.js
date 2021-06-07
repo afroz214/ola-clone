@@ -25,6 +25,7 @@ export const Label = styled.div`
 	box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.64);
 	-webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.64);
 	-moz-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.64);
+	transition: all .2s ease-in-out;
 	/* border: 1px solid #e3e4e8; */
 	border-radius: 0 15px 0px 15px;
 	transition: all 0.1s ease-in-out;
@@ -33,6 +34,9 @@ export const Label = styled.div`
 		box-shadow: 0px 0px 7px 0px #33cc33;
 		-webkit-box-shadow: 0px 0px 7px 0px #33cc33;
 		-moz-box-shadow: 0px 0px 7px 0px #33cc33;
+	}
+	&:hover {
+		transform: scale(1.1);
 	}
 	cursor: pointer;
 `;
