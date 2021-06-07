@@ -7,14 +7,25 @@ import { QuoteCard } from "./quoteCard/quoteCard";
 import { AddOnsCard } from "./addOnCard/addOnCard";
 import { Filters } from "./filterConatiner/filterConatiner";
 import { BackButton } from "components";
-
+import { useSelector } from "react-redux";
+import { useLocation } from "react-router";
 import "./quotePage.css";
+
 export const QuotesPage = () => {
+	const { temp_data } = useSelector((state) => state.home);
+
+	const location = useLocation();
+	const query = new URLSearchParams(location.search);
+	const enquiry_id = query.get("enquiry_id");
 	const [tab, setTab] = useState("tab1");
 	const history = useHistory();
 
 	const back = () => {
-		history.push(`/journey-type?enquiry_id=${'abc'}&&dropout=yes`);
+		history.push(
+			`/journey-type?enquiry_id=${
+				temp_data?.enquiry_id || enquiry_id
+			}&&dropout=yes`
+		);
 	};
 	return (
 		<>
@@ -25,11 +36,7 @@ export const QuotesPage = () => {
 				<Row>
 					<Col lg={3}>
 						<div className="backBtn">
-							<BackButton
-								type="button"
-								onClick={back}
-								style={{ position: "inherit" }}
-							>
+							<BackButton type="button" onClick={back} style={{ position: "inherit" }}>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className=""
@@ -50,20 +57,12 @@ export const QuotesPage = () => {
 							<input type="radio" id="tab4" name="tab-control" />
 							<ul>
 								<li title="Features">
-									<label
-										htmlFor="tab1"
-										role="button"
-										onClick={() => setTab("tab1")}
-									>
+									<label htmlFor="tab1" role="button" onClick={() => setTab("tab1")}>
 										<span>Comprehensive</span>
 									</label>
 								</li>
 								<li title="Delivery Contents">
-									<label
-										htmlFor="tab2"
-										role="button"
-										onClick={() => setTab("tab2")}
-									>
+									<label htmlFor="tab2" role="button" onClick={() => setTab("tab2")}>
 										<span>Third Party</span>
 									</label>
 								</li>
