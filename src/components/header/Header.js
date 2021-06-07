@@ -101,12 +101,13 @@ const Header = () => {
 								<div>
 									<ConfirmButton onClick={() => setModal(true)}>
 										<img
-											src={"/assets/images/phone.png"}
+											src={"/assets/images/tlphn.png"}
 											alt="phone"
 											className="mr-2 my-auto"
+											height='25'
 										/>
-										<label className="m-0 p-0" style={{ fontSize: "16px" }}>
-											Call Us
+										<label className="m-0 p-0" style={{ fontSize: "16px", paddingTop:'3px' }}>
+											Talk To Expert
 										</label>
 									</ConfirmButton>
 								</div>
