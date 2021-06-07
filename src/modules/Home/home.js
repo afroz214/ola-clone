@@ -23,20 +23,20 @@ export const Home = () => {
 	const query = new URLSearchParams(location.search);
 	const enquiry_id = query.get("enquiry_id");
 	const backgroundSplash = (url) => {
-		// switch (url) {
-		// 	case "/lead-page":
-		// 		return "/assets/images/landing-page/bg-2.png";
-		// 	case "/journey-type":
-		// 		return "/assets/images/landing-page/bg-2.png";
-		// 	case "/vehicle-type":
-		// 		return "/assets/images/landing-page/bg-2.png";
-		// 	case "/registration":
-		// 		return "/assets/images/landing-page/bg-2.png";
-		// 	case "/vehicle-details":
-		// 		return "/assets/images/splashFT.png";
-		// 	default:
-		// 		return "";
-		// }
+		switch (url) {
+			case "/lead-page":
+				return "/assets/images/landing-page/bg-2.png";
+			case "/journey-type":
+				return "/assets/images/landing-page/bg-2.png";
+			case "/vehicle-type":
+				return "/assets/images/landing-page/bg-2.png";
+			case "/registration":
+				return "/assets/images/landing-page/bg-2.png";
+			case "/vehicle-details":
+				return "/assets/images/splashFT.png";
+			default:
+				return "";
+		}
 	};
 
 	const SplashPos = (url) => {
@@ -89,7 +89,7 @@ export const Home = () => {
 				url={backgroundSplash(location.pathname)}
 				pos={SplashPos(location.pathname)}
 				heightPer={
-					["/vehicle-details"].includes(location.pathname) ? "62%" : "100%"
+					["/vehicle-details"].includes(location.pathname) ? "65%" : "100%"
 				}
 			>
 				<FormContainer>
