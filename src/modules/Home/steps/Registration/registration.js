@@ -18,7 +18,7 @@ import swal from "sweetalert";
 export const Registration = ({ enquiry_id }) => {
 	/*---------------- back button---------------------*/
 	const back = () => {
-		history.push(`/journey-type?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`);
+		history.push(`/lead-page`);
 	};
 	/*----------x----- back button-------x-------------*/
 	const history = useHistory();

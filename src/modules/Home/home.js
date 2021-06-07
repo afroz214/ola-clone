@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import swal from "sweetalert";
 import { Col, Row } from "react-bootstrap";
+import { Loader } from 'components';
 import { useLocation, useHistory } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Container, FormContainer, Avatar } from "./style";

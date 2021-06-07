@@ -14,7 +14,7 @@ export const QuotesPage = () => {
 	const history = useHistory();
 
 	const back = () => {
-		history.push("/vehicle-details");
+		history.push(`/journey-type`);
 	};
 	return (
 		<>

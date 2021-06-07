@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Row, Col, Form } from "react-bootstrap";
-import { Textbox, Button, Error, Label } from "components";
+import { Textbox, Button, Error } from "components";
 import { useForm } from "react-hook-form";
 import styled from "styled-components";
 import * as yup from "yup";
@@ -67,7 +67,7 @@ export const LeadPage = () => {
 	//onSuccess
 	useEffect(() => {
 		if (enquiry_id?.enquiryId) {
-			history.push(`/journey-type?enquiry_id=${enquiry_id?.enquiryId}`);
+			history.push(`/registration?enquiry_id=${enquiry_id?.enquiryId}`);
 			dispatch(set_temp_data({ enquiry_id: enquiry_id?.enquiryId }));
 		}
 

@@ -79,7 +79,7 @@ export const CarDetails = ({ enquiry_id }) => {
 	//After Completion
 	useEffect(() => {
 		if (Step > 6) {
-			history.push(`/quotes?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`);
+			history.push(`/journey-type?enquiry_id=${temp_data?.enquiry_id || enquiry_id}`);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [Step]);
