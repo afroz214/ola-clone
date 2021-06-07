@@ -161,7 +161,7 @@ export const CarDetails = ({ enquiry_id }) => {
 
 const StyledDiv = styled.div`
 	height: 650px;
-	@media (max-width: 767px) {
+	@media (max-width: 768px) {
 		height: 900px;
 	}
 	@media (max-width: 600px) {
