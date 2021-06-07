@@ -5,12 +5,18 @@ import PropTypes from "prop-types";
 import Popup from "../../../../components/Popup/Popup";
 import { Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-
+import { set_temp_data } from "modules/Home/home.slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { setTempData } from "../../filterConatiner/quoteFilter.slice";
 import "./policyTypePopup.css";
-const PolicyTypePopup = ({ show, onClose, setPolicy, policyType }) => {
+const PolicyTypePopup = ({
+	show,
+	onClose,
+	setPolicy,
+	policyType,
+	setPreviousPopup,
+}) => {
 	const { register, handleSubmit, errors, setValue, watch } = useForm({
 		// resolver: yupResolver(mobileValidation),
 		// mode: "onBlur",
@@ -30,7 +36,20 @@ const PolicyTypePopup = ({ show, onClose, setPolicy, policyType }) => {
 				policyType: data,
 			})
 		);
+
 		onClose(false);
+		if (data === "Bundled" || data === "Comprehensive") {
+			setPreviousPopup(true);
+		} else if (data === "Not sure") {
+			dispatch(
+				set_temp_data({
+					ncb: "0%",
+					expiry: "Not Sure",
+					noClaimMade: false,
+					policyExpired: true,
+				})
+			);
+		}
 	};
 
 	const content = (

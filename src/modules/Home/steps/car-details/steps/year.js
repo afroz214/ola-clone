@@ -17,6 +17,7 @@ const CarCheck = subYears(new Date(Date.now() - 86400000), 15);
 // validation schema
 const yupValidate = yup.object({
 	year: yup.string().required("year is required").nullable(),
+	manfDate: yup.string().required("manufacture date is required").nullable(),
 });
 
 export const YearCM = ({ stepFn }) => {
@@ -31,17 +32,18 @@ export const YearCM = ({ stepFn }) => {
 	//prefill
 	useEffect(() => {
 		if (temp_data?.regDate) setValue("year", temp_data?.regDate);
+		if (temp_data?.manfDate) setValue("manfDate", temp_data?.manfDate);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [temp_data]);
 
 	const onSubmit = (data) => {
 		console.log(data);
-		dispatch(set_temp_data({ regDate: data?.year }));
+		dispatch(set_temp_data({ regDate: data?.year, manfDate: data?.manfDate }));
 		stepFn(6, data, 7);
 	};
 
 	return (
-		<Row className="mx-auto d-flex no-wrap mt-4 w-100">
+		<Row className="mx-auto d-flex no-wrap mt-2 w-100">
 			<Form onSubmit={handleSubmit(onSubmit)} className="w-100">
 				<Col xs="12" sm="12" md="12" lg="12" xl="12" className="w-100">
 					<div className="py-2 dateTimeThree">
@@ -51,7 +53,7 @@ export const YearCM = ({ stepFn }) => {
 							defaultValue={""}
 							render={({ onChange, onBlur, value, name }) => (
 								<DateInput
-									maxDate={CarCheck}
+									minDate={CarCheck}
 									value={value}
 									name={name}
 									onChange={onChange}
@@ -65,12 +67,35 @@ export const YearCM = ({ stepFn }) => {
 						)}
 					</div>
 				</Col>
+				<h3 className='text-center w-100 mx-auto mt-3'>{'Enter Manufacture Date'}</h3>
+				<Col xs="12" sm="12" md="12" lg="12" xl="12" className="w-100 mt-4">
+					<div className="py-2 dateTimeThree">
+						<Controller
+							control={control}
+							name="manfDate"
+							defaultValue={""}
+							render={({ onChange, onBlur, value, name }) => (
+								<DateInput
+									// minDate={CarCheck}
+									value={value}
+									name={name}
+									onChange={onChange}
+									ref={register}
+									error={errors && errors?.manfDate}
+								/>
+							)}
+						/>
+						{!!errors?.manfDate && (
+							<Error className="mt-1">{errors?.manfDate?.message}</Error>
+						)}
+					</div>
+				</Col>
 				<Col
 					sm="12"
 					md="12"
 					lg="12"
 					xl="12"
-					className="d-flex justify-content-center mt-5"
+					className="d-flex justify-content-center mt-4"
 				>
 					<Btn
 						buttonStyle="outline-solid"

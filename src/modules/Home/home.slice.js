@@ -8,12 +8,14 @@ export const homeSlice = createSlice({
 		loading: false,
 		error: null,
 		success: null,
+		enquiry_id: null,
 		type: [],
 		vehicleType: [],
 		brandType: [],
 		modelType: [],
 		temp_data: {},
 		rto: [],
+		variant: [],
 	},
 	reducers: {
 		loading: (state) => {
@@ -35,24 +37,44 @@ export const homeSlice = createSlice({
 			state.loading = null;
 			state.error = null;
 			state.success = null;
+			switch (payload) {
+				case "enquiry_id":
+					state.enquiry_id = null;
+					break;
+				default:
+					break;
+			}
+		},
+		enquiry_id: (state, { payload }) => {
+			state.loading = null;
+			state.enquiry_id = payload;
 		},
 		type: (state, { payload }) => {
+			state.loading = null;
 			state.type = payload;
 		},
 		vehicleType: (state, { payload }) => {
+			state.loading = null;
 			state.vehicleType = payload;
 		},
 		brandType: (state, { payload }) => {
+			state.loading = null;
 			state.brandType = payload;
 		},
 		modelType: (state, { payload }) => {
+			state.loading = null;
 			state.modelType = payload;
 		},
 		set_temp_data: (state, { payload }) => {
 			state.temp_data = { ...state.temp_data, ...payload };
 		},
 		rto: (state, { payload }) => {
+			state.loading = null;
 			state.rto = payload;
+		},
+		variant: (state, { payload }) => {
+			state.loading = null;
+			state.variant = payload;
 		},
 	},
 });
@@ -68,11 +90,26 @@ export const {
 	modelType,
 	set_temp_data,
 	rto,
+	enquiry_id,
+	variant,
 } = homeSlice.actions;
+
+export const Enquiry = (data) => {
+	return async (dispatch) => {
+		try {
+			dispatch(loading());
+			actionStructre(dispatch, enquiry_id, error, service.enquiry, data);
+		} catch (err) {
+			dispatch(error("Something went wrong"));
+			console.error("Error", err);
+		}
+	};
+};
 
 export const Type = (data) => {
 	return async (dispatch) => {
 		try {
+			dispatch(loading());
 			actionStructre(dispatch, type, error, service.type, data);
 		} catch (err) {
 			dispatch(error("Something went wrong"));
@@ -84,6 +121,7 @@ export const Type = (data) => {
 export const VehicleType = (data) => {
 	return async (dispatch) => {
 		try {
+			dispatch(loading());
 			actionStructre(dispatch, vehicleType, error, service.vehicleType, data);
 		} catch (err) {
 			dispatch(error("Something went wrong"));
@@ -95,6 +133,7 @@ export const VehicleType = (data) => {
 export const BrandType = (data) => {
 	return async (dispatch) => {
 		try {
+			dispatch(loading());
 			actionStructre(dispatch, brandType, error, service.brandType, data);
 		} catch (err) {
 			dispatch(error("Something went wrong"));
@@ -106,6 +145,7 @@ export const BrandType = (data) => {
 export const ModelType = (data) => {
 	return async (dispatch) => {
 		try {
+			dispatch(loading());
 			actionStructre(dispatch, modelType, error, service.modelType, data);
 		} catch (err) {
 			dispatch(error("Something went wrong"));
@@ -117,7 +157,20 @@ export const ModelType = (data) => {
 export const Rto = (data) => {
 	return async (dispatch) => {
 		try {
+			dispatch(loading());
 			actionStructre(dispatch, rto, error, service.rto, data);
+		} catch (err) {
+			dispatch(error("Something went wrong"));
+			console.error("Error", err);
+		}
+	};
+};
+
+export const Variant = (data) => {
+	return async (dispatch) => {
+		try {
+			dispatch(loading());
+			actionStructre(dispatch, variant, error, service.variantType, data);
 		} catch (err) {
 			dispatch(error("Something went wrong"));
 			console.error("Error", err);

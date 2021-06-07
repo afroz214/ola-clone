@@ -6,18 +6,23 @@ import PolicyTypePopup from "../quotesPopup/policyTypePopup/policyTypePopup";
 import IDVPopup from "../quotesPopup/idvPopup/IDVPopup";
 import NCBPopup from "../quotesPopup/ncbPopup/NCBPopup";
 import { useHistory } from "react-router-dom";
-
+import { addDays } from "date-fns";
 import { MultiSelect, Error, ErrorMsg } from "components";
 import PrevInsurerPopup from "../quotesPopup/prevInsurerPopup/prevInsurerPopup";
 import DateInput from "../../proposal/DateInput";
 import { Row, Col } from "react-bootstrap";
 import swal from "sweetalert";
 import { useDispatch, useSelector } from "react-redux";
-import { clear, NcbList as getNcb } from "./quoteFilter.slice";
+import { clear, NcbList as getNcb, SaveQuoteData } from "./quoteFilter.slice";
+
+/*---------------date config----------------*/
+const policyMax = addDays(new Date(Date.now() - 86400000), 45);
+/*-----x---------date config-----x----------*/
+
 export const FilterContainer = (quotesPage) => {
 	const dispatch = useDispatch();
 	const { tempData } = useSelector((state) => state.quoteFilter);
-
+	const loginData = useSelector((state) => state.login);
 	const { handleSubmit, register, watch, control, errors, setValue } = useForm(
 		{}
 	);
@@ -30,7 +35,9 @@ export const FilterContainer = (quotesPage) => {
 	const [policyType, setPolicyType] = useState(tempData?.policyType || false);
 	const [policyPopup, setPolicyPopup] = useState(policyType ? false : true);
 	const [dateEditor, setDateEditor] = useState(false);
-	const [regisDate, setRegisDate] = useState("01-Apr-2018");
+	const [regisDate, setRegisDate] = useState(
+		userData.temp_data?.regDate || "01-Apr-2018"
+	);
 	const [prevNcb, setPrevNcb] = useState(tempData?.ncbValue || "0%");
 
 	useEffect(() => {
@@ -45,7 +52,35 @@ export const FilterContainer = (quotesPage) => {
 	useEffect(() => {
 		dispatch(getNcb());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [tempData?.ncbValue]);
+
+	useEffect(() => {
+		if (userData.temp_data && userData.temp_data?.ncb) {
+			const quoteData = {
+				userId: loginData?.corpId,
+				productSubTypeId: userData?.temp_data?.productSubTypeId,
+				fullName: userData.temp_data?.firstName + userData.temp_data?.lastName,
+				emailId: userData.temp_data?.emailId,
+				mobileNo: userData.temp_data?.mobileNo,
+				dob: "10/11/1998",
+				rto: userData.temp_data?.rtoNumber,
+				manfactureId: userData.temp_data?.manfId,
+				motorManufactureYear: userData.temp_data?.manufactureYear || 2020,
+				model: userData.temp_data?.modelName,
+				version: userData.temp_data?.modelId, //have doubt
+				vehicleRegisterAt: userData.temp_data?.comVehicleTypeName || "Taxi",
+				vehicleRegisterDate: userData.temp_data?.regDate,
+				vehicleRegisterType: userData.temp_data?.ownerTypeId,
+				policyExpiryDate: userData.temp_data?.expiry,
+				hasExpired: userData.temp_data?.policyExpired ? "yes" : "no",
+				ncb: userData.temp_data?.ncb,
+				fuelType: userData.temp_data?.fuel,
+				vehicleUsage: userData.temp_data?.carrierType || 2,
+			};
+			dispatch(SaveQuoteData(quoteData));
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [userData.temp_data?.ncb]);
 
 	return (
 		<>
@@ -83,8 +118,8 @@ export const FilterContainer = (quotesPage) => {
 									<FilterMenuOpenSub>
 										{userData?.temp_data?.manfName ? (
 											<>
-												{userData?.vehicleType[0]?.comVehicleTypeName} | Petrol
-												|{userData?.temp_data?.rtoNumber} AR 7294
+												{userData?.temp_data?.productSubTypeCode} | Petrol |
+												{userData?.temp_data?.rtoNumber} AR 7294
 											</>
 										) : (
 											<> Private Car | Petrol | MH01 AR 7294 </>
@@ -118,7 +153,12 @@ export const FilterContainer = (quotesPage) => {
 								<FilterMenuOpenWrap>
 									<FilterMenuOpenSub>
 										Policy Expiry:{" "}
-										<FilterMenuOpenSubBold>30-Apr-2021</FilterMenuOpenSubBold>
+										<FilterMenuOpenSubBold>
+											{" "}
+											{userData.temp_data?.expiry
+												? userData?.temp_data?.expiry
+												: "30 - Apr - 2021"}
+										</FilterMenuOpenSubBold>
 									</FilterMenuOpenSub>
 									<FilterMenuOpenEdit>
 										<FilterMenuOpenTitle>
@@ -139,6 +179,7 @@ export const FilterContainer = (quotesPage) => {
 															name="regDate"
 															render={({ onChange, onBlur, value, name }) => (
 																<DateInput
+																	maxDate={policyMax}
 																	minDate={false}
 																	value={value}
 																	name={name}
@@ -163,7 +204,13 @@ export const FilterContainer = (quotesPage) => {
 							<Col lg={3} md={12}>
 								<FilterMenuOpenWrap>
 									<FilterMenuOpenSub>
-										New NCB: <FilterMenuOpenSubBold>10%</FilterMenuOpenSubBold>
+										New NCB:{" "}
+										<FilterMenuOpenSubBold>
+											{" "}
+											{userData.temp_data?.ncb
+												? userData?.temp_data?.ncb
+												: "10%"}
+										</FilterMenuOpenSubBold>
 									</FilterMenuOpenSub>
 									<FilterMenuOpenEdit>
 										<FilterMenuOpenTitle onClick={() => setNcbPopup(true)}>
@@ -185,6 +232,7 @@ export const FilterContainer = (quotesPage) => {
 					policyType={policyType}
 					show={policyPopup}
 					onClose={setPolicyPopup}
+					setPreviousPopup={setPrevPopup}
 				/>
 			)}
 
@@ -358,8 +406,10 @@ const FilterMenuOpenSub = styled.div`
 	font-size: 14px;
 	line-height: 17px;
 	color: #707070;
+	min-width: 250px;
 	@media (max-width: 996px) {
 		margin-bottom: 15px;
+		min-width: auto;
 	}
 `;
 
