@@ -81,12 +81,12 @@ export const YearCM = ({ stepFn }) => {
 									name={name}
 									onChange={onChange}
 									ref={register}
-									error={errors && errors?.temp_data}
+									error={errors && errors?.manfDate}
 								/>
 							)}
 						/>
-						{!!errors?.temp_data && (
-							<Error className="mt-1">{errors?.temp_data?.message}</Error>
+						{!!errors?.manfDate && (
+							<Error className="mt-1">{errors?.manfDate?.message}</Error>
 						)}
 					</div>
 				</Col>
