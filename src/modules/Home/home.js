@@ -89,7 +89,7 @@ export const Home = () => {
 				url={backgroundSplash(location.pathname)}
 				pos={SplashPos(location.pathname)}
 				heightPer={
-					["/vehicle-details"].includes(location.pathname) ? "65%" : "100%"
+					["/vehicle-details"].includes(location.pathname) ? "80%" : "100%"
 				}
 			>
 				<FormContainer>
